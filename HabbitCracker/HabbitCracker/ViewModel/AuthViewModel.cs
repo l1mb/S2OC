@@ -1,5 +1,7 @@
-﻿using System;
+﻿using HabbitCracker.Modelz;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +9,7 @@ using System.Windows.Controls;
 
 namespace HabbitCracker.ViewModel
 {
-    class AuthViewModel:BaseViewModel
+    class AuthViewModel : BaseViewModel
     {
         private Page _currentPage;
         private Page _SignInPage
@@ -29,13 +31,20 @@ namespace HabbitCracker.ViewModel
             CurrentPage = _SignUpPage;
         }
         );
-        
+
         public RelayCommand SetSignInPage => new RelayCommand(obj =>
         {
             //CurrentPage = _databasePage;
             CurrentPage = _SignInPage;
         }
         );
+
+        public RelayCommand SignUp => new RelayCommand(obj =>
+         {
+             SqlCommand sql = new SqlCommand($"insert into Auth values ({})");
+         }
+             );
+
 
         public AuthViewModel()
         {
