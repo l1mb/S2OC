@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HabbitCracker
+namespace HabbitCracker.View.Auth
 {
     /// <summary>
-    /// Логика взаимодействия для AuthWindow.xaml
+    /// Interaction logic for SignIn.xaml
     /// </summary>
-    public partial class AuthWindow : Window
+    public partial class SignIn : Page
     {
-        public AuthWindow()
+        public SignIn()
         {
             InitializeComponent();
         }
