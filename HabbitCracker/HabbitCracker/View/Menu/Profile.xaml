@@ -9,6 +9,20 @@
       Title="Profile">
 
     <Grid Background="DarkGray">
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="20" Margin="20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="45" ShadowDepth="0"></DropShadowEffect>
+                </Border.Effect>
+                <Image Source="../Resources/ProfilePic.jpg"></Image>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
