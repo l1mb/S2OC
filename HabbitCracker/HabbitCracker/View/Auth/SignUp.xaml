@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HabbitCracker.View.Auth"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm ="clr-namespace:HabbitCracker.ViewModel"
+    xmlns:vm ="clr-namespace:HabbitCracker.ViewModel.Auth"
     Title="SignUp"
     d:DesignHeight="490"
     d:DesignWidth="800"
@@ -24,37 +24,36 @@
     </Page.Resources>
     <Grid Background="AntiqueWhite">
         <Grid.DataContext>
-            <vm:AuthViewModel></vm:AuthViewModel>
+            <vm:SignViewModel></vm:SignViewModel>
         </Grid.DataContext>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition/>
+            <RowDefinition />
+            <RowDefinition Height="30*" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Border Grid.Column="1"  Grid.Row="1" CornerRadius="20" Background="AliceBlue">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="30">
-
                 </DropShadowEffect>
             </Border.Effect>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Имя" />
-                <TextBox x:Name="Name"/>
+                <TextBox x:Name="Name" />
                 <TextBlock Text="Фамилия" />
-                <TextBox x:Name="LastName"/>
+                <TextBox x:Name="LastName" />
                 <TextBlock Text="Логин" />
                 <TextBox x:Name="Login" />
                 <TextBlock Text="Пароль" />
-                <TextBox x:Name="Password"/>
+                <TextBox x:Name="Password" />
                 <TextBlock Text="Дата рождения" />
                 <DockPanel>
-                    <Calendar HorizontalAlignment="Left" x:Name="BDate" Margin="20,5,0,5"  />
-                    <Button HorizontalAlignment="Center" Command="{Binding SignUp}" VerticalAlignment="Center" Content="Sign Up" Padding="20 7 20 7"></Button>
+                    <Calendar HorizontalAlignment="Left" x:Name="BDate" Margin="20,5,0,5" />
+                    <Button HorizontalAlignment="Center" Command="{Binding SignUpButtonClickCommand}" VerticalAlignment="Center" Content="Sign Up" Padding="20 7 20 7"></Button>
                 </DockPanel>
             </StackPanel>
         </Border>

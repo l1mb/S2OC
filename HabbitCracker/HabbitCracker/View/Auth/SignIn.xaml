@@ -1,10 +1,11 @@
 ﻿<Page x:Class="HabbitCracker.View.Auth.SignIn"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HabbitCracker.View.Auth"
-      mc:Ignorable="d" 
+      xmlns:vm ="clr-namespace:HabbitCracker.ViewModel.Auth"
+      mc:Ignorable="d"
       d:DesignHeight="200" d:DesignWidth="400"
       Title="SignIn">
     <Page.Resources>
@@ -20,21 +21,23 @@
         </Style>
     </Page.Resources>
     <Grid>
+        <Grid.DataContext>
+            <vm:SignViewModel></vm:SignViewModel>
+        </Grid.DataContext>
         <Grid Background="AntiqueWhite">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="30*"/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition Height="30*" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Border Grid.Column="1"  Grid.Row="1" CornerRadius="20" Background="AliceBlue">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="30">
-
                     </DropShadowEffect>
                 </Border.Effect>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -42,9 +45,8 @@
                     <TextBox />
                     <TextBlock Text="Пароль" />
                     <TextBox />
-                    
+
                     <Button Content="Войти" HorizontalAlignment="Center" Padding="15,5,15,5" Margin="20"></Button>
-                    
                 </StackPanel>
             </Border>
         </Grid>

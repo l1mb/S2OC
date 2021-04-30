@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HabbitCracker"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:HabbitCracker.ViewModel"
+    xmlns:viewModel="clr-namespace:HabbitCracker.ViewModel.Auth"
     Title="AuthWindow"
     Width="460"
     Height="615"
@@ -17,16 +17,17 @@
             <Setter Property="FontSize" Value="14" />
         </Style>
     </Window.Resources>
-    <Grid >
+    <Grid>
+
         <Grid.DataContext>
             <viewModel:AuthViewModel></viewModel:AuthViewModel>
         </Grid.DataContext>
-        <Grid >
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.6*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1.6*" />
+                <RowDefinition Height="10*" />
             </Grid.RowDefinitions>
-            <StackPanel >
+            <StackPanel>
                 <Grid>
                     <TextBlock Text="Welcome" MinHeight="30" FontSize="24" Margin="20 7 20 40"></TextBlock>
                     <Button x:Name="SignUp"  Command="{Binding SetSignUpPage}" Background="BurlyWood" Click="SignInClick"  Content="Sign up"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20 0 0 10"></Button>

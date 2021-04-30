@@ -10,7 +10,19 @@
     Width="1280"
     Height="720"
     mc:Ignorable="d">
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="Image" x:Key="ImageIcon" x:Name="ImageIcone">
+            <Setter Property="Height" Value="25"></Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ButtonIcon">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+        </Style>
+    </Window.Resources>
+        <Grid>
         <Grid.DataContext>
             <viewModels:MainViewModel />
         </Grid.DataContext>
@@ -25,19 +37,23 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1">
-                <Button Margin="5" Command="{Binding SetDatabasePageCommand}">
-                    <Image Source="../Resources/Icons/DataBase.ico" Stretch="UniformToFill" />
-
+                <Button
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding SetDatabasePageCommand}">
+                    <Image Style="{StaticResource ImageIcon}"  Source="../Resources/Icons/DataBase.png" />
                 </Button>
-                <Button Margin="5" Content="" />
-                <Button Margin="5" Content="" />
+                <Button Style="{StaticResource ButtonIcon}">
+                    <Image Style="{StaticResource ImageIcon}"  Source="../Resources/Icons/profile.png"  ></Image>
+                </Button>
+                        <Button Margin="5" Content="" />
                 <Button Margin="5" Content="" />
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
-            <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden">
-
-            </Frame>
+            <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />
         </Grid>
     </Grid>
 </Window>

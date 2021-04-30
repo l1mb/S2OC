@@ -19,7 +19,8 @@ namespace HabbitCracker
     /// </summary>
     public partial class AuthWindow : Window
     {
-        private bool active;
+        private bool flag = false;
+
         public AuthWindow()
         {
             InitializeComponent();
@@ -27,15 +28,15 @@ namespace HabbitCracker
 
         private void SignInClick(object sender, EventArgs eventArgs)
         {
-            SwitchColors(SignUp, SignIn);
+            SwitchColors(SignUp, SignIn, ref flag);
         }
 
         private void SignUpClick(object sender, EventArgs eventArgs)
         {
-            SwitchColors(SignIn, SignUp);
+            SwitchColors(SignIn, SignUp, ref flag);
         }
 
-        private void SwitchColors(Button src, Button dest)
+        private void SwitchColors(Button src, Button dest, ref bool flag)
         {
             var tempBackgroundBrush = dest.Background;
             var tempForegroundBrush = dest.Foreground;
@@ -45,11 +46,6 @@ namespace HabbitCracker
 
             src.Background = tempBackgroundBrush;
             src.Foreground = tempForegroundBrush;
-        }
-
-        private void SignUpClick(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

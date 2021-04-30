@@ -7,13 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace HabbitCracker.ViewModel
+namespace HabbitCracker.ViewModel.Auth
 {
-    class AuthViewModel : BaseViewModel
+    internal class AuthViewModel : BaseViewModel
     {
         private Page _currentPage;
+
         private Page _SignInPage
             ;
+
         private Page _SignUpPage;
 
         public Page CurrentPage
@@ -41,19 +43,15 @@ namespace HabbitCracker.ViewModel
 
         public RelayCommand SignUp => new RelayCommand(obj =>
          {
-             SqlCommand sql = new SqlCommand($"insert into Auth values ({})");
+             //SqlCommand sql = new SqlCommand($"insert into Auth values ({})");
          }
-             );
-
+        );
 
         public AuthViewModel()
         {
             _SignInPage = new View.Auth.SignIn();
             _SignUpPage = new View.Auth.SignUp();
             _currentPage = _SignUpPage;
-
         }
-
-        
     }
 }
