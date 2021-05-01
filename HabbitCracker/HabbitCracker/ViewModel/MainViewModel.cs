@@ -2,6 +2,7 @@
 using System.Security.AccessControl;
 using System.Threading.Channels;
 using System.Windows.Controls;
+using HabbitCracker.View.Menu;
 using static System.Configuration.ConfigurationManager;
 
 namespace HabbitCracker.ViewModel
@@ -10,6 +11,7 @@ namespace HabbitCracker.ViewModel
     {
         private Page _databasePage;
         private Page _profilePage;
+        private Page _habbitPage;
 
         private Page _currentPage;
 
@@ -35,10 +37,17 @@ namespace HabbitCracker.ViewModel
             }
         );
 
+        public RelayCommand SetHabbitPageCommand => new RelayCommand(obj =>
+             {
+                 CurrentPage = _habbitPage;
+             }
+        );
+
         public MainViewModel()
         {
-            _databasePage = new View.DataBase();
-            _profilePage = new View.Profile();
+            _databasePage = new View.Menu.DataBase();
+            _profilePage = new View.Menu.Profile();
+            _habbitPage = new View.Menu.Habbits();
             CurrentPage = _profilePage;
         }
     }

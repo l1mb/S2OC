@@ -28,7 +28,7 @@ namespace HabbitCracker.Model.Contexts
             Habbits = GetHabbits();
         }
 
-        public ObservableCollection<Habbit> GetHabbits()
+        private ObservableCollection<Habbit> GetHabbits()
         {
             var habbits = new ObservableCollection<Habbit>();
             foreach (var habbit in _dbContext.Habbits)

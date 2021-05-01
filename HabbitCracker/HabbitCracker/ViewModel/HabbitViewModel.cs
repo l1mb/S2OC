@@ -11,7 +11,7 @@ namespace HabbitCracker.ViewModel
 {
     internal class HabbitViewModel : BaseViewModel
     {
-        private ObservableCollection<Habbit> _personHabbits;
+        private ObservableCollection<Habbit> _personHabbits = new ObservableCollection<Habbit>();
         private Habbit _selectedHabbit;
 
         public ObservableCollection<Habbit> PersonHabbits
@@ -38,7 +38,48 @@ namespace HabbitCracker.ViewModel
         {
             if (HabbitContext.GetInstance().Habbits.Count == 0)
             {
-                _personHabbits.Add(new Habbit() { Id = });
+                _personHabbits.Add(new Habbit()
+                {
+                    Id = UserContext.GetInstance().UserPerson.Id,
+                    CurrentStreak = 0,
+                    Description = "text about danger of smoking",
+                    CreateDate = DateTime.Now,
+                    Title = "Smoking",
+                    IdNavigation = UserContext.GetInstance().UserPerson
+                });
+                _personHabbits.Add(new Habbit()
+                {
+                    Id = UserContext.GetInstance().UserPerson.Id,
+                    CurrentStreak = 0,
+                    Description = "text about danger of drinking",
+                    CreateDate = DateTime.Now,
+                    Title = "Drinking",
+                    IdNavigation = UserContext.GetInstance().UserPerson
+                });
+
+                _personHabbits.Add(new Habbit()
+                {
+                    Id = UserContext.GetInstance().UserPerson.Id,
+                    CurrentStreak = 0,
+                    Description = "text about danger of using drugs",
+                    CreateDate = DateTime.Now,
+                    Title = "Druging",
+                    IdNavigation = UserContext.GetInstance().UserPerson
+                });
+
+                _personHabbits.Add(new Habbit()
+                {
+                    Id = UserContext.GetInstance().UserPerson.Id,
+                    CurrentStreak = 0,
+                    Description = "text about danger of using seal",
+                    CreateDate = DateTime.Now,
+                    Title = "Sealing",
+                    IdNavigation = UserContext.GetInstance().UserPerson
+                });
+            }
+            else
+            {
+                PersonHabbits = HabbitContext.GetInstance().Habbits;
             }
         }
     }

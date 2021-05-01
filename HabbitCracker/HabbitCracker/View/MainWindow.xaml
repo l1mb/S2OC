@@ -51,7 +51,9 @@
                 <Button Command="{Binding SetProfilePageCommand}" Style="{StaticResource ButtonIcon}">
                     <Image Source="../Resources/Icons/profile.png" Style="{StaticResource ImageIcon}" />
                 </Button>
-                <Button Margin="5" Content="" />
+                <Button Margin="5" Style="{StaticResource ButtonIcon}" Command="{Binding SetHabbitPageCommand}">
+                    <Image Source="../Resources/Icons/habbit.png" Style="{StaticResource ImageIcon}"></Image>
+                </Button>
                 <Button Margin="5" Content="" />
             </StackPanel>
         </Grid>

@@ -4,11 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:HabbitCracker.View.Menu"
+      xmlns:vm="clr-namespace:HabbitCracker.ViewModel"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Habbits">
 
     <Grid Style="{StaticResource MainGridBackground}">
+        <Grid.DataContext>
+            <vm:HabbitViewModel></vm:HabbitViewModel>
+        </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="10*" />
@@ -19,25 +23,23 @@
         <ListBox
             Grid.Row="1"
             ItemsPanel="{StaticResource WrapTemplate}"
+            ItemsSource="{Binding PersonHabbits}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            SelectedItem="{Binding SelectedTeacher}"
+            SelectedItem="{Binding SelectedHabbit}"
             Style="{StaticResource List}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid MinWidth="400px">
+                    <Grid MinWidth="300px">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.3*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
-                        <Image
-                            Grid.Column="0"
-                            MaxWidth="200px"
-                            Source="{Binding }" />
+
                         <StackPanel Grid.Column="1">
-                            <!--<Label Content="{Binding Name}" Style="{StaticResource TeacherInfoLabel}" />
-                            <Label Content="{Binding Pulpit}" Style="{StaticResource TeacherInfoLabel}" />
-                            <Label Content="{Binding Auditorium}" Style="{StaticResource TeacherInfoLabel}" />
-                            <Label Content="{Binding EMail}" Style="{StaticResource TeacherInfoLabel}" />-->
+                            <Label Content="{Binding Id}" Style="{StaticResource HabbitLabel}" />
+                            <Label Content="{Binding Description}" Style="{StaticResource HabbitLabel}" />
+                            <Label Content="{Binding Title}" Style="{StaticResource HabbitLabel}" />
+                            <Label Content="{Binding CreateDate}" Style="{StaticResource HabbitLabel}" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
