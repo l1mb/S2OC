@@ -25,7 +25,7 @@
             <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#B3A1A1">
         <Grid.DataContext>
             <viewModels:MainViewModel />
         </Grid.DataContext>
@@ -48,7 +48,7 @@
                     Command="{Binding SetDatabasePageCommand}">
                     <Image Source="../Resources/Icons/DataBase.png" Style="{StaticResource ImageIcon}" />
                 </Button>
-                <Button Style="{StaticResource ButtonIcon}">
+                <Button Command="{Binding SetProfilePageCommand}" Style="{StaticResource ButtonIcon}">
                     <Image Source="../Resources/Icons/profile.png" Style="{StaticResource ImageIcon}" />
                 </Button>
                 <Button Margin="5" Content="" />

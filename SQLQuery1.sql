@@ -17,14 +17,28 @@
 
 --GO
 
---CREATE TABLE PERSON
+	--CREATE TABLE PERSON
+	--(
+	--ID INT FOREIGN KEY REFERENCES AUTH(ID) primary key,
+	--NAME VARCHAR(15),
+	--SURNAME VARCHAR(20),
+	--ROLE VARCHAR(20) CHECK (ROLE = 'Администратор' or ROLE = 'Модератор' or ROLE = 'Пользователь' ),
+	--PICTURE VARCHAR(40),
+	--IDWALLET INT FOREIGN KEY REFERENCES WALLET(IDWALLET)
+	--)
+
+
+
+USE OOP_COURSEWORK;
+
+--create table HABBIT
 --(
---ID INT FOREIGN KEY REFERENCES AUTH(ID),
---NAME VARCHAR(15),
---SURNAME VARCHAR(20),
---ROLE VARCHAR(20) CHECK (ROLE = 'Администратор' or ROLE = 'Модератор' or ROLE = 'Пользователь' ),
---PICTURE VARCHAR(40),
---IDWALLET INT FOREIGN KEY REFERENCES WALLET(IDWALLET)
+--	ID INT FOREIGN KEY REFERENCES PERSON(ID),
+--	Title varchar(40),
+--	Description varchar(100),
+--	CreateDate date,
+--	CurrentStreak int
 --)
+
 
 go

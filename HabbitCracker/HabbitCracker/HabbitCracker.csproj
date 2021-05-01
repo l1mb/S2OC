@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\DataBase.ico" />
+    <None Remove="Resources\Icons\database.png" />
+    <None Remove="Resources\Icons\profile.png" />
     <None Remove="Resources\ProfilePic.jpg" />
     <None Remove="View\DataBase.ico" />
   </ItemGroup>
@@ -26,7 +29,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Icons\DataBase.ico" />
+    <Resource Include="Resources\Icons\database.png" />
+    <Resource Include="Resources\Icons\profile.png" />
     <Resource Include="Resources\ProfilePic.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles\Styles.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 </Project>

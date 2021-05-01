@@ -29,6 +29,12 @@ namespace HabbitCracker.ViewModel
             }
         );
 
+        public RelayCommand SetProfilePageCommand => new RelayCommand(obj =>
+            {
+                CurrentPage = _profilePage;
+            }
+        );
+
         public MainViewModel()
         {
             _databasePage = new View.DataBase();
