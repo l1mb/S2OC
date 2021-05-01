@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabbitCracker.Model.Contexts;
+﻿using HabbitCracker.Model.Contexts;
 using HabbitCracker.Model.Entities;
+using System;
+using System.Collections.ObjectModel;
 
 namespace HabbitCracker.ViewModel
 {
@@ -13,6 +9,18 @@ namespace HabbitCracker.ViewModel
     {
         private ObservableCollection<Habbit> _personHabbits = new ObservableCollection<Habbit>();
         private Habbit _selectedHabbit;
+        private Person _person;
+        private Habbit _newHabbit;
+
+        public Habbit NewHabbit
+        {
+            get => _newHabbit;
+            set
+            {
+                _newHabbit = value;
+                OnPropertyChanged(nameof(NewHabbit));
+            }
+        }
 
         public ObservableCollection<Habbit> PersonHabbits
         {
@@ -56,7 +64,6 @@ namespace HabbitCracker.ViewModel
                     Title = "Drinking",
                     IdNavigation = UserContext.GetInstance().UserPerson
                 });
-
                 _personHabbits.Add(new Habbit()
                 {
                     Id = UserContext.GetInstance().UserPerson.Id,
@@ -66,7 +73,6 @@ namespace HabbitCracker.ViewModel
                     Title = "Druging",
                     IdNavigation = UserContext.GetInstance().UserPerson
                 });
-
                 _personHabbits.Add(new Habbit()
                 {
                     Id = UserContext.GetInstance().UserPerson.Id,

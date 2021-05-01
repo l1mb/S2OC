@@ -13,4 +13,21 @@
         <Setter Property="FontSize" Value="15px" />
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
+
+    <Style x:Key="DockPanelTextBlock" TargetType="TextBlock">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="FontSize" Value="15" />
+    </Style>
+
+    <Style x:Key="RoundedWhiteBorder" TargetType="Border">
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Background" Value="White"></Setter>
+    </Style>
+    <Style x:Key="ButtonIcon" TargetType="Button">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
 </ResourceDictionary>
