@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Configuration;
-using HabbitCracker.Model.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace HabbitCracker
+namespace HabbitCracker.Model.Entities
 {
     public partial class CourseworkDbContext : DbContext
     {
-        private static readonly Lazy<CourseworkDbContext> Instance = new(() => new CourseworkDbContext());
-
-        public static CourseworkDbContext GetInstance()
-        {
-            return Instance.Value;
-        }
-
         public CourseworkDbContext()
         {
         }
@@ -30,6 +21,13 @@ namespace HabbitCracker
         public virtual DbSet<Habbit> Habbits { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Wallet> Wallets { get; set; }
+
+        private static readonly Lazy<CourseworkDbContext> Instance = new(() => new CourseworkDbContext());
+
+        public static CourseworkDbContext GetInstance()
+        {
+            return Instance.Value;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

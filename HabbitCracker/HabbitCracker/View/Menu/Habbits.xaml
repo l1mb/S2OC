@@ -35,7 +35,7 @@
             <ListBox
                 Grid.Column="0"
                 ItemsPanel="{StaticResource WrapTemplate}"
-                ItemsSource="{Binding PersonHabbits}"
+                ItemsSource="{Binding PersonHabbits, Mode=TwoWay}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 SelectedItem="{Binding SelectedHabbit}"
                 Style="{StaticResource List}">
@@ -62,22 +62,54 @@
                     <RowDefinition Height="2*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid DataContext="{Binding SelectedHabbit}">
+                <Grid>
 
-                    <Border Margin="20" Background="Beige" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Border
+                        Margin="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Background="Beige">
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="40" ShadowDepth="0"></DropShadowEffect>
+                            <DropShadowEffect BlurRadius="40" ShadowDepth="0" />
                         </Border.Effect>
-                        <StackPanel MinHeight="300" MinWidth="220">
-                            <DockPanel>
-                                <TextBlock Style="{StaticResource DockPanelTextBlock}" Text="Title" HorizontalAlignment="Left"></TextBlock>
-                                <TextBlock Style="{StaticResource DockPanelTextBlock}" Text="{Binding Path=Id}" HorizontalAlignment="Right"></TextBlock>
-                            </DockPanel>
-                        </StackPanel>
+                        <Grid>
+
+                            <StackPanel
+                                MinWidth="220"
+                                MinHeight="220"
+                                DataContext="{Binding SelectedHabbit}">
+                                <DockPanel>
+                                    <TextBlock
+                                        HorizontalAlignment="Left"
+                                        Style="{StaticResource DockPanelTextBlock}"
+                                        Text="Title" />
+                                    <TextBlock
+                                        HorizontalAlignment="Right"
+                                        Style="{StaticResource DockPanelTextBlock}"
+                                        Text="{Binding Path=Id}" />
+                                </DockPanel>
+                            </StackPanel>
+                            <Button
+                                Padding="15,5,15,5"
+                                VerticalAlignment="Bottom"
+                                Command="{Binding DeleteSelectedCommand}"
+                                Content="Удалить"
+                                Style="{StaticResource ButtonIcon}" />
+                        </Grid>
                     </Border>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Button Command="{Binding }"></Button>
+                    <StackPanel>
+                        <Button
+                            Margin="10"
+                            Command="{Binding OpenNewHabbitCtorCommand}"
+                            Content="Добавить новую привычку" />
+                        <Button
+                            Margin="10"
+
+                            Command="{Binding ClearHabbitList}"
+                            Content="Удалить все привычки" />
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>
