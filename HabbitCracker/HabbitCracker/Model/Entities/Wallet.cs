@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
+#nullable disable
 
 namespace HabbitCracker.Model.Entities
 {
-    internal class Wallet
+    public partial class Wallet
     {
-        public int idWallet;
-        public decimal balance;
-        public string hash;
+        public Wallet()
+        {
+            People = new HashSet<Person>();
+        }
+
+        public int Idwallet { get; set; }
+        public decimal? Balance { get; set; }
+        public string Hash { get; set; }
+
+        public virtual ICollection<Person> People { get; set; }
     }
 }

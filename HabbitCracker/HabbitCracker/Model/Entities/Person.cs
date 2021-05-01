@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#nullable disable
 
 namespace HabbitCracker.Model.Entities
 {
-    internal class Person
+    public partial class Person
     {
-        public string name;
-        public string lastName;
-        public int id;
-        public int idwallet;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Role { get; set; }
+        public string Picture { get; set; }
+        public int? Idwallet { get; set; }
 
-        //todo пока не понимаю, нахуя мне нужны эти сущности
+        public virtual Auth IdNavigation { get; set; }
+        public virtual Wallet IdwalletNavigation { get; set; }
     }
 }

@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+#nullable disable
 
 namespace HabbitCracker.Model.Entities
 {
-    internal class Habbit
+    public partial class Habbit
     {
-        public int id;
-        public string title;
-        public string description;
-        public DateTime createTime;
-        public int currentStreak;
+        public int? Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public int? CurrentStreak { get; set; }
+
+        public virtual Person IdNavigation { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HabbitCracker.Model.Contexts;
 using HabbitCracker.Model.Entities;
 
 namespace HabbitCracker.ViewModel
@@ -35,6 +36,10 @@ namespace HabbitCracker.ViewModel
 
         public HabbitViewModel()
         {
+            if (HabbitContext.GetInstance().Habbits.Count == 0)
+            {
+                _personHabbits.Add(new Habbit() { Id = });
+            }
         }
     }
 }

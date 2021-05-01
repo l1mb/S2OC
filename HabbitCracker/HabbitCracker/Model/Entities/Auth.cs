@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#nullable disable
 
 namespace HabbitCracker.Model.Entities
 {
-    class Auth
+    public partial class Auth
     {
-        public int Id;
-        public string Login;
-        public string Password;
+        public int Id { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public virtual Person Person { get; set; }
     }
 }
