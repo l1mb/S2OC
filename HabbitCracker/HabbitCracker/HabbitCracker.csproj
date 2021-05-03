@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\challenges.png" />
     <None Remove="Resources\Icons\DataBase.ico" />
     <None Remove="Resources\Icons\database.png" />
     <None Remove="Resources\Icons\habbit.png" />
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Icons\challenges.png" />
     <Resource Include="Resources\Icons\DataBase.ico" />
     <Resource Include="Resources\Icons\database.png" />
     <Resource Include="Resources\Icons\habbit.png" />

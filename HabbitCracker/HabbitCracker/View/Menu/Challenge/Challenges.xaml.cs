@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HabbitCracker.View.Menu
+namespace HabbitCracker.View.Menu.Challenge
 {
     /// <summary>
-    /// Логика взаимодействия для Habbits.xaml
+    /// Логика взаимодействия для Challenges.xaml
     /// </summary>
-    public partial class Habbits : Page
+    public partial class Challenges : Page
     {
-        public Habbits()
+        public Challenges()
         {
             InitializeComponent();
-        }
-
-        private void Selector_OnSelected(object sender, RoutedEventArgs e)
-        {
-            DisplayGrid.Visibility = Visibility.Visible;
         }
     }
 }
