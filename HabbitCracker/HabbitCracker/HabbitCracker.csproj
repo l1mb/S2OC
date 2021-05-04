@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Config\" />
     <Folder Include="Model\Entities\" />
+    <Folder Include="SQL\" />
   </ItemGroup>
 
   <ItemGroup>

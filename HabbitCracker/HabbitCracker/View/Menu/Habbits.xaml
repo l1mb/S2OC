@@ -17,7 +17,7 @@
         </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="10*" />
+            <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
         <Grid>
             <TextBlock
@@ -34,11 +34,13 @@
             </Grid.ColumnDefinitions>
             <ListBox
                 Grid.Column="0"
-                SelectionChanged="Selector_OnSelected"
+                Margin="15"
+                BorderBrush="Transparent"
                 ItemsPanel="{StaticResource WrapTemplate}"
                 ItemsSource="{Binding PersonHabbits, Mode=TwoWay}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 SelectedItem="{Binding SelectedHabbit}"
+                SelectionChanged="Selector_OnSelected"
                 Style="{StaticResource List}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

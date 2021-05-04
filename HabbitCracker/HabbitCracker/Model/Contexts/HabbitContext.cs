@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HabbitCracker.Model.Contexts
 {
-    internal class HabbitContext
+    internal class HabbitContext : DbContext
     {
         public static readonly Lazy<HabbitContext> Instance = new(() => new HabbitContext());
 

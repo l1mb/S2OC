@@ -1,8 +1,9 @@
-﻿<Application x:Class="HabbitCracker.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:HabbitCracker"
-             StartupUri="View/Auth/AuthWindow.xaml">
+﻿<Application
+    x:Class="HabbitCracker.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:HabbitCracker"
+    StartupUri="View/Auth/AuthWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

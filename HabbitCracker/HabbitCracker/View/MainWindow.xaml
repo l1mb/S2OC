@@ -59,6 +59,7 @@
                 </Button>
                 <Button
                     Margin="5"
+                    Command="{Binding SetChallengesPageCommand}"
                     Style="{StaticResource ButtonIcon}">
                     <Image Source="../Resources/Icons/challenges.png" Style="{StaticResource ImageIcon}" />
                 </Button>

@@ -20,9 +20,9 @@
     </Style>
 
     <Style x:Key="RoundedWhiteBorder" TargetType="Border">
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="Background" Value="White"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="White" />
     </Style>
     <Style x:Key="ButtonIcon" TargetType="Button">
         <Setter Property="Margin" Value="5" />
