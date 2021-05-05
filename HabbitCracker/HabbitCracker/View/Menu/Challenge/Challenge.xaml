@@ -65,7 +65,7 @@
                 <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
             </Border.Effect>
             <ListBox
-                Margin="15SQK"
+                Margin="15"
                 BorderBrush="Transparent"
                 ItemsPanel="{StaticResource WrapTemplate}"
                 ItemsSource="{Binding Challenges, Mode=TwoWay}"

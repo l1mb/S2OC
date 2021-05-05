@@ -1,10 +1,10 @@
-﻿<Page x:Class="HabbitCracker.View.Auth.SignIn"
+﻿<Page x:Class="HabbitCracker.View.AuthView.SignIn"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:HabbitCracker.View.Auth"
       xmlns:vm ="clr-namespace:HabbitCracker.ViewModel.Auth"
+      xmlns:authmenu="clr-namespace:HabbitCracker.ViewModel.AuthViewModel"
       mc:Ignorable="d"
       d:DesignHeight="200" d:DesignWidth="400"
       Title="SignIn">
@@ -22,7 +22,7 @@
     </Page.Resources>
     <Grid>
         <Grid.DataContext>
-            <vm:SignViewModel></vm:SignViewModel>
+            <authmenu:SignViewModel></authmenu:SignViewModel>
         </Grid.DataContext>
         <Grid Background="AntiqueWhite">
             <Grid.ColumnDefinitions>

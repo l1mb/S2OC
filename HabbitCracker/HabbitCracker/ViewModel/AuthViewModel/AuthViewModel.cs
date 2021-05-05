@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using HabbitCracker.View.AuthView;
 
 namespace HabbitCracker.ViewModel.Auth
 {
@@ -49,8 +50,8 @@ namespace HabbitCracker.ViewModel.Auth
 
         public AuthViewModel()
         {
-            _SignInPage = new View.Auth.SignIn();
-            _SignUpPage = new View.Auth.SignUp();
+            _SignInPage = new SignIn();
+            _SignUpPage = new SignUp();
             _currentPage = _SignUpPage;
         }
     }

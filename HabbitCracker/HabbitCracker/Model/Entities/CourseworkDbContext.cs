@@ -52,14 +52,18 @@ namespace HabbitCracker.Model.Entities
                     .HasColumnName("ID");
 
                 entity.Property(e => e.Login)
-                    .HasMaxLength(30)
+                    .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("LOGIN");
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(30)
+                entity.Property(e => e.Hash)
+                    .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("PASSWORD");
+                    .HasColumnName("HASH");
+                entity.Property(e => e.Salt)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("SALT");
             });
 
             modelBuilder.Entity<Challenge>(entity =>

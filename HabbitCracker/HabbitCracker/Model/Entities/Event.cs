@@ -5,6 +5,7 @@
 namespace HabbitCracker.Model.Entities
 {
     public partial class Event
+    //TODO В СМЫСЛЕ ЕВЕНТ ЭТО СОБЫТИЕ? ЭТО ЛАЙК)
     {
         public Event()
         {
