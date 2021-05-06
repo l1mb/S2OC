@@ -9,6 +9,7 @@
     Title="MainWindow"
     Width="1280"
     Height="720"
+    MinWidth="800"
     mc:Ignorable="d">
     <Window.Resources>
         <Style

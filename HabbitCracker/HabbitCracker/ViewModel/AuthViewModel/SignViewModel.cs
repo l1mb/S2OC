@@ -1,7 +1,10 @@
 ﻿using HabbitCracker.Model.Contexts;
 using HabbitCracker.Model.Entities;
 using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 
 namespace HabbitCracker.ViewModel.AuthViewModel
 {
@@ -68,12 +71,6 @@ namespace HabbitCracker.ViewModel.AuthViewModel
                     currentPerson.Id = SignAuth.Id;
 
                     CourseworkDbContext.GetInstance().SaveChanges();
-                    Window window = new MainWindow();
-                    window.Show();
-
-                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
-
-                    MessageBox.Show(UserContext.GetInstance().UserPerson.ToString());
                 }
                 catch (Exception e)
                 {
@@ -82,7 +79,37 @@ namespace HabbitCracker.ViewModel.AuthViewModel
             }
         );
 
-        public RelayCommand SignInButtonClickCommand => new RelayCommand(obj => { }
+        public RelayCommand SignInButtonClickCommand => new RelayCommand(obj =>
+            {
+                try
+                {
+                    var i = CourseworkDbContext.GetInstance().Auths
+                        .Where(p => p.Login == SignAuth.Login && p.Password == SignAuth.Password);
+                    var q = i.Single().Id;
+                    if (i.Count() == 0)
+                        MessageBox.Show("Такого пользователя не существует");
+                    else
+                    {
+                        UserContext.GetInstance().UserPerson = CourseworkDbContext.GetInstance().People.Where(p => p.Id == q).Single();
+                        Passed();
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Что-то пошло не так");
+                    throw;
+                }
+            }
         );
+
+        public void Passed()
+        {
+            Window window = new MainWindow();
+            window.Show();
+
+            if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
+
+            MessageBox.Show(UserContext.GetInstance().UserPerson.ToString());
+        }
     }
 }

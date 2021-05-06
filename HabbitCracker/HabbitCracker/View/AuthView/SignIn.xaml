@@ -40,13 +40,14 @@
                     <DropShadowEffect ShadowDepth="0" BlurRadius="30">
                     </DropShadowEffect>
                 </Border.Effect>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Логин" />
-                    <TextBox />
-                    <TextBlock Text="Пароль" />
-                    <TextBox />
-
-                    <Button Content="Войти" HorizontalAlignment="Center" Padding="15,5,15,5" Margin="20"></Button>
+                <StackPanel>
+                    <StackPanel  DataContext="{Binding SignAuth}"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="Логин" />
+                        <TextBox Text="{Binding Path=Login}" />
+                        <TextBlock Text="Пароль" />
+                        <TextBox Text="{Binding Path=Password}" />
+                    </StackPanel>
+                    <Button Content="Войти" HorizontalAlignment="Center" Padding="15,5,15,5" Margin="20" Command="{Binding SignInButtonClickCommand}"></Button>
                 </StackPanel>
             </Border>
         </Grid>
