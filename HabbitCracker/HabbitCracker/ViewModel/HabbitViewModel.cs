@@ -73,7 +73,7 @@ namespace HabbitCracker.ViewModel
                     Description = NewHabbit.Description,
                     CreateDate = DateTime.Now,
                     Title = NewHabbit.Title,
-                    DayCount = NewHabbit.DayCount,
+                    DaysCount = NewHabbit.DaysCount,
                     IdNavigation = UserContext.GetInstance().UserPerson
                 });
             PersonHabbits = _personHabbits;

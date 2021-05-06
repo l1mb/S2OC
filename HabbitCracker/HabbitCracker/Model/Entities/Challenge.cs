@@ -4,7 +4,7 @@ namespace HabbitCracker.Model.Entities
 {
     public partial class Challenge
     {
-        public int Challangeid { get; set; }
+        public int Challengeid { get; set; }
         public int? Creatorid { get; set; }
         public string Title { get; set; }
         public string Tip { get; set; }

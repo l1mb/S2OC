@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Configuration;
+using HabbitCracker.Model.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace HabbitCracker.Model.Entities
+namespace HabbitCracker
 {
     public partial class CourseworkDbContext : DbContext
     {
+        private static readonly Lazy<CourseworkDbContext> Instance = new(() => new CourseworkDbContext());
+
+        public static CourseworkDbContext GetInstance()
+        {
+            return Instance.Value;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            }
+        }
+
         public CourseworkDbContext()
         {
         }
@@ -24,21 +41,6 @@ namespace HabbitCracker.Model.Entities
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Wallet> Wallets { get; set; }
 
-        private static readonly Lazy<CourseworkDbContext> Instance = new(() => new CourseworkDbContext());
-
-        public static CourseworkDbContext GetInstance()
-        {
-            return Instance.Value;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Cyrillic_General_CI_AS");
@@ -46,6 +48,9 @@ namespace HabbitCracker.Model.Entities
             modelBuilder.Entity<Auth>(entity =>
             {
                 entity.ToTable("AUTH");
+
+                entity.HasIndex(e => e.Login, "UQ__AUTH__E39E266508CF8D5F")
+                    .IsUnique();
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
@@ -56,10 +61,11 @@ namespace HabbitCracker.Model.Entities
                     .IsUnicode(false)
                     .HasColumnName("LOGIN");
 
-                entity.Property(e => e.Hash)
+                entity.Property(e => e.Password)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("HASH");
+                    .HasColumnName("PASSWORD");
+
                 entity.Property(e => e.Salt)
                     .HasMaxLength(255)
                     .IsUnicode(false)
@@ -68,14 +74,14 @@ namespace HabbitCracker.Model.Entities
 
             modelBuilder.Entity<Challenge>(entity =>
             {
-                entity.HasKey(e => e.Challangeid)
-                    .HasName("PK__CHALLENG__C27F7F206E6F83AC");
-
                 entity.ToTable("CHALLENGE");
 
-                entity.Property(e => e.Challangeid)
+                entity.HasIndex(e => e.Eventid, "UQ__CHALLENG__6B1BA9B81F618BEB")
+                    .IsUnique();
+
+                entity.Property(e => e.Challengeid)
                     .ValueGeneratedNever()
-                    .HasColumnName("CHALLANGEID");
+                    .HasColumnName("CHALLENGEID");
 
                 entity.Property(e => e.Challengerid).HasColumnName("CHALLENGERID");
 
@@ -83,7 +89,9 @@ namespace HabbitCracker.Model.Entities
 
                 entity.Property(e => e.Dayscount).HasColumnName("DAYSCOUNT");
 
-                entity.Property(e => e.Eventid).HasColumnName("EVENTID");
+                entity.Property(e => e.Eventid)
+                    .IsRequired()
+                    .HasColumnName("EVENTID");
 
                 entity.Property(e => e.Tip)
                     .HasMaxLength(100)
@@ -95,15 +103,10 @@ namespace HabbitCracker.Model.Entities
                     .IsUnicode(false)
                     .HasColumnName("TITLE");
 
-                //entity.HasOne(d => d.Creator)
-                //    .WithMany(p => p.Challenges)
-                //    .HasForeignKey(d => d.Creatorid)
-                //    .HasConstraintName("FK__CHALLENGE__CREAT__4CA06362");
-
-                entity.HasOne(d => d.Event)
+                entity.HasOne(d => d.Creator)
                     .WithMany(p => p.Challenges)
-                    .HasForeignKey(d => d.Eventid)
-                    .HasConstraintName("FK__CHALLENGE__EVENT__4D94879B");
+                    .HasForeignKey(d => d.Creatorid)
+                    .HasConstraintName("FK__CHALLENGE__CREAT__5F7E2DAC");
             });
 
             modelBuilder.Entity<Event>(entity =>
@@ -123,6 +126,13 @@ namespace HabbitCracker.Model.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("EVENT");
+
+                entity.HasOne(d => d.EventNavigation)
+                    .WithOne(p => p.Event)
+                    .HasPrincipalKey<Challenge>(p => p.Eventid)
+                    .HasForeignKey<Event>(d => d.Eventid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__EVENT__EVENTID__625A9A57");
             });
 
             modelBuilder.Entity<Habbit>(entity =>
@@ -146,7 +156,7 @@ namespace HabbitCracker.Model.Entities
                 entity.HasOne(d => d.IdNavigation)
                     .WithMany()
                     .HasForeignKey(d => d.Id)
-                    .HasConstraintName("FK__HABBIT__ID__4222D4EF");
+                    .HasConstraintName("FK__HABBIT__ID__4F47C5E3");
             });
 
             modelBuilder.Entity<Person>(entity =>
@@ -158,6 +168,11 @@ namespace HabbitCracker.Model.Entities
                     .HasColumnName("ID");
 
                 entity.Property(e => e.Idwallet).HasColumnName("IDWALLET");
+
+                entity.Property(e => e.Lastname)
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasColumnName("LASTNAME");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(15)
@@ -174,27 +189,22 @@ namespace HabbitCracker.Model.Entities
                     .IsUnicode(false)
                     .HasColumnName("ROLE");
 
-                entity.Property(e => e.Surname)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("SURNAME");
-
                 entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Person)
                     .HasForeignKey<Person>(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PERSON__ID__3C69FB99");
+                    .HasConstraintName("FK__PERSON__ID__4B7734FF");
 
                 entity.HasOne(d => d.IdwalletNavigation)
                     .WithMany(p => p.People)
                     .HasForeignKey(d => d.Idwallet)
-                    .HasConstraintName("FK__PERSON__IDWALLET__3E52440B");
+                    .HasConstraintName("FK__PERSON__IDWALLET__4D5F7D71");
             });
 
             modelBuilder.Entity<Wallet>(entity =>
             {
                 entity.HasKey(e => e.Idwallet)
-                    .HasName("PK__WALLET__D462E32F56D4524E");
+                    .HasName("PK__WALLET__D462E32FD9A60D3D");
 
                 entity.ToTable("WALLET");
 
