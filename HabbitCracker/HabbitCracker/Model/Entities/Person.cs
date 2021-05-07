@@ -9,6 +9,7 @@ namespace HabbitCracker.Model.Entities
         public Person()
         {
             Challenges = new HashSet<Challenge>();
+            Habbits = new HashSet<Habbit>();
         }
 
         public int Id { get; set; }
@@ -21,10 +22,6 @@ namespace HabbitCracker.Model.Entities
         public virtual Auth IdNavigation { get; set; }
         public virtual Wallet IdwalletNavigation { get; set; }
         public virtual ICollection<Challenge> Challenges { get; set; }
-
-        public override string ToString()
-        {
-            return $"{this.Name}, {this.Lastname}, {this.Id}";
-        }
+        public virtual ICollection<Habbit> Habbits { get; set; }
     }
 }

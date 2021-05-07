@@ -1,0 +1,22 @@
+﻿I will handle all my thougnts about what can i add to my coursework to improve it
+
+1
+Add repo with crud functions to easy code reading
+
+2
+Is it normal to save data from setter in habbitvm? probably it cause unwanted habbits in database if i would be careless..
+
+3
+Create Generic method, which returns unique id and checks id for entries in database	
+
+4
+create 2 new databases which holds default habbits and challenges
+
+5
+add admin view model, moderator, user
+
+6
+add picking challenges from slider
+
+7
+=>admin crud page => challenge pick => logic

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Configuration;
-using HabbitCracker.Model.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 #nullable disable
 
-namespace HabbitCracker
+namespace HabbitCracker.Model.Entities
 {
     public partial class CourseworkDbContext : DbContext
     {
@@ -47,9 +46,9 @@ namespace HabbitCracker
 
             modelBuilder.Entity<Auth>(entity =>
             {
-                entity.ToTable("AUTH");
+                RelationalEntityTypeBuilderExtensions.ToTable((EntityTypeBuilder)entity, "AUTH");
 
-                entity.HasIndex(e => e.Login, "UQ__AUTH__E39E266508CF8D5F")
+                entity.HasIndex(e => e.Login, "UQ__AUTH__E39E26658CA13084")
                     .IsUnique();
 
                 entity.Property(e => e.Id)
@@ -74,9 +73,9 @@ namespace HabbitCracker
 
             modelBuilder.Entity<Challenge>(entity =>
             {
-                entity.ToTable("CHALLENGE");
+                RelationalEntityTypeBuilderExtensions.ToTable((EntityTypeBuilder)entity, "CHALLENGE");
 
-                entity.HasIndex(e => e.Eventid, "UQ__CHALLENG__6B1BA9B81F618BEB")
+                entity.HasIndex(e => e.Eventid, "UQ__CHALLENG__6B1BA9B84907165A")
                     .IsUnique();
 
                 entity.Property(e => e.Challengeid)
@@ -103,15 +102,14 @@ namespace HabbitCracker
                     .IsUnicode(false)
                     .HasColumnName("TITLE");
 
-                entity.HasOne(d => d.Creator)
+                RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceCollectionBuilder)entity.HasOne(d => d.Creator)
                     .WithMany(p => p.Challenges)
-                    .HasForeignKey(d => d.Creatorid)
-                    .HasConstraintName("FK__CHALLENGE__CREAT__5F7E2DAC");
+                    .HasForeignKey(d => d.Creatorid), "FK__CHALLENGE__CREAT__2057CCD0");
             });
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.ToTable("EVENT");
+                RelationalEntityTypeBuilderExtensions.ToTable((EntityTypeBuilder)entity, "EVENT");
 
                 entity.Property(e => e.Eventid)
                     .ValueGeneratedNever()
@@ -127,19 +125,20 @@ namespace HabbitCracker
                     .IsUnicode(false)
                     .HasColumnName("EVENT");
 
-                entity.HasOne(d => d.EventNavigation)
+                RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceReferenceBuilder)entity.HasOne(d => d.EventNavigation)
                     .WithOne(p => p.Event)
                     .HasPrincipalKey<Challenge>(p => p.Eventid)
                     .HasForeignKey<Event>(d => d.Eventid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__EVENT__EVENTID__625A9A57");
+                    .OnDelete(DeleteBehavior.ClientSetNull), "FK__EVENT__EVENTID__2334397B");
             });
 
             modelBuilder.Entity<Habbit>(entity =>
             {
-                entity.HasNoKey();
+                RelationalEntityTypeBuilderExtensions.ToTable((EntityTypeBuilder)entity, "HABBIT");
 
-                entity.ToTable("HABBIT");
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
 
                 entity.Property(e => e.CreateDate).HasColumnType("date");
 
@@ -147,21 +146,20 @@ namespace HabbitCracker
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Id).HasColumnName("ID");
-
                 entity.Property(e => e.Title)
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithMany()
-                    .HasForeignKey(d => d.Id)
-                    .HasConstraintName("FK__HABBIT__ID__4F47C5E3");
+                entity.Property(e => e.Userid).HasColumnName("USERID");
+
+                RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceCollectionBuilder)entity.HasOne(d => d.User)
+                    .WithMany(p => p.Habbits)
+                    .HasForeignKey(d => d.Userid), "FK__HABBIT__USERID__1C873BEC");
             });
 
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.ToTable("PERSON");
+                RelationalEntityTypeBuilderExtensions.ToTable((EntityTypeBuilder)entity, "PERSON");
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
@@ -187,24 +185,23 @@ namespace HabbitCracker
                 entity.Property(e => e.Role)
                     .HasMaxLength(20)
                     .IsUnicode(false)
-                    .HasColumnName("ROLE");
+                    .HasColumnName("ROLE")
+                    .HasDefaultValueSql("('Пользователь')");
 
-                entity.HasOne(d => d.IdNavigation)
+                RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceReferenceBuilder)entity.HasOne(d => d.IdNavigation)
                     .WithOne(p => p.Person)
                     .HasForeignKey<Person>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PERSON__ID__4B7734FF");
+                    .OnDelete(DeleteBehavior.ClientSetNull), "FK__PERSON__ID__16CE6296");
 
-                entity.HasOne(d => d.IdwalletNavigation)
+                RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceCollectionBuilder)entity.HasOne(d => d.IdwalletNavigation)
                     .WithMany(p => p.People)
-                    .HasForeignKey(d => d.Idwallet)
-                    .HasConstraintName("FK__PERSON__IDWALLET__4D5F7D71");
+                    .HasForeignKey(d => d.Idwallet), "FK__PERSON__IDWALLET__19AACF41");
             });
 
             modelBuilder.Entity<Wallet>(entity =>
             {
                 entity.HasKey(e => e.Idwallet)
-                    .HasName("PK__WALLET__D462E32FD9A60D3D");
+                    .HasName("PK__WALLET__D462E32FEBCE32E3");
 
                 entity.ToTable("WALLET");
 

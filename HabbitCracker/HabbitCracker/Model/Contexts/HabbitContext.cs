@@ -28,12 +28,18 @@ namespace HabbitCracker.Model.Contexts
             Habbits = GetHabbits();
         }
 
+        public void GetCurrentContext()
+        {
+        }
+
         private ObservableCollection<Habbit> GetHabbits()
         {
             var habbits = new ObservableCollection<Habbit>();
-            foreach (var habbit in _dbContext.Habbits)
+
+            foreach (var item in _dbContext.Habbits.Where(p =>
+                p.Userid == UserContext.GetInstance().UserPerson.Id).ToList())
             {
-                habbits.Add(habbit);
+                habbits.Add(item);
             }
             return habbits;
         }

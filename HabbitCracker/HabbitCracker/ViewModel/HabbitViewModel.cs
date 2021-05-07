@@ -13,7 +13,14 @@ namespace HabbitCracker.ViewModel
         private ObservableCollection<Habbit> _personHabbits = new ObservableCollection<Habbit>();
         private Habbit _selectedHabbit;
         private Person _person;
-        private Habbit _newHabbit = new Habbit();
+        private Random _rand = new Random();
+
+        public int Rand
+        {
+            get => _rand.Next();
+        }
+
+        private Habbit _newHabbit = new();
 
         public Habbit NewHabbit
         {
@@ -65,17 +72,23 @@ namespace HabbitCracker.ViewModel
 
         public RelayCommand AddNewHabbitCommand => new RelayCommand(obj =>
         {
+            var tmpHabbit = new Habbit()
+            {
+                Id = Rand,
+                Userid = UserContext.GetInstance().UserPerson.Id,
+                CurrentStreak = 0,
+                Description = NewHabbit.Description,
+                CreateDate = DateTime.Now,
+                Title = NewHabbit.Title,
+                DaysCount = NewHabbit.DaysCount,
+                User = UserContext.GetInstance().UserPerson
+            };
             if (!String.IsNullOrWhiteSpace(NewHabbit.Title) && !string.IsNullOrWhiteSpace(NewHabbit.Description))
-                PersonHabbits.Add(new Habbit()
-                {
-                    Id = UserContext.GetInstance().UserPerson.Id,
-                    CurrentStreak = 0,
-                    Description = NewHabbit.Description,
-                    CreateDate = DateTime.Now,
-                    Title = NewHabbit.Title,
-                    DaysCount = NewHabbit.DaysCount,
-                    IdNavigation = UserContext.GetInstance().UserPerson
-                });
+            {
+                PersonHabbits.Add(tmpHabbit);
+                CourseworkDbContext.GetInstance().Habbits.Add(tmpHabbit);
+                CourseworkDbContext.GetInstance().SaveChanges();
+            }
             PersonHabbits = _personHabbits;
             OnPropertyChanged(nameof(PersonHabbits));
         });
@@ -86,48 +99,53 @@ namespace HabbitCracker.ViewModel
             {
                 _personHabbits.Add(new Habbit()
                 {
-                    Id = UserContext.GetInstance().UserPerson.Id,
+                    Id = Rand,
+                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of smoking",
                     CreateDate = DateTime.Now,
                     Title = "Smoking",
-                    IdNavigation = UserContext.GetInstance().UserPerson
+                    User = UserContext.GetInstance().UserPerson
                 });
                 _personHabbits.Add(new Habbit()
                 {
-                    Id = UserContext.GetInstance().UserPerson.Id,
+                    Id = Rand,
+                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of drinking",
                     CreateDate = DateTime.Now,
                     Title = "Drinking",
-                    IdNavigation = UserContext.GetInstance().UserPerson
+                    User = UserContext.GetInstance().UserPerson
                 });
                 _personHabbits.Add(new Habbit()
                 {
-                    Id = UserContext.GetInstance().UserPerson.Id,
+                    Id = Rand,
+                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of using drugs",
                     CreateDate = DateTime.Now,
                     Title = "Druging",
-                    IdNavigation = UserContext.GetInstance().UserPerson
+                    User = UserContext.GetInstance().UserPerson
                 });
                 _personHabbits.Add(new Habbit()
                 {
-                    Id = UserContext.GetInstance().UserPerson.Id,
+                    Id = Rand,
+                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of using seal",
                     CreateDate = DateTime.Now,
                     Title = "Sealing",
-                    IdNavigation = UserContext.GetInstance().UserPerson
+                    User = UserContext.GetInstance().UserPerson
                 });
                 _personHabbits.Add(new Habbit()
                 {
-                    Id = UserContext.GetInstance().UserPerson.Id,
+                    Id = Rand,
+                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of using seal",
                     CreateDate = DateTime.Now,
                     Title = "Sealing",
-                    IdNavigation = UserContext.GetInstance().UserPerson
+                    User = UserContext.GetInstance().UserPerson
                 });
             }
             else

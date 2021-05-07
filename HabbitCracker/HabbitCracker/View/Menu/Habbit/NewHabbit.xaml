@@ -11,6 +11,7 @@
     Height="350"
     mc:Ignorable="d">
     <Grid Style="{StaticResource MainGridBackground}">
+
         <Border
             MinWidth="300"
             Margin="15"
@@ -40,25 +41,28 @@
                         Margin="5"
                         MaxLength="99"
                         Text="{Binding Path=Description}" />
-                    <TextBlock
-                        HorizontalAlignment="Left"
-                        Style="{StaticResource DockPanelTextBlock}"
-                        Text="Количество дней" />
+                    <DockPanel>
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource DockPanelTextBlock}"
+                            Text="Количество дней" />
+                        <Label Content="{Binding DaysCount}" HorizontalAlignment="Right"></Label>
+                    </DockPanel>
                     <Slider
                         x:Name="DayCountSlider"
                         Margin="5"
                         Maximum="62"
                         Minimum="7"
-                        Value="{Binding Path=DayCount}" />
+                        Value="{Binding Path=DaysCount}" />
                 </StackPanel>
             </Grid>
         </Border>
 
         <Button
             Padding="7"
-            Content="Добавить привычку"
-            Style="{StaticResource ButtonIcon}"
+            VerticalAlignment="Bottom"
             Command="{Binding AddNewHabbitCommand}"
-            VerticalAlignment="Bottom" />
+            Content="Добавить привычку"
+            Style="{StaticResource ButtonIcon}" />
     </Grid>
 </Window>

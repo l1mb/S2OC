@@ -5,7 +5,7 @@ use OOP_COURSEWORK
 	drop table HABBIT
 	drop table CHALLENGE
 	drop table EVENT
-	drop table WALLET
+	drop table 
 
 select * from Auth
 select * from person
@@ -46,15 +46,17 @@ Primary key (id)
 
 
 --drop table PERSON
-
+use OOP_COURSEWORK
 
 select * from AUTH
 select * from PERSON
+select * from HABBIT
 --USE OOP_COURSEWORK;
 
 create table HABBIT
 (
-	ID INT FOREIGN KEY REFERENCES PERSON(ID),
+	ID INT PRIMARY KEY,
+	USERID INT FOREIGN KEY REFERENCES PERSON(ID) ,
 	Title varchar(40),
 	Description varchar(100),
 	DaysCount int,

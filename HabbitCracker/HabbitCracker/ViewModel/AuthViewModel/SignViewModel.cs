@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
 using Microsoft.EntityFrameworkCore;
+using static HabbitCracker.Model.Entities.CourseworkDbContext;
 
 namespace HabbitCracker.ViewModel.AuthViewModel
 {
@@ -40,17 +41,16 @@ namespace HabbitCracker.ViewModel.AuthViewModel
 
         private string lastname;
 
-        public bool IsUserIdUnique(int id)
-        {
-            foreach (var item in CourseworkDbContext.GetInstance().Auths)
-            {
-                if (id == item.Id)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        public bool IsUserIdUnique(int id) => GetInstance().Auths.All(p => p.Id != id);
+
+        //foreach (var item in CourseworkDbContext.GetInstance().Auths)
+        //{
+        //    if (id == item.Id)
+        //    {
+        //        return false;
+        //    }
+        //}
+        //return true;
 
         public int GetUniqueId()
         {
@@ -88,10 +88,10 @@ namespace HabbitCracker.ViewModel.AuthViewModel
                     SignAuth.Person = currentPerson;
                     currentPerson.IdNavigation = SignAuth;
 
-                    CourseworkDbContext.GetInstance().Auths.Add(SignAuth);
+                    GetInstance().Auths.Add(SignAuth);
                     currentPerson.Id = SignAuth.Id;
 
-                    CourseworkDbContext.GetInstance().SaveChanges();
+                    GetInstance().SaveChanges();
                     Passed();
                 }
                 catch (InvalidOperationException exception)
@@ -113,7 +113,7 @@ namespace HabbitCracker.ViewModel.AuthViewModel
                     //todo GET MATCHES WITH AUTH.LOGIN => GET PERSON FROM DB WITH SIGN.AUTH ID
 
                     //!tried using linq to ef, but it cant resolve my hasher methods
-                    foreach (var item in CourseworkDbContext.GetInstance().Auths)
+                    foreach (var item in GetInstance().Auths)
                     {
                         if ((item != null) && ((SignAuth.Login == item.Login) &&
                                                (item.Password == Hasher.Encrypt(SignAuth.Password, item.Salt))))
@@ -123,7 +123,7 @@ namespace HabbitCracker.ViewModel.AuthViewModel
                         }
                     }
 
-                    UserContext.GetInstance().UserPerson = CourseworkDbContext.GetInstance().People
+                    UserContext.GetInstance().UserPerson = GetInstance().People
                         .Single(p => p.Id == eAuth.Id);
                     Passed();
                 }
