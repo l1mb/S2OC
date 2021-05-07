@@ -1,9 +1,11 @@
 ﻿using HabbitCracker.Model.Contexts;
 using HabbitCracker.Model.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Documents;
 using Microsoft.EntityFrameworkCore;
 
 namespace HabbitCracker.ViewModel.AuthViewModel
@@ -11,6 +13,22 @@ namespace HabbitCracker.ViewModel.AuthViewModel
     internal class SignViewModel : BaseViewModel
     {
         public Model.Entities.Auth SignAuth { get; set; } = new();
+
+        private string _login;
+
+        public string Login
+        {
+            get => _login;
+            set => _login = value;
+        }
+
+        private string _password;
+
+        public String Password
+        {
+            get => _password;
+            set => _password = value;
+        }
 
         private string name;
 
@@ -62,15 +80,23 @@ namespace HabbitCracker.ViewModel.AuthViewModel
                     currentPerson.Name = Name;
                     currentPerson.Lastname = Lastname;
                     var id = GetUniqueId();
-
+                    SignAuth.Login = Login;
+                    SignAuth.Salt = Hasher.GetSalt();
+                    SignAuth.Password = Hasher.Encrypt(Password, SignAuth.Salt);
                     SignAuth.Id = id;
                     currentPerson.Id = SignAuth.Id;
                     SignAuth.Person = currentPerson;
                     currentPerson.IdNavigation = SignAuth;
+
                     CourseworkDbContext.GetInstance().Auths.Add(SignAuth);
                     currentPerson.Id = SignAuth.Id;
 
                     CourseworkDbContext.GetInstance().SaveChanges();
+                    Passed();
+                }
+                catch (InvalidOperationException exception)
+                {
+                    MessageBox.Show("Скорее "); //!need to add exception and try catch
                 }
                 catch (Exception e)
                 {
@@ -83,23 +109,30 @@ namespace HabbitCracker.ViewModel.AuthViewModel
             {
                 try
                 {
-                    var i = CourseworkDbContext.GetInstance().Auths
-                        .Where(p => p.Login == SignAuth.Login && p.Password == SignAuth.Password);
-                    var q = i.Single().Id;
-                    if (i.Count() == 0)
-                        MessageBox.Show("Такого пользователя не существует");
-                    else
+                    Model.Entities.Auth eAuth = new Model.Entities.Auth();
+                    //todo GET MATCHES WITH AUTH.LOGIN => GET PERSON FROM DB WITH SIGN.AUTH ID
+
+                    //!tried using linq to ef, but it cant resolve my hasher methods
+                    foreach (var item in CourseworkDbContext.GetInstance().Auths)
                     {
-                        UserContext.GetInstance().UserPerson = CourseworkDbContext.GetInstance().People.Where(p => p.Id == q).Single();
-                        Passed();
+                        if ((item != null) && ((SignAuth.Login == item.Login) &&
+                                               (item.Password == Hasher.Encrypt(SignAuth.Password, item.Salt))))
+                        {
+                            eAuth = item;
+                            break;
+                        }
                     }
+
+                    UserContext.GetInstance().UserPerson = CourseworkDbContext.GetInstance().People
+                        .Single(p => p.Id == eAuth.Id);
+                    Passed();
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Что-то пошло не так");
-                    throw;
                 }
             }
+
         );
 
         public void Passed()

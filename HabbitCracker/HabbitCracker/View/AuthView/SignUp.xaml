@@ -56,8 +56,7 @@
                         </Border.Effect>
                         <StackPanel
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            DataContext="{Binding SignAuth}">
+                            VerticalAlignment="Center">
                             <TextBlock Text="Логин" />
                             <TextBox x:Name="Login" Text="{Binding Login}" />
                             <TextBlock Text="Пароль" />

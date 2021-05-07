@@ -7,7 +7,7 @@ using HabbitCracker.Model.Entities;
 
 namespace HabbitCracker.Model.Contexts
 {
-    internal class UserContext
+    internal class UserContext : IDisposable
     {
         public static readonly Lazy<UserContext> Instance = new(() => new UserContext());
 
@@ -21,6 +21,10 @@ namespace HabbitCracker.Model.Contexts
         public UserContext()
         {
             UserPerson = new Person();
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
