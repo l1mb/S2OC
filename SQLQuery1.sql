@@ -5,11 +5,12 @@ use OOP_COURSEWORK
 	drop table HABBIT
 	drop table CHALLENGE
 	drop table EVENT
-	drop table 
-
+	DROP TABLE WALLET
 select * from Auth
 select * from person
-TABLE CREATE AUTH
+select * from Habbit
+
+CREATE TABLE AUTH
 (
 ID INT PRIMARY KEY ,
 LOGIN VARCHAR(255) unique,
@@ -38,7 +39,7 @@ CREATE TABLE PERSON
 ID INT FOREIGN KEY REFERENCES AUTH(ID),
 NAME VARCHAR(15),
 LASTNAME VARCHAR(20),
-ROLE VARCHAR(20) CHECK (ROLE = 'Администратор' or ROLE = 'Модератор' or ROLE = 'Пользователь' ),
+ROLE VARCHAR(20) CHECK (ROLE = 'Администратор' or ROLE = 'Модератор' or ROLE = 'Пользователь' ) DEFAULT ('Пользователь'),
 PICTURE VARCHAR(40),
 IDWALLET INT foreign key references Wallet(idwallet)
 Primary key (id)

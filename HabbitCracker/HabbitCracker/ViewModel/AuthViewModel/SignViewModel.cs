@@ -142,7 +142,7 @@ namespace HabbitCracker.ViewModel.AuthViewModel
 
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
 
-            MessageBox.Show(UserContext.GetInstance().UserPerson.ToString());
+            MessageBox.Show(nameof(Model.Entities.Auth));
         }
     }
 }

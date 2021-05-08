@@ -20,3 +20,12 @@ add picking challenges from slider
 
 7
 =>admin crud page => challenge pick => logic
+
+8
+think about what can i do with my crud admin panel, i need interface to update databases easier
+
+9
+probably i can improve functions from Database.xaml.cs 
+
+10
+update views on update or delete from database.xaml

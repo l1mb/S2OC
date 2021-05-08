@@ -87,6 +87,7 @@ namespace HabbitCracker.ViewModel
             {
                 PersonHabbits.Add(tmpHabbit);
                 CourseworkDbContext.GetInstance().Habbits.Add(tmpHabbit);
+
                 CourseworkDbContext.GetInstance().SaveChanges();
             }
             PersonHabbits = _personHabbits;

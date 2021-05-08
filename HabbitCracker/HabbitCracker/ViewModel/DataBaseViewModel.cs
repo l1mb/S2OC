@@ -9,11 +9,11 @@ namespace HabbitCracker.ViewModel
 {
     internal class DataBaseViewModel : BaseViewModel
     {
-        public Model.Entities.Auth AuthObject = new();
-        public Model.Entities.Challenge ChallengeObject = new();
-        public Model.Entities.Event EventObject = new();
-        public Model.Entities.Habbit HabbitObject = new();
-        public Model.Entities.Person PersonObject = new();
-        public Model.Entities.Wallet WalletObject = new();
+        public Model.Entities.Auth AuthObject { get; set; } = new();
+        public Model.Entities.Challenge ChallengeObject { get; set; } = new();
+        public Model.Entities.Event EventObject { get; set; } = new();
+        public Model.Entities.Habbit HabbitObject { get; set; } = new();
+        public Model.Entities.Person PersonObject { get; set; } = new();
+        public Model.Entities.Wallet WalletObject { get; set; } = new();
     }
 }
