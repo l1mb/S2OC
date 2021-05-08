@@ -6,23 +6,48 @@ using System.Text;
 using System.Threading.Tasks;
 using HabbitCracker.Model.Contexts;
 using HabbitCracker.Model.Entities;
+using static HabbitCracker.Model.Entities.CourseworkDbContext;
 
 namespace HabbitCracker.ViewModel
 {
     internal class ChallengeViewModel : BaseViewModel
     {
         private ObservableCollection<Challenge> _challenges = new ObservableCollection<Challenge>();
+
         private ObservableCollection<Event> _events = new ObservableCollection<Event>();
 
         private Challenge _selectedChallenge = new Challenge();
         private Event _selectedEvent = new Event();
+
+        private ObservableCollection<Event> getEvents()
+        {
+            ObservableCollection<Event> events = new();
+            foreach (var var in CourseworkDbContext.GetInstance().Events.Where(p => p.Challengeid == SelectedChallenge.Challengeid).ToList())
+            {
+                events.Add(var);
+            }
+
+            return events;
+        }
+
+        public ObservableCollection<Event> Events
+        {
+            get => _events;
+            set
+            {
+                _events = value;
+                OnPropertyChanged(nameof(Events));
+            }
+        }
 
         public Challenge SelectedChallenge
         {
             get => _selectedChallenge;
             set
             {
+                Events = getEvents();
                 _selectedChallenge = value;
+
                 OnPropertyChanged(nameof(SelectedChallenge));
             }
         }
@@ -39,21 +64,11 @@ namespace HabbitCracker.ViewModel
 
         public ObservableCollection<Challenge> Challenges
         {
-            get => _challenges;
+            get => ChallengeContext.GetInstance().getChallenges();
             set
             {
                 _challenges = value;
                 OnPropertyChanged(nameof(Challenges));
-            }
-        }
-
-        public ObservableCollection<Event> Events
-        {
-            get => _events;
-            set
-            {
-                _events = value;
-                OnPropertyChanged(nameof(Events));
             }
         }
 

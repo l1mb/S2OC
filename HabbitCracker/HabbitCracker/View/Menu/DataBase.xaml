@@ -139,10 +139,6 @@
                                     Width="70"
                                     Binding="{Binding Path=Challengerid}"
                                     Header="Challengerid" />
-                                <DataGridTextColumn
-                                    Width="70"
-                                    Binding="{Binding Path=Eventid}"
-                                    Header="Eventid" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem.Content>
@@ -195,6 +191,10 @@
                     <TabItem.Content>
                         <DataGrid x:Name="EventGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding Path=Challengeid}"
+                                    Header="Challengeid" />
                                 <DataGridTextColumn
                                     Width="100"
                                     Binding="{Binding Path=Eventid}"

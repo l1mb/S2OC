@@ -29,3 +29,6 @@ probably i can improve functions from Database.xaml.cs
 
 10
 update views on update or delete from database.xaml
+
+11
+add event display

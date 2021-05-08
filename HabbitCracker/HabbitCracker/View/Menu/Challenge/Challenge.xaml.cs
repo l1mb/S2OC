@@ -24,5 +24,11 @@ namespace HabbitCracker.View.Menu.Challenge
         {
             InitializeComponent();
         }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MainChallenge.Visibility = Visibility.Visible;
+            EventGrid.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -73,10 +73,7 @@ namespace HabbitCracker.Model.Entities
 
             modelBuilder.Entity<Challenge>(entity =>
             {
-                RelationalEntityTypeBuilderExtensions.ToTable((EntityTypeBuilder)entity, "CHALLENGE");
-
-                entity.HasIndex(e => e.Eventid, "UQ__CHALLENG__6B1BA9B84907165A")
-                    .IsUnique();
+                entity.ToTable("CHALLENGE");
 
                 entity.Property(e => e.Challengeid)
                     .ValueGeneratedNever()
@@ -88,10 +85,6 @@ namespace HabbitCracker.Model.Entities
 
                 entity.Property(e => e.Dayscount).HasColumnName("DAYSCOUNT");
 
-                entity.Property(e => e.Eventid)
-                    .IsRequired()
-                    .HasColumnName("EVENTID");
-
                 entity.Property(e => e.Tip)
                     .HasMaxLength(100)
                     .IsUnicode(false)
@@ -102,18 +95,21 @@ namespace HabbitCracker.Model.Entities
                     .IsUnicode(false)
                     .HasColumnName("TITLE");
 
-                RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceCollectionBuilder)entity.HasOne(d => d.Creator)
+                entity.HasOne(d => d.Creator)
                     .WithMany(p => p.Challenges)
-                    .HasForeignKey(d => d.Creatorid), "FK__CHALLENGE__CREAT__2057CCD0");
+                    .HasForeignKey(d => d.Creatorid)
+                    .HasConstraintName("FK__CHALLENGE__CREAT__2AD55B43");
             });
 
             modelBuilder.Entity<Event>(entity =>
             {
-                RelationalEntityTypeBuilderExtensions.ToTable((EntityTypeBuilder)entity, "EVENT");
+                entity.ToTable("EVENT");
 
                 entity.Property(e => e.Eventid)
                     .ValueGeneratedNever()
                     .HasColumnName("EVENTID");
+
+                entity.Property(e => e.Challengeid).HasColumnName("CHALLENGEID");
 
                 entity.Property(e => e.Day)
                     .HasMaxLength(25)
@@ -125,11 +121,10 @@ namespace HabbitCracker.Model.Entities
                     .IsUnicode(false)
                     .HasColumnName("EVENT");
 
-                RelationalForeignKeyBuilderExtensions.HasConstraintName((ReferenceReferenceBuilder)entity.HasOne(d => d.EventNavigation)
-                    .WithOne(p => p.Event)
-                    .HasPrincipalKey<Challenge>(p => p.Eventid)
-                    .HasForeignKey<Event>(d => d.Eventid)
-                    .OnDelete(DeleteBehavior.ClientSetNull), "FK__EVENT__EVENTID__2334397B");
+                entity.HasOne(d => d.Challenge)
+                    .WithMany(p => p.Events)
+                    .HasForeignKey(d => d.Challengeid)
+                    .HasConstraintName("FK__EVENT__CHALLENGE__2DB1C7EE");
             });
 
             modelBuilder.Entity<Habbit>(entity =>

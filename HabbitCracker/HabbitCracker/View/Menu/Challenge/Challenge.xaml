@@ -26,10 +26,15 @@
         </Grid.RowDefinitions>
 
         <Border
+            MinWidth="200"
+            MaxWidth="200"
+            Visibility="Collapsed"
             x:Name="MainChallenge"
             Grid.Column="1"
             Margin="20"
             HorizontalAlignment="Left"
+
+            DataContext="{Binding SelectedChallenge}"
             Style="{StaticResource RoundedWhiteBorder}">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" ShadowDepth="0" />
@@ -39,19 +44,19 @@
                     Margin="10"
                     Padding="7"
                     FontSize="18"
-                    Text="#Challenge Name"
+                    Text="{Binding Title}"
                     TextAlignment="Left" />
                 <TextBlock
                     Margin="10"
                     Padding="7"
                     FontSize="14"
-                    Text="#Challenge Description"
+                    Text="{Binding Tip}"
                     TextAlignment="Left" />
                 <TextBlock
                     Margin="10"
                     Padding="7"
                     FontSize="14"
-                    Text="#Count of challengers"
+                    Text="{Binding Challengeid}"
                     TextAlignment="Left" />
             </StackPanel>
         </Border>
@@ -65,6 +70,7 @@
                 <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
             </Border.Effect>
             <ListBox
+                SelectionChanged="Selector_OnSelectionChanged"
                 Margin="15"
                 BorderBrush="Transparent"
                 ItemsPanel="{StaticResource WrapTemplate}"
@@ -81,10 +87,11 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="1">
-                                <Label Content="{Binding Id}" Style="{StaticResource HabbitLabel}" />
-                                <Label Content="{Binding Description}" Style="{StaticResource HabbitLabel}" />
-                                <Label Content="{Binding Title}" Style="{StaticResource HabbitLabel}" />
-                                <Label Content="{Binding CreateDate}" Style="{StaticResource HabbitLabel}" />
+                                <Label Content="{Binding Path=Challengeid}" Style="{StaticResource HabbitLabel}" />
+                                <Label Content="{Binding Path=Challengerid}" Style="{StaticResource HabbitLabel}" />
+                                <Label Content="{Binding Path=Creatorid}" Style="{StaticResource HabbitLabel}" />
+                                <Label Content="{Binding Path=Tip}" Style="{StaticResource HabbitLabel}" />
+                                <Label Content="{Binding Path=Title}" Style="{StaticResource HabbitLabel}" />
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
@@ -92,6 +99,8 @@
             </ListBox>
         </Border>
         <Border
+            x:Name="EventGrid"
+            Visibility="Hidden"
             Grid.Row="2"
             Grid.Column="1"
             MinWidth="250"
@@ -102,9 +111,30 @@
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
             </Border.Effect>
-            <StackPanel Margin="20">
-                <TextBlock Text="" />
-            </StackPanel>
+
+            <ListBox
+                Margin="15"
+                BorderBrush="Transparent"
+                ItemsPanel="{StaticResource WrapTemplate}"
+                ItemsSource="{Binding Events}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                Style="{StaticResource List}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid MinWidth="300px">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="1">
+                                <Label Content="{Binding Path=Day}" Style="{StaticResource HabbitLabel}" />
+                                <Label Content="{Binding Path=Event1}" Style="{StaticResource HabbitLabel}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Border>
     </Grid>
 </Page>
