@@ -90,13 +90,15 @@ namespace HabbitCracker.ViewModel.AuthViewModel
 
                     GetInstance().Auths.Add(SignAuth);
                     currentPerson.Id = SignAuth.Id;
-
+                    SignAuth = null;
                     GetInstance().SaveChanges();
+
                     Passed();
                 }
                 catch (InvalidOperationException exception)
                 {
-                    MessageBox.Show("Скорее "); //!need to add exception and try catch
+                    MessageBox.Show("Скорее ");
+                    //!need to add exception and try catch
                 }
                 catch (Exception e)
                 {
@@ -124,6 +126,8 @@ namespace HabbitCracker.ViewModel.AuthViewModel
 
                     UserContext.GetInstance().UserPerson = GetInstance().People
                         .Single(p => p.Id == eAuth.Id);
+                    currentPerson = null;
+                    SignAuth = null;
                     Passed();
                 }
                 catch (Exception e)

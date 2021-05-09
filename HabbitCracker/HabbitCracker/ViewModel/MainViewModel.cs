@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Threading.Channels;
 using System.Windows;
 using System.Windows.Controls;
+using HabbitCracker.Model.Contexts;
+using HabbitCracker.Model.Entities;
 using HabbitCracker.View.Menu;
 using HabbitCracker.View.Menu.Challenge;
 using static System.Configuration.ConfigurationManager;
@@ -37,16 +41,15 @@ namespace HabbitCracker.ViewModel
 
         public RelayCommand Logout => new RelayCommand(obj =>
         {
+            UserContext.GetInstance().UserPerson = new Person();
+
             AuthWindow authWindow = new AuthWindow();
             authWindow.Show();
-            Application.Current.Windows[0]?.Close();
             foreach (var VARIABLE in Application.Current.Windows)
             {
-                if (VARIABLE.ToString() == "HabbitCracker.MainWindow")
+                if (VARIABLE != null && VARIABLE.ToString() == nameof(HabbitCracker.MainWindow))
                 {
                     ((Window)VARIABLE).Close();
-                    var suka = VARIABLE as Window;
-                    suka.Close();
                 }
             }
         });
