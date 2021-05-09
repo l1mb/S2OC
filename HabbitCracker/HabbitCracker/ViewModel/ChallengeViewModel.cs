@@ -45,10 +45,9 @@ namespace HabbitCracker.ViewModel
             get => _selectedChallenge;
             set
             {
-                Events = getEvents();
                 _selectedChallenge = value;
-
                 OnPropertyChanged(nameof(SelectedChallenge));
+                Events = getEvents();
             }
         }
 

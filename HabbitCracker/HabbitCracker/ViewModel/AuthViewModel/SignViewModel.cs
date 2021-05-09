@@ -109,18 +109,17 @@ namespace HabbitCracker.ViewModel.AuthViewModel
             {
                 try
                 {
-                    Model.Entities.Auth eAuth = new Model.Entities.Auth();
+                    var eAuth = new Model.Entities.Auth();
                     //todo GET MATCHES WITH AUTH.LOGIN => GET PERSON FROM DB WITH SIGN.AUTH ID
 
                     //!tried using linq to ef, but it cant resolve my hasher methods
                     foreach (var item in GetInstance().Auths)
                     {
-                        if ((item != null) && ((SignAuth.Login == item.Login) &&
-                                               (item.Password == Hasher.Encrypt(SignAuth.Password, item.Salt))))
-                        {
-                            eAuth = item;
-                            break;
-                        }
+                        if ((item == null) || ((SignAuth.Login != item.Login) ||
+                                               (item.Password != Hasher.Encrypt(SignAuth.Password, item.Salt))))
+                            continue;
+                        eAuth = item;
+                        break;
                     }
 
                     UserContext.GetInstance().UserPerson = GetInstance().People
@@ -143,6 +142,10 @@ namespace HabbitCracker.ViewModel.AuthViewModel
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
 
             MessageBox.Show(nameof(Model.Entities.Auth));
+
+            //AuthWindow authWindow = new AuthWindow();
+            //window.Close();
+            //authWindow.Show();
         }
     }
 }

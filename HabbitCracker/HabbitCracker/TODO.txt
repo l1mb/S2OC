@@ -32,3 +32,13 @@ update views on update or delete from database.xaml
 
 11
 add event display
+
+12
+fix empty listbox on challenge.xaml
+
+13
+
+swap pages in authview
+
+
+

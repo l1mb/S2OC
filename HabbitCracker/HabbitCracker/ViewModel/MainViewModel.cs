@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.AccessControl;
 using System.Threading.Channels;
+using System.Windows;
 using System.Windows.Controls;
 using HabbitCracker.View.Menu;
 using HabbitCracker.View.Menu.Challenge;
@@ -33,6 +34,22 @@ namespace HabbitCracker.ViewModel
                 CurrentPage = _databasePage;
             }
         );
+
+        public RelayCommand Logout => new RelayCommand(obj =>
+        {
+            AuthWindow authWindow = new AuthWindow();
+            authWindow.Show();
+            Application.Current.Windows[0]?.Close();
+            foreach (var VARIABLE in Application.Current.Windows)
+            {
+                if (VARIABLE.ToString() == "HabbitCracker.MainWindow")
+                {
+                    ((Window)VARIABLE).Close();
+                    var suka = VARIABLE as Window;
+                    suka.Close();
+                }
+            }
+        });
 
         public RelayCommand SetProfilePageCommand => new RelayCommand(obj =>
             {
