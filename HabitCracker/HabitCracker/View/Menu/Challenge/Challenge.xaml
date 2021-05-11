@@ -1,0 +1,140 @@
+﻿<Page
+    x:Class="HabitCracker.View.Menu.Challenge.Challenges"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HabitCracker.View.Menu.Challenge"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:HabitCracker.ViewModel"
+    Title="Challenges"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Style="{StaticResource MainGridBackground}">
+        <Grid.DataContext>
+            <vm:ChallengeViewModel />
+        </Grid.DataContext>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border
+            MinWidth="200"
+            MaxWidth="200"
+            Visibility="Collapsed"
+            x:Name="MainChallenge"
+            Grid.Column="1"
+            Margin="20"
+            HorizontalAlignment="Left"
+
+            DataContext="{Binding SelectedChallenge}"
+            Style="{StaticResource RoundedWhiteBorder}">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" ShadowDepth="0" />
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock
+                    Margin="10"
+                    Padding="7"
+                    FontSize="18"
+                    Text="{Binding Title}"
+                    TextAlignment="Left" />
+                <TextBlock
+                    Margin="10"
+                    Padding="7"
+                    FontSize="14"
+                    Text="{Binding Tip}"
+                    TextAlignment="Left" />
+                <TextBlock
+                    Margin="10"
+                    Padding="7"
+                    FontSize="14"
+                    Text="{Binding Challengeid}"
+                    TextAlignment="Left" />
+            </StackPanel>
+        </Border>
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="20"
+            Background="White"
+            Opacity="0.96">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
+            </Border.Effect>
+            <ListBox
+                SelectionChanged="Selector_OnSelectionChanged"
+                Margin="15"
+                BorderBrush="Transparent"
+                ItemsPanel="{StaticResource WrapTemplate}"
+                ItemsSource="{Binding Challenges, Mode=TwoWay}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                SelectedItem="{Binding SelectedChallenge}"
+                Style="{StaticResource List}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid MinWidth="300px">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="1">
+                                <Label Content="{Binding Path=Challengeid}" Style="{StaticResource HabitLabel}" />
+                                <Label Content="{Binding Path=Challengerid}" Style="{StaticResource HabitLabel}" />
+                                <Label Content="{Binding Path=Creatorid}" Style="{StaticResource HabitLabel}" />
+                                <Label Content="{Binding Path=Tip}" Style="{StaticResource HabitLabel}" />
+                                <Label Content="{Binding Path=Title}" Style="{StaticResource HabitLabel}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Border
+            x:Name="EventGrid"
+            Visibility="Hidden"
+            Grid.Row="2"
+            Grid.Column="1"
+            MinWidth="250"
+            Margin="20"
+            HorizontalAlignment="Right"
+            Background="White"
+            Opacity="0.96">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
+            </Border.Effect>
+
+            <ListBox
+                Margin="15"
+                BorderBrush="Transparent"
+                ItemsPanel="{StaticResource WrapTemplate}"
+                ItemsSource="{Binding Events}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                Style="{StaticResource List}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid MinWidth="300px">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="1">
+                                <Label Content="{Binding Path=Day}" Style="{StaticResource HabitLabel}" />
+                                <Label Content="{Binding Path=Event1}" Style="{StaticResource HabitLabel}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</Page>

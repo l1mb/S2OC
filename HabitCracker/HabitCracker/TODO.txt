@@ -1,0 +1,48 @@
+﻿I will handle all my thougnts about what can i add to my coursework to improve it
+
+1
+Add repo with crud functions to easy code reading
+
+2
+Is it normal to save data from setter in Habitvm? probably it cause unwanted Habits in database if i would be careless..
+
+3
+Create Generic method, which returns unique id and checks id for entries in database	
+
+4
+create 2 new databases which holds default Habits and challenges
+
+5
+add admin view model, moderator, user
+
+6
+add picking challenges from slider
+
+7
+=>admin crud page => challenge pick => logic
+
+8
+think about what can i do with my crud admin panel, i need interface to update databases easier
+
+9
+probably i can improve functions from Database.xaml.cs 
+
+10
+update views on update or delete from database.xaml
+
+11
+add event display
+
+12
+fix empty listbox on challenge.xaml
+
+13
+
+swap pages in authview
+
+14
+сделать мементо, в бд хранится таблица с id, номер недели, пн вт ср чт пт
+визуализация: груп бай день, count по вертикали, переключение по memento
+
+15
+optimize code in habbitvm

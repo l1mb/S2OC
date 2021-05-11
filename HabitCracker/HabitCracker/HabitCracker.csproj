@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Icons\challenges.png" />
+    <None Remove="Resources\Icons\DataBase.ico" />
+    <None Remove="Resources\Icons\database.png" />
+    <None Remove="Resources\Icons\habit.png" />
+    <None Remove="Resources\Icons\profile.png" />
+    <None Remove="Resources\ProfilePic.jpg" />
+    <None Remove="View\Menu\icons8-arrow-100.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icons\challenges.png" />
+    <Resource Include="Resources\Icons\DataBase.ico" />
+    <Resource Include="Resources\Icons\database.png" />
+    <Resource Include="Resources\Icons\habit.png" />
+    <Resource Include="Resources\Icons\profile.png" />
+    <Resource Include="Resources\ProfilePic.jpg" />
+    <Resource Include="View\Menu\icons8-arrow-100.png" />
+  </ItemGroup>
+
+</Project>
