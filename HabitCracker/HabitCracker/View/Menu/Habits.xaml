@@ -20,9 +20,12 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="8*" />
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid x:Name="LetsAdd">
+            <TextBlock Text="Давайте добавим вам привычку" HorizontalAlignment="Center" FontSize="19" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+        <Grid x:Name="SearchGrid" Visibility="Collapsed">
             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Style="{StaticResource ButtonIcon}">
+                <Button Command="{Binding GetPreviousDays}" Style="{StaticResource ButtonIcon}">
                     <Image FlowDirection="RightToLeft" Source="/View/Menu/icons8-arrow-100.png" />
                 </Button>
                 <Grid>
@@ -79,7 +82,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Content="Вс" Style="{StaticResource SundayLabel}" />
-                <Button Style="{StaticResource ButtonIcon}">
+                <Button Command="{Binding GetNextDays}" Style="{StaticResource ButtonIcon}">
                     <Image Source="/View/Menu/icons8-arrow-100.png" />
                 </Button>
             </DockPanel>

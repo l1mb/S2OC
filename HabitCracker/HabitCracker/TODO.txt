@@ -46,3 +46,11 @@ swap pages in authview
 
 15
 optimize code in habbitvm
+
+16
+rethink how to add weekprogress (weekorder )
+
+17
+set back days to black color
+
+18 stack index out of range exception

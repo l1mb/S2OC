@@ -28,6 +28,8 @@ namespace HabitCracker.View.Menu
         private void Selector_OnSelected(object sender, RoutedEventArgs e)
         {
             DisplayGrid.Visibility = Visibility.Visible;
+            LetsAdd.Visibility = Visibility.Collapsed;
+            SearchGrid.Visibility = Visibility.Visible;
         }
     }
 }
