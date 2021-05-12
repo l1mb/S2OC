@@ -1,4 +1,6 @@
 ﻿I will handle all my thougnts about what can i add to my coursework to improve it
+Something in list below already done, something in progress
+I am too lazy to read again
 
 1
 Add repo with crud functions to easy code reading
@@ -54,3 +56,11 @@ rethink how to add weekprogress (weekorder )
 set back days to black color
 
 18 stack index out of range exception
+
+19
+
+delete weekorder
+
+
+20
+add person habbit state, something like lvl 1 crook, lvl 40 boss

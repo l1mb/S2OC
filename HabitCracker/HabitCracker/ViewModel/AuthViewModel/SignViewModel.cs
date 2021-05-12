@@ -14,6 +14,7 @@ namespace HabitCracker.ViewModel.AuthViewModel
     internal class SignViewModel : BaseViewModel
     {
         public Model.Entities.Auth SignAuth { get; set; } = new();
+        public Wallet UserWallet { get; set; } = new();
 
         private string _login;
 
@@ -77,6 +78,12 @@ namespace HabitCracker.ViewModel.AuthViewModel
             {
                 try
                 {
+                    UserWallet.Idwallet = GetUniqueId();
+                    UserWallet.Balance = 0;
+                    UserWallet.Hash = "";
+
+                    currentPerson.Idwallet = UserWallet.Idwallet;
+
                     currentPerson.Name = Name;
                     currentPerson.Lastname = Lastname;
                     var id = GetUniqueId();
@@ -88,7 +95,10 @@ namespace HabitCracker.ViewModel.AuthViewModel
                     SignAuth.Person = currentPerson;
                     currentPerson.IdNavigation = SignAuth;
 
+                    UserWallet.People.Add(currentPerson);
+
                     GetInstance().Auths.Add(SignAuth);
+                    GetInstance().Wallets.Add(UserWallet);
                     currentPerson.Id = SignAuth.Id;
                     SignAuth = null;
                     GetInstance().SaveChanges();

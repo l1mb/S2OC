@@ -23,6 +23,7 @@ SALT VARCHAR(255)
 
 
 
+
 --drop table WALLET
 
 ----GO

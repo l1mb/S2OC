@@ -48,16 +48,18 @@
                 Padding="20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Background="White"
-                DataContext="{Binding CurrentPerson}">
+                Background="White">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="45" ShadowDepth="0" />
                 </Border.Effect>
-                <StackPanel VerticalAlignment="Top">
-                    <TextBlock Text="Приветствем тебя, Чемпион"  FontSize="20"  Margin="20" MinWidth="250" />
-                    <TextBlock Text="{Binding Path=Name}" />
-                    <TextBlock Text="{Binding Path=Lastname}" />
-                    <TextBlock Text="{Binding Path=Id}" />
+                <StackPanel>
+                    <StackPanel VerticalAlignment="Top"  DataContext="{Binding CurrentPerson}">
+                        <TextBlock Text="Приветствем тебя, Чемпион"  FontSize="20"  Margin="20" MinWidth="250" />
+                        <TextBlock Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Path=Lastname}" />
+                        <TextBlock Text="{Binding Path=Id}" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding PersonBalance}"></TextBlock>
                 </StackPanel>
             </Border>
         </Grid>

@@ -20,26 +20,34 @@ namespace HabitCracker.Model.Memento
             List<DayOfWeek> tempDayOfWeeks = new();
 
             DateTime currenTime = DateTime.Today.AddDays(15);
-            var secDate = origin.OrderBy(p => p.Weekday).First().Weekday.Value.Date;
-            //пока год и номер недели не станут ==
-            while ((dates(currenTime).Item1 != dates(secDate).Item1 - 1) ^ (dates(currenTime).Item2 != dates(secDate).Item2))
+            if (origin.OrderBy(p => p.Weekday).Count() == 0)
             {
-                while (currenTime.DayOfWeek != DayOfWeek.Monday)
+                return new CareTaker();
+            }
+            var dateTime = origin.OrderBy(p => p.Weekday).First().Weekday;
+            if (dateTime != null)
+            {
+                var secDate = dateTime.Value.Date;
+                //пока год и номер недели не станут ==
+                while ((dates(currenTime).Item1 != dates(secDate).Item1 - 1) ^ (dates(currenTime).Item2 != dates(secDate).Item2))
                 {
-                    currenTime = currenTime.AddDays(-1);
-                }
-                //add null check
-                foreach (var weekprogress in origin.OrderByDescending(p => p.Weekday))
-                {
-                    if (dates(currenTime).Item1 == dates((DateTime)weekprogress.Weekday).Item1)
+                    while (currenTime.DayOfWeek != DayOfWeek.Monday)
                     {
-                        if (weekprogress.Weekday != null && !tempDayOfWeeks.Contains(weekprogress.Weekday.Value.DayOfWeek)) tempDayOfWeeks.Add(weekprogress.Weekday.Value.DayOfWeek);
+                        currenTime = currenTime.AddDays(-1);
                     }
-                }
+                    //add null check
+                    foreach (var weekprogress in origin.OrderByDescending(p => p.Weekday))
+                    {
+                        if (weekprogress.Weekday != null && dates(currenTime).Item1 == dates((DateTime)weekprogress.Weekday).Item1)
+                        {
+                            if (weekprogress.Weekday != null && !tempDayOfWeeks.Contains(weekprogress.Weekday.Value.DayOfWeek)) tempDayOfWeeks.Add(weekprogress.Weekday.Value.DayOfWeek);
+                        }
+                    }
 
-                Caretaker.Save(new WeekMemento(JsonConvert.SerializeObject(tempDayOfWeeks)));
-                currenTime = currenTime.AddDays(-7);
-                tempDayOfWeeks = new();
+                    Caretaker.Save(new WeekMemento(JsonConvert.SerializeObject(tempDayOfWeeks)));
+                    currenTime = currenTime.AddDays(-7);
+                    tempDayOfWeeks = new();
+                }
             }
 
             Caretaker.ReverseUndoMementoes();

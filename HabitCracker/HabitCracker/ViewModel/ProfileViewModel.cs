@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
+using HabitCracker.View.Menu;
 
 namespace HabitCracker.ViewModel
 {
@@ -18,6 +19,15 @@ namespace HabitCracker.ViewModel
             get => _pizdec;
             set => _pizdec = value;
         }
+
+        public Decimal? PersonBalance => CourseworkDbContext.GetInstance().Wallets.First(p => p.Idwallet == CurrentPerson.Idwallet).Balance;
+
+        //public string LastHabbit
+        //{
+        //    get
+        //    {
+        //    };
+        //}
 
         public Person CurrentPerson { get; set; } = UserContext.GetInstance().UserPerson;
     }

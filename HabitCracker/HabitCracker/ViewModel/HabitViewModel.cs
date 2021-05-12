@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
+using HabitCracker.Model.Entities.Валеты;
 using HabitCracker.Model.Memento;
 using HabitCracker.View.Menu.Habit;
 using Newtonsoft.Json;
@@ -282,7 +283,8 @@ namespace HabitCracker.ViewModel
                 //var tt = typeof(HabitViewModel).GetProperties().Where(p => p.PropertyType == typeof(bool)).ToArray();
                 //и установки значения в свойства через рефлексию
 
-                JsonConvert.DeserializeObject<List<DayOfWeek>>(Caretaker.GetCurrent().State);
+                //JsonConvert.DeserializeObject<List<DayOfWeek>>(Caretaker.GetCurrent().State);
+
                 var w = new Weekprogress();
                 w.Id = Rand;
                 w.Habit = SelectedHabit.Id;
@@ -301,6 +303,21 @@ namespace HabitCracker.ViewModel
                     {
                         w.Weekorder = t.OrderByDescending(p => p.Weekorder).First()?.Weekorder;
                     }
+                }
+
+                if (SelectedHabit.CurrentStreak != null)
+                {
+                    SelectedHabit.CurrentStreak++;
+                }
+
+                if (SelectedHabit.CurrentStreak != null)
+                {
+                    var tempGiveReward = Rewarder.GiveReward((int)SelectedHabit.CurrentStreak);
+
+                    CourseworkDbContext.GetInstance().Wallets
+                            .First(p => p.Idwallet == UserContext.GetInstance().UserPerson.Idwallet).Balance =
+                        tempGiveReward.Item1;
+                    MessageBox.Show(tempGiveReward.Item2);
                 }
 
                 w.Weekday = DateTime.Now;
