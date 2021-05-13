@@ -64,3 +64,12 @@ delete weekorder
 
 20
 add person habbit state, something like lvl 1 crook, lvl 40 boss
+
+
+21
+add validation
+
+22
+add pick challenge from double click
+
+

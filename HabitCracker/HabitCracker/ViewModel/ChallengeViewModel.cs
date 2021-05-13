@@ -37,6 +37,12 @@ namespace HabitCracker.ViewModel
         private Challenge _selectedChallenge = new Challenge();
         private Event _selectedEvent = new Event();
 
+        public RelayCommand AddSelectedToPersonChallenge => new RelayCommand(obj =>
+        {
+            if (SelectedChallenge != null)
+                PersonChallenges.Add(SelectedChallenge);
+        });
+
         private ObservableCollection<Event> getEvents()
         {
             ObservableCollection<Event> events = new();

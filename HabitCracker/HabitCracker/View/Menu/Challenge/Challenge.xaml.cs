@@ -42,5 +42,14 @@ namespace HabitCracker.View.Menu.Challenge
             All.Visibility = Visibility.Visible;
             Person.Visibility = Visibility.Collapsed;
         }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("Ghbrjk");
+        }
     }
 }

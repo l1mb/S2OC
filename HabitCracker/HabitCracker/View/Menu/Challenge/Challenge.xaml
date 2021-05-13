@@ -5,19 +5,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HabitCracker.View.Menu.Challenge"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
     xmlns:vm="clr-namespace:HabitCracker.ViewModel"
     Title="Challenges"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Page.DataContext>
-        <vm:ChallengeViewModel />
-    </Page.DataContext>
+
     <Grid>
-        <Grid Name="Person" Grid.Visibility="Collapsed" Style="{StaticResource MainGridBackground}">
-            <Grid.DataContext>
-                <vm:ChallengeViewModel />
-            </Grid.DataContext>
+        <Grid.DataContext>
+            <vm:ChallengeViewModel />
+        </Grid.DataContext>
+        <Grid
+            Name="Person"
+            Grid.Visibility="Collapsed"
+            Style="{StaticResource MainGridBackground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="4*" />
@@ -29,60 +31,68 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Button x:Name="GoBack" Click="GoBack_OnClick" Content="Fuck go back" Padding="15, 5" Margin="15" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding SetPersonPage}"></Button>
+            <Button
+                x:Name="GoBack"
+                Margin="15"
+                Padding="15,5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Click="GoBack_OnClick"
+                Command="{Binding SetPersonPage}"
+                Content="Fuck go back" />
             <Border
-            MinWidth="200"
-            MaxWidth="200"
-            Visibility="Collapsed"
-            x:Name="MainChallenge"
-            Grid.Column="1"
-            Margin="20"
-            HorizontalAlignment="Left"
-
-            DataContext="{Binding SelectedChallenge}"
-            Style="{StaticResource RoundedWhiteBorder}">
+                x:Name="MainChallenge"
+                Grid.Column="1"
+                MinWidth="200"
+                MaxWidth="200"
+                Margin="20"
+                HorizontalAlignment="Left"
+                DataContext="{Binding SelectedChallenge}"
+                Style="{StaticResource RoundedWhiteBorder}"
+                Visibility="Collapsed">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="30" ShadowDepth="0" />
                 </Border.Effect>
                 <StackPanel>
                     <TextBlock
-                    Margin="10"
-                    Padding="7"
-                    FontSize="18"
-                    Text="{Binding Title}"
-                    TextAlignment="Left" />
+                        Margin="10"
+                        Padding="7"
+                        FontSize="18"
+                        Text="{Binding Title}"
+                        TextAlignment="Left" />
                     <TextBlock
-                    Margin="10"
-                    Padding="7"
-                    FontSize="14"
-                    Text="{Binding Tip}"
-                    TextAlignment="Left" />
+                        Margin="10"
+                        Padding="7"
+                        FontSize="14"
+                        Text="{Binding Tip}"
+                        TextAlignment="Left" />
                     <TextBlock
-                    Margin="10"
-                    Padding="7"
-                    FontSize="14"
-                    Text="{Binding Challengeid}"
-                    TextAlignment="Left" />
+                        Margin="10"
+                        Padding="7"
+                        FontSize="14"
+                        Text="{Binding Challengeid}"
+                        TextAlignment="Left" />
                 </StackPanel>
             </Border>
             <Border
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="20"
-            Background="White"
-            Opacity="0.96">
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="20"
+                Background="White"
+                Opacity="0.96">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
                 </Border.Effect>
                 <ListBox
-                SelectionChanged="Selector_OnSelectionChanged"
-                Margin="15"
-                BorderBrush="Transparent"
-                ItemsPanel="{StaticResource WrapTemplate}"
-                ItemsSource="{Binding PersonChallenges, Mode=TwoWay}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                SelectedItem="{Binding SelectedChallenge}"
-                Style="{StaticResource List}">
+                    Margin="15"
+                    BorderBrush="Transparent"
+                    ItemsPanel="{StaticResource WrapTemplate}"
+                    ItemsSource="{Binding PersonChallenges, Mode=TwoWay}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    SelectedItem="{Binding SelectedChallenge}"
+                    SelectionChanged="Selector_OnSelectionChanged"
+                    Style="{StaticResource List}">
+
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid MinWidth="300px">
@@ -104,26 +114,26 @@
                 </ListBox>
             </Border>
             <Border
-            x:Name="EventGrid"
-            Visibility="Hidden"
-            Grid.Row="2"
-            Grid.Column="1"
-            MinWidth="250"
-            Margin="20"
-            HorizontalAlignment="Right"
-            Background="White"
-            Opacity="0.96">
+                x:Name="EventGrid"
+                Grid.Row="2"
+                Grid.Column="1"
+                MinWidth="250"
+                Margin="20"
+                HorizontalAlignment="Right"
+                Background="White"
+                Opacity="0.96"
+                Visibility="Hidden">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
                 </Border.Effect>
 
                 <ListBox
-                Margin="15"
-                BorderBrush="Transparent"
-                ItemsPanel="{StaticResource WrapTemplate}"
-                ItemsSource="{Binding Events}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                Style="{StaticResource List}">
+                    Margin="15"
+                    BorderBrush="Transparent"
+                    ItemsPanel="{StaticResource WrapTemplate}"
+                    ItemsSource="{Binding Events}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    Style="{StaticResource List}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid MinWidth="300px">
@@ -143,7 +153,10 @@
             </Border>
         </Grid>
 
-        <Grid Name="All" Visibility="Visible" Style="{StaticResource MainGridBackground}">
+        <Grid
+            Name="All"
+            Style="{StaticResource MainGridBackground}"
+            Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="4*" />
@@ -156,40 +169,38 @@
             </Grid.RowDefinitions>
 
             <ListBox
-            Background="Transparent"
-            Grid.Column="1"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            Margin="15"
-            MouseDoubleClick="Control_OnMouseDoubleClick"
-
-            ItemsSource="{Binding PersonChallenges}" Padding="10">
+                Grid.Column="1"
+                Margin="15"
+                Padding="10"
+                Background="Transparent"
+                ItemsSource="{Binding PersonChallenges}"
+                MouseDoubleClick="Control_OnMouseDoubleClick"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border
-                        Style="{StaticResource RoundedWhiteBorder}"
-                    Margin="10">
+                        <Border Margin="10" Style="{StaticResource RoundedWhiteBorder}">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="30" ShadowDepth="0" />
                             </Border.Effect>
                             <StackPanel>
                                 <TextBlock
-                            Margin="10"
-                            Padding="7"
-                            FontSize="18"
-                            Text="{Binding Title}"
-                            TextAlignment="Left" />
+                                    Margin="10"
+                                    Padding="7"
+                                    FontSize="18"
+                                    Text="{Binding Title}"
+                                    TextAlignment="Left" />
                                 <TextBlock
-                            Margin="10"
-                            Padding="7"
-                            FontSize="14"
-                            Text="{Binding Tip}"
-                            TextAlignment="Left" />
+                                    Margin="10"
+                                    Padding="7"
+                                    FontSize="14"
+                                    Text="{Binding Tip}"
+                                    TextAlignment="Left" />
                                 <TextBlock
-                            Margin="10"
-                            Padding="7"
-                            FontSize="14"
-                            Text="{Binding Challengeid}"
-                            TextAlignment="Left" />
+                                    Margin="10"
+                                    Padding="7"
+                                    FontSize="14"
+                                    Text="{Binding Challengeid}"
+                                    TextAlignment="Left" />
                             </StackPanel>
                         </Border>
                     </DataTemplate>
@@ -197,23 +208,31 @@
             </ListBox>
 
             <Border
-            Grid.Row="1"
-            Grid.Column="1"
-            Margin="20"
-            Background="White"
-            Opacity="0.96">
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="20"
+                Background="White"
+                Opacity="0.96"
+                Visibility="Visible">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="20" ShadowDepth="0" />
                 </Border.Effect>
                 <ListBox
-                Margin="15"
-                BorderBrush="Transparent"
-                ItemContainerStyle="{StaticResource ListBox}"
-                ItemsPanel="{StaticResource WrapTemplate}"
-                ItemsSource="{Binding AllChallenges, Mode=TwoWay}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                SelectedItem="{Binding SelectedChallenge}"
-                Style="{StaticResource List}">
+                    Margin="15"
+                    BorderBrush="Transparent"
+                    ItemContainerStyle="{StaticResource ListBox}"
+                    ItemsPanel="{StaticResource WrapTemplate}"
+                    ItemsSource="{Binding AllChallenges, Mode=TwoWay}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    SelectedItem="{Binding SelectedChallenge}"
+                    SelectionChanged="ListBox_SelectionChanged"
+                    Style="{StaticResource List}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding AddSelectedToPersonChallenge}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid MinWidth="300px">
