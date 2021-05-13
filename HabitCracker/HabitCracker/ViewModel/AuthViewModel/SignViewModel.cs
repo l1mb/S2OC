@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Documents;
+using HabitCracker.View.MainWindow;
 using Microsoft.EntityFrameworkCore;
 using static HabitCracker.Model.Entities.CourseworkDbContext;
 
@@ -136,8 +137,8 @@ namespace HabitCracker.ViewModel.AuthViewModel
 
                     UserContext.GetInstance().UserPerson = GetInstance().People
                         .Single(p => p.Id == eAuth.Id);
-                    currentPerson = null;
-                    SignAuth = null;
+                    //currentPerson = null;
+                    //SignAuth = null;
                     Passed();
                 }
                 catch (Exception e)
@@ -145,13 +146,21 @@ namespace HabitCracker.ViewModel.AuthViewModel
                     MessageBox.Show("Что-то пошло не так");
                 }
             }
-
         );
 
         public void Passed()
         {
-            Window window = new MainWindow();
-            window.Show();
+            Window window = null;
+
+            if (UserContext.GetInstance().UserPerson.Role == "Администратор" || UserContext.GetInstance().UserPerson.Role == "Модератор")
+            {
+                window = new AdminMainWindow();
+            }
+            else
+            {
+                window = new MainWindow();
+            }
+            window?.Show();
 
             if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
 

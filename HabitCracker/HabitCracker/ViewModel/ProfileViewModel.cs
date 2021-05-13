@@ -20,7 +20,13 @@ namespace HabitCracker.ViewModel
             set => _pizdec = value;
         }
 
-        public Decimal? PersonBalance => CourseworkDbContext.GetInstance().Wallets.First(p => p.Idwallet == CurrentPerson.Idwallet).Balance;
+        public Decimal? PersonBalance
+        {
+            get
+            {
+                return CourseworkDbContext.GetInstance().Wallets.First(p => p.Idwallet == CurrentPerson.Idwallet).Balance;
+            }
+        }
 
         //public string LastHabbit
         //{

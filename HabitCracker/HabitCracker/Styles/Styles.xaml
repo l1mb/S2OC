@@ -41,6 +41,15 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="TabIsEnabled" TargetType="TabItem">
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsModerator}" Value="True">
+                <Setter Property="IsEnabled" Value="False" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="TuesdayLabel" TargetType="Label">
         <Setter Property="Background" Value="Transparent" />
         <Style.Triggers>

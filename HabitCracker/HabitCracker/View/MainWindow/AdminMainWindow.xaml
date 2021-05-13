@@ -1,0 +1,77 @@
+﻿<Window
+    x:Class="HabitCracker.View.MainWindow.AdminMainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HabitCracker"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:HabitCracker.ViewModel"
+    Title="MainWindow"
+    Width="1280"
+    Height="720"
+    MinWidth="800"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style
+            x:Key="ImageIcon"
+            x:Name="ImageIcone"
+            TargetType="Image">
+            <Setter Property="Height" Value="35" />
+        </Style>
+
+        <Style x:Key="ButtonIcon" TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="#B3A1A1">
+        <Grid.DataContext>
+            <viewModels:MainViewModel />
+        </Grid.DataContext>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="15*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="9*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="1">
+                <StackPanel DockPanel.Dock="Top">
+                    <Button
+                            Margin="5"
+                            HorizontalAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding SetDatabasePageCommand}">
+                        <Image Source="../../Resources/Icons/DataBase.png" Style="{StaticResource ImageIcon}" />
+                    </Button>
+                    <Button Command="{Binding SetProfilePageCommand}" Style="{StaticResource ButtonIcon}">
+                        <Image Source="../../Resources/Icons/profile.png" Style="{StaticResource ImageIcon}" />
+                    </Button>
+                    <Button
+                            Margin="5"
+                            Command="{Binding SetHabitPageCommand}"
+                            Style="{StaticResource ButtonIcon}">
+                        <Image Source="../../Resources/Icons/Habit.png" Style="{StaticResource ImageIcon}" />
+                    </Button>
+                    <Button
+                            Margin="5"
+                            Command="{Binding SetChallengesPageCommand}"
+                            Style="{StaticResource ButtonIcon}">
+                        <Image Source="../../Resources/Icons/challenges.png" Style="{StaticResource ImageIcon}" />
+                    </Button>
+                </StackPanel>
+                <Button Command="{Binding Logout}" VerticalAlignment="Bottom" Style="{StaticResource ButtonIcon}" Content="Logout" Padding="15, 10" ></Button>
+            </DockPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />
+        </Grid>
+    </Grid>
+</Window>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
 
 namespace HabitCracker.ViewModel
@@ -15,5 +16,25 @@ namespace HabitCracker.ViewModel
         public Model.Entities.Habit HabitObject { get; set; } = new();
         public Model.Entities.Person PersonObject { get; set; } = new();
         public Model.Entities.Wallet WalletObject { get; set; } = new();
+
+        private bool _isModerator;
+
+        public bool IsModerator
+        {
+            get { return _isModerator; }
+            set
+            {
+                _isModerator = value;
+                OnPropertyChanged(nameof(IsModerator));
+            }
+        }
+
+        public DataBaseViewModel()
+        {
+            if (UserContext.GetInstance().UserPerson.Role == "Модератор")
+            {
+                IsModerator = true;
+            }
+        }
     }
 }

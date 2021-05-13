@@ -68,6 +68,7 @@ namespace HabitCracker.ViewModel
         public MainViewModel()
         {
             _databasePage = new View.Menu.DataBase();
+
             _profilePage = new View.Menu.Profile();
             _HabitPage = new View.Menu.Habits();
             _challengePage = new Challenges();

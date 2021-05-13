@@ -45,12 +45,12 @@
                 <DropShadowEffect BlurRadius="50" ShadowDepth="0" />
             </Border.Effect>
             <TabControl>
-                <TabItem DataContext="{Binding AuthObject}">
+                <TabItem Style="{StaticResource TabIsEnabled}">
                     <TabItem.Header>
                         <TextBlock FontSize="14" Text="Auth" />
                     </TabItem.Header>
                     <TabItem.Content>
-                        <DataGrid x:Name="AuthGrid" AutoGenerateColumns="False">
+                        <DataGrid DataContext="{Binding AuthObject}" x:Name="AuthGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="100"
@@ -72,12 +72,12 @@
                         </DataGrid>
                     </TabItem.Content>
                 </TabItem>
-                <TabItem DataContext="{Binding PersonObject}">
+                <TabItem Style="{StaticResource TabIsEnabled}">
                     <TabItem.Header>
                         <TextBlock FontSize="14" Text="Person" />
                     </TabItem.Header>
                     <TabItem.Content>
-                        <DataGrid x:Name="PersonGrid" AutoGenerateColumns="False">
+                        <DataGrid DataContext="{Binding PersonObject}" x:Name="PersonGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="100"
@@ -108,12 +108,12 @@
                     </TabItem.Content>
                 </TabItem>
 
-                <TabItem DataContext="{Binding ChallengeObject}">
+                <TabItem>
                     <TabItem.Header>
                         <TextBlock FontSize="14" Text="Challenge" />
                     </TabItem.Header>
                     <TabItem.Content>
-                        <DataGrid x:Name="ChallengesGrid" AutoGenerateColumns="False">
+                        <DataGrid  DataContext="{Binding ChallengeObject}" x:Name="ChallengesGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="100"
@@ -144,12 +144,12 @@
                     </TabItem.Content>
                 </TabItem>
 
-                <TabItem DataContext="{Binding HabitObject}">
+                <TabItem Style="{StaticResource TabIsEnabled}">
                     <TabItem.Header>
                         <TextBlock FontSize="14" Text="Habit" />
                     </TabItem.Header>
                     <TabItem.Content>
-                        <DataGrid x:Name="HabitGrid" AutoGenerateColumns="False">
+                        <DataGrid DataContext="{Binding HabitObject}" x:Name="HabitGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="100"
@@ -184,12 +184,12 @@
                     </TabItem.Content>
                 </TabItem>
 
-                <TabItem DataContext="{Binding EventObject}">
+                <TabItem>
                     <TabItem.Header>
                         <TextBlock FontSize="14" Text="Event" />
                     </TabItem.Header>
                     <TabItem.Content>
-                        <DataGrid x:Name="EventGrid" AutoGenerateColumns="False">
+                        <DataGrid DataContext="{Binding EventObject}" x:Name="EventGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="100"
@@ -212,12 +212,12 @@
                     </TabItem.Content>
                 </TabItem>
 
-                <TabItem DataContext="{Binding WalletObject}">
+                <TabItem Style="{StaticResource TabIsEnabled}">
                     <TabItem.Header>
                         <TextBlock FontSize="14" Text="Wallet" />
                     </TabItem.Header>
                     <TabItem.Content>
-                        <DataGrid x:Name="WalletGrid" AutoGenerateColumns="False">
+                        <DataGrid DataContext="{Binding WalletObject}" x:Name="WalletGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="100"
