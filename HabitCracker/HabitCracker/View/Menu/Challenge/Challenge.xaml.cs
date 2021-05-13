@@ -30,5 +30,17 @@ namespace HabitCracker.View.Menu.Challenge
             MainChallenge.Visibility = Visibility.Visible;
             EventGrid.Visibility = Visibility.Visible;
         }
+
+        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Person.Visibility = Visibility.Visible;
+            All.Visibility = Visibility.Collapsed;
+        }
+
+        private void GoBack_OnClick(object sender, RoutedEventArgs e)
+        {
+            All.Visibility = Visibility.Visible;
+            Person.Visibility = Visibility.Collapsed;
+        }
     }
 }

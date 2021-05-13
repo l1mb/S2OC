@@ -71,7 +71,7 @@ namespace HabitCracker.ViewModel
 
             _profilePage = new View.Menu.Profile();
             _HabitPage = new View.Menu.Habits();
-            _challengePage = new Challenges();
+            _challengePage = new View.Menu.Challenge.Challenges();
             CurrentPage = _profilePage;
         }
     }

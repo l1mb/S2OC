@@ -30,8 +30,8 @@
             <StackPanel>
                 <Grid>
                     <TextBlock Text="Welcome" MinHeight="30" FontSize="24" Margin="20 7 20 40"></TextBlock>
-                    <Button x:Name="SignUp"  Command="{Binding SetSignUpPage}" Background="BurlyWood" Click="SignInClick"  Content="Sign up"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20 0 0 10"></Button>
-                    <Button x:Name="SignIn" Command="{Binding SetSignInPage}" Click="SignUpClick" Content="Sign in"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 10"></Button>
+                    <Button Style="{StaticResource MultiTriggerButtonStyle}" x:Name="SignUp"  Command="{Binding SetSignUpPage}" Background="BurlyWood" Click="SignInClick"  Content="Sign up"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20 0 0 10"></Button>
+                    <Button Style="{StaticResource MultiTriggerButtonStyle}" x:Name="SignIn" Command="{Binding SetSignInPage}" Click="SignUpClick" Content="Sign in"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 20 10"></Button>
                 </Grid>
             </StackPanel>
             <Frame Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}"

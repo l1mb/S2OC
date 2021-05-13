@@ -2,6 +2,33 @@
     <ItemsPanelTemplate x:Key="WrapTemplate">
         <WrapPanel ItemWidth="300px" />
     </ItemsPanelTemplate>
+
+    <Style x:Key="MultiTriggerButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#3d3d3d" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="4" Padding="10,5" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListBox" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="#3d3d3d"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border CornerRadius="4" Padding="10,5" Margin="10" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="List" TargetType="ListBox">
         <Setter Property="Background" Value="Transparent" />
     </Style>

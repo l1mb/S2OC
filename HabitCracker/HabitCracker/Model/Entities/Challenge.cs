@@ -17,6 +17,7 @@ namespace HabitCracker.Model.Entities
         public string Tip { get; set; }
         public int? Dayscount { get; set; }
         public int? Challengerid { get; set; }
+        public int? Eventid { get; set; }
 
         public virtual Person Creator { get; set; }
         public virtual ICollection<Event> Events { get; set; }

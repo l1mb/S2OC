@@ -24,7 +24,7 @@ namespace HabitCracker.ViewModel
         {
             get
             {
-                return CourseworkDbContext.GetInstance().Wallets.First(p => p.Idwallet == CurrentPerson.Idwallet).Balance;
+                return Model.Entities.CourseworkDbContext.GetInstance().Wallets.First(p => p.Idwallet == CurrentPerson.Idwallet).Balance;
             }
         }
 

@@ -23,15 +23,6 @@ namespace HabitCracker.Model.Entities
             }
         }
 
-        public CourseworkDbContext()
-        {
-        }
-
-        public CourseworkDbContext(DbContextOptions<CourseworkDbContext> options)
-            : base(options)
-        {
-        }
-
         public virtual DbSet<Auth> Auths { get; set; }
         public virtual DbSet<Challenge> Challenges { get; set; }
         public virtual DbSet<Event> Events { get; set; }
@@ -85,6 +76,8 @@ namespace HabitCracker.Model.Entities
 
                 entity.Property(e => e.Dayscount).HasColumnName("DAYSCOUNT");
 
+                entity.Property(e => e.Eventid).HasColumnName("EVENTID");
+
                 entity.Property(e => e.Tip)
                     .HasMaxLength(100)
                     .IsUnicode(false)
@@ -98,7 +91,7 @@ namespace HabitCracker.Model.Entities
                 entity.HasOne(d => d.Creator)
                     .WithMany(p => p.Challenges)
                     .HasForeignKey(d => d.Creatorid)
-                    .HasConstraintName("FK__CHALLENGE__CREAT__42ACE4D4");
+                    .HasConstraintName("FK__CHALLENGE__CREAT__5D60DB10");
             });
 
             modelBuilder.Entity<Event>(entity =>
@@ -112,8 +105,7 @@ namespace HabitCracker.Model.Entities
                 entity.Property(e => e.Challengeid).HasColumnName("CHALLENGEID");
 
                 entity.Property(e => e.Day)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
+                    .HasColumnType("datetime")
                     .HasColumnName("DAY");
 
                 entity.Property(e => e.Event1)
@@ -121,10 +113,12 @@ namespace HabitCracker.Model.Entities
                     .IsUnicode(false)
                     .HasColumnName("EVENT");
 
+                entity.Property(e => e.Isdone).HasColumnName("ISDONE");
+
                 entity.HasOne(d => d.Challenge)
                     .WithMany(p => p.Events)
                     .HasForeignKey(d => d.Challengeid)
-                    .HasConstraintName("FK__EVENT__CHALLENGE__4589517F");
+                    .HasConstraintName("FK__EVENT__CHALLENGE__6CA31EA0");
             });
 
             modelBuilder.Entity<Habit>(entity =>
@@ -231,12 +225,10 @@ namespace HabitCracker.Model.Entities
                     .HasColumnType("date")
                     .HasColumnName("WEEKDAY");
 
-                entity.Property(e => e.Weekorder).HasColumnName("WEEKORDER");
-
                 entity.HasOne(d => d.HabitNavigation)
                     .WithMany(p => p.Weekprogresses)
                     .HasForeignKey(d => d.Habit)
-                    .HasConstraintName("FK__WEEKPROGR__HABIT__3FD07829");
+                    .HasConstraintName("FK__WEEKPROGR__HABIT__6F7F8B4B");
             });
 
             OnModelCreatingPartial(modelBuilder);

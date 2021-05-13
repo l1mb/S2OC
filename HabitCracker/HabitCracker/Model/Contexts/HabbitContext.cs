@@ -20,11 +20,11 @@ namespace HabitCracker.Model.Contexts
 
         public ObservableCollection<Habit> Habits = new();
 
-        private readonly CourseworkDbContext _dbContext;
+        private readonly Entities.CourseworkDbContext _dbContext;
 
         public HabitContext()
         {
-            _dbContext = CourseworkDbContext.GetInstance();
+            _dbContext = Entities.CourseworkDbContext.GetInstance();
             Habits = GetHabits();
         }
 

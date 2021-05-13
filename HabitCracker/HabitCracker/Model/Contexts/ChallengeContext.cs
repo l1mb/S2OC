@@ -19,11 +19,11 @@ namespace HabitCracker.Model.Contexts
             return Instance.Value;
         }
 
-        public readonly CourseworkDbContext _dbContext;
+        public readonly Entities.CourseworkDbContext _dbContext;
 
         public ChallengeContext()
         {
-            _dbContext = CourseworkDbContext.GetInstance();
+            _dbContext = Entities.CourseworkDbContext.GetInstance();
         }
 
         public ObservableCollection<Challenge> getChallenges()

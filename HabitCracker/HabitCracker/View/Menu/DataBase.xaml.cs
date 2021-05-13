@@ -14,13 +14,13 @@ namespace HabitCracker.View.Menu
     /// </summary>
     public partial class DataBase : Page
     {
-        private CourseworkDbContext db;
+        private Model.Entities.CourseworkDbContext db;
 
         public DataBase()
         {
             InitializeComponent();
 
-            db = new CourseworkDbContext();
+            db = new Model.Entities.CourseworkDbContext();
             LoadData();
             SetItemSource();
 

@@ -146,7 +146,7 @@ namespace HabitCracker.ViewModel
             {
                 _selectedHabit = value;
                 Caretaker = Originator.FillDays(
-                    CourseworkDbContext.GetInstance().Weekprogresses.Where(p => p.Habit == SelectedHabit.Id));
+                    Model.Entities.CourseworkDbContext.GetInstance().Weekprogresses.Where(p => p.Habit == SelectedHabit.Id));
                 Switcher(Caretaker.GetCurrent());
                 OnPropertyChanged(nameof(SelectedHabit));
                 OnPropertyChanged(nameof(Caretaker));
@@ -181,9 +181,9 @@ namespace HabitCracker.ViewModel
             if (!String.IsNullOrWhiteSpace(NewHabit.Title) && !string.IsNullOrWhiteSpace(NewHabit.Description))
             {
                 PersonHabits.Add(tmpHabit);
-                CourseworkDbContext.GetInstance().Habits.Add(tmpHabit);
+                Model.Entities.CourseworkDbContext.GetInstance().Habits.Add(tmpHabit);
 
-                CourseworkDbContext.GetInstance().SaveChanges();
+                Model.Entities.CourseworkDbContext.GetInstance().SaveChanges();
             }
 
             PersonHabits = _personHabits;
@@ -288,22 +288,7 @@ namespace HabitCracker.ViewModel
                 var w = new Weekprogress();
                 w.Id = Rand;
                 w.Habit = SelectedHabit.Id;
-                var t = CourseworkDbContext.GetInstance().Weekprogresses;
-                if (t.Count(p => p.Habit == SelectedHabit.Id) == 0)
-                {
-                    w.Weekorder = 0;
-                }
-                else
-                {
-                    if (DateTime.Today.DayOfWeek == DayOfWeek.Monday)
-                    {
-                        w.Weekorder = t.OrderByDescending(p => p.Weekorder).First().Weekorder + 1;
-                    }
-                    else
-                    {
-                        w.Weekorder = t.OrderByDescending(p => p.Weekorder).First()?.Weekorder;
-                    }
-                }
+                var t = Model.Entities.CourseworkDbContext.GetInstance().Weekprogresses;
 
                 if (SelectedHabit.CurrentStreak != null)
                 {
@@ -314,15 +299,15 @@ namespace HabitCracker.ViewModel
                 {
                     var tempGiveReward = Rewarder.GiveReward((int)SelectedHabit.CurrentStreak);
 
-                    CourseworkDbContext.GetInstance().Wallets
+                    Model.Entities.CourseworkDbContext.GetInstance().Wallets
                             .First(p => p.Idwallet == UserContext.GetInstance().UserPerson.Idwallet).Balance =
                         tempGiveReward.Item1;
                     MessageBox.Show(tempGiveReward.Item2);
                 }
 
                 w.Weekday = DateTime.Now;
-                CourseworkDbContext.GetInstance().Weekprogresses.Add(w);
-                CourseworkDbContext.GetInstance().SaveChanges();
+                Model.Entities.CourseworkDbContext.GetInstance().Weekprogresses.Add(w);
+                Model.Entities.CourseworkDbContext.GetInstance().SaveChanges();
             });
 
         public HabitViewModel()
