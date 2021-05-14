@@ -39,11 +39,18 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand AddSelectedToPersonChallenge => new RelayCommand(obj =>
         {
-            if (SelectedChallenge != null)
-                PersonChallenges.Add(SelectedChallenge);
+            if (SelectedChallenge == null) return;
+            var tempChallenge = SelectedChallenge;
+            tempChallenge.Challengerid = UserContext.GetInstance().UserPerson.Id;
+
+            SelectedChallenge.Challengerid = UserContext.GetInstance().UserPerson.Id;
+            PersonChallenges.Add(SelectedChallenge);
+
+            CourseworkDbContext.GetInstance().Challenges.Add(SelectedChallenge);
+            CourseworkDbContext.GetInstance().SaveChanges();
         });
 
-        private ObservableCollection<Event> getEvents()
+        private ObservableCollection<Event> GetEvents()
         {
             ObservableCollection<Event> events = new();
             foreach (var var in Model.Entities.CourseworkDbContext.GetInstance().Events.Where(p => p.Challengeid == SelectedChallenge.Challengeid).ToList())
@@ -71,7 +78,7 @@ namespace HabitCracker.ViewModel
             {
                 _selectedChallenge = value;
                 OnPropertyChanged(nameof(SelectedChallenge));
-                Events = getEvents();
+                Events = GetEvents();
             }
         }
 

@@ -73,3 +73,12 @@ add validation
 add pick challenge from double click
 
 
+23
+change photo and password
+
+
+24
+add challengers entity
+
+25
+create is done checkbox challenges

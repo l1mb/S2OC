@@ -39,4 +39,8 @@
     <Resource Include="View\Menu\icons8-arrow-100.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Tools\" />
+  </ItemGroup>
+
 </Project>

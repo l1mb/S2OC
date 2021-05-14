@@ -89,6 +89,10 @@ create table CHALLENGE
 	EVENTID int
 )
 
+
+
+
+
 drop table CHALLENGE
 use OOP_COURSEWORK
 CREATE TABLE EVENT
@@ -99,6 +103,8 @@ CREATE TABLE EVENT
 	EVENT VARCHAR(50),
 	ISDONE bit
 )
+
+
 
 drop table event
 --go
