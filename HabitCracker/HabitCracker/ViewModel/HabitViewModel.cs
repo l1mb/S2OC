@@ -28,6 +28,18 @@ namespace HabitCracker.ViewModel
 
         private bool[] daysBools = new bool[7];
 
+        private bool _habbitIsDone = false;
+
+        public bool IsDone
+        {
+            get => _habbitIsDone;
+            set
+            {
+                _habbitIsDone = value;
+                OnPropertyChanged(nameof(IsDone));
+            }
+        }
+
         public bool Monday
 
         {
@@ -107,6 +119,7 @@ namespace HabitCracker.ViewModel
             set => daysBools = value;
         }
 
+        private Window addNewHabbitWindow;
         private ObservableCollection<Habit> _personHabits = new ObservableCollection<Habit>();
         private Habit _selectedHabit;
         private Person _person;
@@ -148,6 +161,15 @@ namespace HabitCracker.ViewModel
                 Caretaker = Originator.FillDays(
                     Model.Entities.CourseworkDbContext.GetInstance().Weekprogresses.Where(p => p.Habit == SelectedHabit.Id));
                 Switcher(Caretaker.GetCurrent());
+
+                if (_selectedHabit.Weekprogresses.Count(p => p.Weekday == DateTime.Today) != 0)
+                {
+                    IsDone = true;
+                }
+                else
+                {
+                    IsDone = false;
+                }
                 OnPropertyChanged(nameof(SelectedHabit));
                 OnPropertyChanged(nameof(Caretaker));
             }
@@ -160,9 +182,9 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand OpenNewHabitCtorCommand => new RelayCommand(obj =>
         {
-            Window window = new NewHabit();
-            window.Show();
-            window.DataContext = this;
+            addNewHabbitWindow = new NewHabit();
+            addNewHabbitWindow.Show();
+            addNewHabbitWindow.DataContext = this;
         });
 
         public RelayCommand AddNewHabitCommand => new RelayCommand(obj =>
@@ -185,7 +207,7 @@ namespace HabitCracker.ViewModel
 
                 Model.Entities.CourseworkDbContext.GetInstance().SaveChanges();
             }
-
+            addNewHabbitWindow.Close();
             PersonHabits = _personHabits;
             OnPropertyChanged(nameof(PersonHabits));
         });
@@ -284,7 +306,7 @@ namespace HabitCracker.ViewModel
                 //и установки значения в свойства через рефлексию
 
                 //JsonConvert.DeserializeObject<List<DayOfWeek>>(Caretaker.GetCurrent().State);
-
+                IsDone = true;
                 var w = new Weekprogress();
                 w.Id = Rand;
                 w.Habit = SelectedHabit.Id;

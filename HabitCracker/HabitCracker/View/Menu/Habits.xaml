@@ -157,9 +157,17 @@
                                 <Button
                                     Padding="15,5"
                                     VerticalAlignment="Bottom"
-                                    Command="{Binding HabitIsDone}"
-                                    Content="Выполнил"
-                                    Style="{StaticResource ButtonIcon}" />
+                                    Command="{Binding HabitIsDone}">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                                 <Button
                                     Padding="15,5,15,5"
                                     VerticalAlignment="Bottom"
