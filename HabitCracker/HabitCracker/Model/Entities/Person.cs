@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 
-#nullable disable
-
 namespace HabitCracker.Model.Entities
 {
-    public partial class Person
+    public class Person
     {
         public Person()
         {
@@ -17,11 +15,11 @@ namespace HabitCracker.Model.Entities
         public string Lastname { get; set; }
         public string Role { get; set; }
         public string Picture { get; set; }
-        public int? Idwallet { get; set; }
+        public int AuthRef { get; set; }
 
-        public virtual Auth IdNavigation { get; set; }
-        public virtual Wallet IdwalletNavigation { get; set; }
-        public virtual ICollection<Challenge> Challenges { get; set; }
-        public virtual ICollection<Habit> Habits { get; set; }
+        public Auth Auth { get; set; }
+        public Wallet Wallet { get; set; }
+        public ICollection<Challenge> Challenges { get; set; }
+        public ICollection<Habit> Habits { get; set; }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using HabitCracker.Model.Entities;
+﻿using HabitCracker.Model.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace HabitCracker.View.Menu
 {
@@ -14,13 +12,13 @@ namespace HabitCracker.View.Menu
     /// </summary>
     public partial class DataBase : Page
     {
-        private Model.Entities.CourseworkDbContext db;
+        private Model.Entities.CoolerContext db;
 
         public DataBase()
         {
             InitializeComponent();
 
-            db = new Model.Entities.CourseworkDbContext();
+            db = new Model.Entities.CoolerContext();
             LoadData();
             SetItemSource();
 
@@ -73,10 +71,9 @@ namespace HabitCracker.View.Menu
                 {
                     case "AuthGrid":
                         {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                            foreach (var t in item.SelectedItems)
                             {
-                                Auth auth = item.SelectedItems[i] as Auth;
-                                if (auth != null)
+                                if (t is Auth auth)
                                 {
                                     db.Auths.Remove(auth);
                                 }
@@ -86,10 +83,9 @@ namespace HabitCracker.View.Menu
 
                     case "ChallengeGrid":
                         {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                            foreach (var t in item.SelectedItems)
                             {
-                                Model.Entities.Challenge challenge = item.SelectedItems[i] as Model.Entities.Challenge;
-                                if (challenge != null)
+                                if (t is Model.Entities.Challenge challenge)
                                 {
                                     db.Challenges.Remove(challenge);
                                 }
@@ -99,10 +95,9 @@ namespace HabitCracker.View.Menu
 
                     case "EventGrid":
                         {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                            foreach (var t in item.SelectedItems)
                             {
-                                Event @event = item.SelectedItems[i] as Event;
-                                if (@event != null)
+                                if (t is Event @event)
                                 {
                                     db.Events.Remove(@event);
                                 }
@@ -112,10 +107,9 @@ namespace HabitCracker.View.Menu
 
                     case "PersonGrid":
                         {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                            foreach (var t in item.SelectedItems)
                             {
-                                Person person = item.SelectedItems[i] as Person;
-                                if (person != null)
+                                if (t is Person person)
                                 {
                                     db.People.Remove(person);
                                 }
@@ -125,10 +119,9 @@ namespace HabitCracker.View.Menu
 
                     case "WalletGrid":
                         {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                            foreach (var t in item.SelectedItems)
                             {
-                                Wallet wallet = item.SelectedItems[i] as Wallet;
-                                if (wallet != null)
+                                if (t is Wallet wallet)
                                 {
                                     db.Wallets.Remove(wallet);
                                 }
@@ -140,8 +133,7 @@ namespace HabitCracker.View.Menu
                         {
                             for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                Model.Entities.Habit Habit = item.SelectedItems[i] as Model.Entities.Habit;
-                                if (Habit != null)
+                                if (item.SelectedItems[i] is Model.Entities.Habit Habit)
                                 {
                                     db.Habits.Remove(Habit);
                                 }
@@ -155,17 +147,6 @@ namespace HabitCracker.View.Menu
             //also tried map datagrid with DbSet<"EntityName"> but do not finished it
 
             db.SaveChanges();
-        }
-
-        private void Remove<T>(DataGrid grid, int itemNumber) where T : class
-        {
-            T var = grid.SelectedItems[itemNumber] as T;
-            if (var != null)
-            {
-                switch (nameof(T))
-                {
-                }
-            }
         }
     }
 }

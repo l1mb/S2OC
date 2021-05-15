@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using HabitCracker.Model.Memento;
 
 namespace HabitCracker.Model.Memento
 {
@@ -15,11 +11,7 @@ namespace HabitCracker.Model.Memento
 
         public WeekMemento GetCurrent()
         {
-            if (UndoMementoes.Count() != 0)
-            {
-                return UndoMementoes.Peek();
-            }
-            else return null;
+            return UndoMementoes.Count() != 0 ? UndoMementoes.Peek() : null;
         }
 
         public WeekMemento GetPrevious()
@@ -38,7 +30,7 @@ namespace HabitCracker.Model.Memento
 
         public WeekMemento GetNext()
         {
-            if (RedoMementoes.Count() != 0)
+            if (RedoMementoes != null && RedoMementoes.Count() != 0)
             {
                 UndoMementoes.Push(RedoMementoes.Pop());
             }

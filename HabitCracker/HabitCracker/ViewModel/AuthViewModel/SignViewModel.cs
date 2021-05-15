@@ -1,14 +1,10 @@
 ﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Documents;
 using HabitCracker.View.MainWindow;
-using Microsoft.EntityFrameworkCore;
-using static HabitCracker.Model.Entities.CourseworkDbContext;
+using System;
+using System.Linq;
+using System.Windows;
+using static HabitCracker.Model.Entities.CoolerContext;
 
 namespace HabitCracker.ViewModel.AuthViewModel
 {
@@ -45,12 +41,12 @@ namespace HabitCracker.ViewModel.AuthViewModel
 
         public bool IsUserIdUnique(int id) => GetInstance().Auths.All(p => p.Id != id);
 
-        //foreach (var item in CourseworkDbContext.GetInstance().Auths)
+        //foreach (var item in CoolerContext.GetInstance().Auths)
         //{
         //    if (id == item.Id)
         //    {
         //        return false;
-        //    }
+        //    }s
         //}
         //return true;
 
@@ -79,37 +75,33 @@ namespace HabitCracker.ViewModel.AuthViewModel
             {
                 try
                 {
-                    UserWallet.Idwallet = GetUniqueId();
-                    UserWallet.Balance = 0;
-                    UserWallet.Hash = "";
+                    //UserWallet.Id = GetUniqueId();
 
-                    currentPerson.Idwallet = UserWallet.Idwallet;
+                    currentPerson.Wallet = UserWallet;
+                    UserWallet.Balance = 0;
+
+                    //currentPerson.Id = UserWallet.Id;
 
                     currentPerson.Name = Name;
                     currentPerson.Lastname = Lastname;
-                    var id = GetUniqueId();
+                    //var id = GetUniqueId();
                     SignAuth.Login = Login;
                     SignAuth.Salt = Hasher.GetSalt();
                     SignAuth.Password = Hasher.Encrypt(Password, SignAuth.Salt);
-                    SignAuth.Id = id;
-                    currentPerson.Id = SignAuth.Id;
+                    //SignAuth.Id = id;
+                    //currentPerson.Id = SignAuth.Id;
                     SignAuth.Person = currentPerson;
-                    currentPerson.IdNavigation = SignAuth;
+                    currentPerson.Auth = SignAuth;
 
-                    UserWallet.People.Add(currentPerson);
+                    UserWallet.Owner = currentPerson;
 
                     GetInstance().Auths.Add(SignAuth);
                     GetInstance().Wallets.Add(UserWallet);
-                    currentPerson.Id = SignAuth.Id;
+                    //currentPerson.Id = SignAuth.Id;
                     SignAuth = null;
                     GetInstance().SaveChanges();
 
                     Passed();
-                }
-                catch (InvalidOperationException exception)
-                {
-                    MessageBox.Show("Скорее ");
-                    //!need to add exception and try catch
                 }
                 catch (Exception e)
                 {
@@ -143,7 +135,7 @@ namespace HabitCracker.ViewModel.AuthViewModel
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Что-то пошло не так");
+                    MessageBox.Show(e.Message);
                 }
             }
         );
@@ -153,18 +145,12 @@ namespace HabitCracker.ViewModel.AuthViewModel
             Window window = null;
 
             if (UserContext.GetInstance().UserPerson.Role == "Администратор" || UserContext.GetInstance().UserPerson.Role == "Модератор")
-            {
                 window = new AdminMainWindow();
-            }
             else
-            {
                 window = new MainWindow();
-            }
             window?.Show();
 
-            if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
-
-            MessageBox.Show(nameof(Model.Entities.Auth));
+            Application.Current.MainWindow?.Close();
 
             //AuthWindow authWindow = new AuthWindow();
             //window.Close();

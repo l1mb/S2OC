@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HabitCracker.Model.Contexts;
+using HabitCracker.Model.Entities;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using HabitCracker.Model.Contexts;
-using HabitCracker.Model.Entities;
-using HabitCracker.View.Menu.Challenge;
-using static HabitCracker.Model.Entities.CourseworkDbContext;
+using static HabitCracker.Model.Entities.CoolerContext;
 
 namespace HabitCracker.ViewModel
 {
@@ -16,9 +11,6 @@ namespace HabitCracker.ViewModel
     {
         private ObservableCollection<Challenge> _allchallenges = new ObservableCollection<Challenge>();
         private ObservableCollection<Challenge> _personchallenges = new ObservableCollection<Challenge>();
-
-        private Page _allChallengesPage;
-        private Page _personChallengesPage;
 
         private Page _currentPage;
 
@@ -40,20 +32,21 @@ namespace HabitCracker.ViewModel
         public RelayCommand AddSelectedToPersonChallenge => new RelayCommand(obj =>
         {
             if (SelectedChallenge == null) return;
-            var tempChallenge = SelectedChallenge;
-            tempChallenge.Challengerid = UserContext.GetInstance().UserPerson.Id;
 
-            SelectedChallenge.Challengerid = UserContext.GetInstance().UserPerson.Id;
+            //var tempChallenge = SelectedChallenge;
+            //tempChallenge.Challengers.Add(UserContext.GetInstance().UserPerson);
+
+            SelectedChallenge.Challengers.Add(UserContext.GetInstance().UserPerson);
             PersonChallenges.Add(SelectedChallenge);
 
-            CourseworkDbContext.GetInstance().Challenges.Add(SelectedChallenge);
-            CourseworkDbContext.GetInstance().SaveChanges();
+            GetInstance().Challenges.Add(SelectedChallenge);
+            GetInstance().SaveChanges();
         });
 
         private ObservableCollection<Event> GetEvents()
         {
             ObservableCollection<Event> events = new();
-            foreach (var var in Model.Entities.CourseworkDbContext.GetInstance().Events.Where(p => p.Challengeid == SelectedChallenge.Challengeid).ToList())
+            foreach (var var in GetInstance().Events.Where(p => p.Challenge == SelectedChallenge).ToList())
             {
                 events.Add(var);
             }
@@ -112,22 +105,10 @@ namespace HabitCracker.ViewModel
             }
         }
 
-        public RelayCommand SetPersonPage => new RelayCommand(obj =>
-        {
-            CurrentPage = _personChallengesPage;
-        });
-
-        public RelayCommand SetAllPage => new RelayCommand(obj =>
-         {
-             CurrentPage = _allChallengesPage;
-         });
-
         public ChallengeViewModel()
         {
-            AllChallenges = ChallengeContext.GetInstance().getChallenges();
-            PersonChallenges =
-                new ObservableCollection<Challenge>(AllChallenges.Where(p =>
-                    p.Challengerid == UserContext.GetInstance().UserPerson.Id));
+            AllChallenges = ChallengeContext.GetInstance().GetChallenges();
+            PersonChallenges = new ObservableCollection<Challenge>(UserContext.GetInstance().UserPerson.Challenges);
         }
     }
 }

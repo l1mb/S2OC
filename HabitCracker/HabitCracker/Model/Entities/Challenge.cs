@@ -1,25 +1,20 @@
 ﻿using System.Collections.Generic;
 
-#nullable disable
-
 namespace HabitCracker.Model.Entities
 {
-    public partial class Challenge
+    public class Challenge
     {
         public Challenge()
         {
             Events = new HashSet<Event>();
+            Challengers = new List<Person>();
         }
 
-        public int Challengeid { get; set; }
-        public int? Creatorid { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Tip { get; set; }
-        public int? Dayscount { get; set; }
-        public int? Challengerid { get; set; }
-        public int? Eventid { get; set; }
-
-        public virtual Person Creator { get; set; }
-        public virtual ICollection<Event> Events { get; set; }
+        public int DaysCount { get; set; }
+        public IList<Person> Challengers { get; private set; }
+        public ICollection<Event> Events { get; private set; }
     }
 }

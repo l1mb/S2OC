@@ -1,32 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HabitCracker.Model.Entities;
+using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Entities;
-using HabitCracker.View.Menu;
-using Microsoft.EntityFrameworkCore;
 
 namespace HabitCracker.Model.Contexts
 {
-    internal class ChallengeContext : DbContext
+    internal class ChallengeContext
     {
-        public static readonly Lazy<ChallengeContext> Instance = new(() => new ChallengeContext());
+        private static readonly Lazy<ChallengeContext> Instance = new(() => new ChallengeContext());
 
         public static ChallengeContext GetInstance()
         {
             return Instance.Value;
         }
 
-        public readonly Entities.CourseworkDbContext _dbContext;
+        public readonly CoolerContext _dbContext;
 
         public ChallengeContext()
         {
-            _dbContext = Entities.CourseworkDbContext.GetInstance();
+            _dbContext = CoolerContext.GetInstance();
         }
 
-        public ObservableCollection<Challenge> getChallenges()
+        public ObservableCollection<Challenge> GetChallenges()
         {
             var challenges = new ObservableCollection<Challenge>();
             foreach (var challenge in _dbContext.Challenges)

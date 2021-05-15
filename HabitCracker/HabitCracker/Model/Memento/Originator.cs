@@ -1,13 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using HabitCracker.Model.Entities;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace HabitCracker.Model.Memento
 {
@@ -15,19 +10,18 @@ namespace HabitCracker.Model.Memento
     {
         public CareTaker Caretaker = new();
 
-        public CareTaker FillDays(System.Linq.IQueryable<HabitCracker.Model.Entities.Weekprogress> origin)
+        public CareTaker FillDays(System.Linq.IQueryable<HabitCracker.Model.Entities.HabitProgress> origin)
         {
             List<DayOfWeek> tempDayOfWeeks = new();
 
-            DateTime currenTime = DateTime.Today.AddDays(15);
-            if (origin.OrderBy(p => p.Weekday).Count() == 0)
+            DateTime currenTime = DateTime.Today;
+            if (!origin.OrderBy(p => p.Weekday).Any())
             {
                 return new CareTaker();
             }
             var dateTime = origin.OrderBy(p => p.Weekday).First().Weekday;
-            if (dateTime != null)
             {
-                var secDate = dateTime.Value.Date;
+                var secDate = dateTime.Date;
                 //пока год и номер недели не станут ==
                 while ((dates(currenTime).Item1 != dates(secDate).Item1 - 1) ^ (dates(currenTime).Item2 != dates(secDate).Item2))
                 {
@@ -38,9 +32,9 @@ namespace HabitCracker.Model.Memento
                     //add null check
                     foreach (var weekprogress in origin.OrderByDescending(p => p.Weekday))
                     {
-                        if (weekprogress.Weekday != null && dates(currenTime).Item1 == dates((DateTime)weekprogress.Weekday).Item1)
+                        if (dates(currenTime).Item1 == dates((DateTime)weekprogress.Weekday).Item1)
                         {
-                            if (weekprogress.Weekday != null && !tempDayOfWeeks.Contains(weekprogress.Weekday.Value.DayOfWeek)) tempDayOfWeeks.Add(weekprogress.Weekday.Value.DayOfWeek);
+                            if (!tempDayOfWeeks.Contains(weekprogress.Weekday.DayOfWeek)) tempDayOfWeeks.Add(weekprogress.Weekday.DayOfWeek);
                         }
                     }
 

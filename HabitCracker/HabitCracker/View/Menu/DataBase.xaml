@@ -137,8 +137,8 @@
                                     Header="Dayscount" />
                                 <DataGridTextColumn
                                     Width="70"
-                                    Binding="{Binding Path=Challengerid}"
-                                    Header="Challengerid" />
+                                    Binding="{Binding Path=Challenge}"
+                                    Header="Challenge" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem.Content>

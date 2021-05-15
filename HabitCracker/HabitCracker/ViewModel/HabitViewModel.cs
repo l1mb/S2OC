@@ -1,32 +1,61 @@
 ﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Media;
 using HabitCracker.Model.Entities.Валеты;
 using HabitCracker.Model.Memento;
 using HabitCracker.View.Menu.Habit;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using static System.DateTime;
+using static Newtonsoft.Json.JsonConvert;
 
 namespace HabitCracker.ViewModel
 {
     internal class HabitViewModel : BaseViewModel
     {
-        public Originator Originator = new Originator();
-        public CareTaker Caretaker = new CareTaker();
-        private ObservableCollection<bool> _days = new();
 
-        private bool[] daysBools = new bool[7];
+        public Habit[] Habits = {
+            new()
+            {
+                Description = "text about danger of smoking",
+                CreateDate = Now,
+                Title = "Smoking",
+                User = UserContext.GetInstance().UserPerson
+            },
+            new()
+            {
+                Description = "text about danger of drinking",
+                CreateDate = Now,
+                Title = "Drinking",
+                User = UserContext.GetInstance().UserPerson
+            },
+            new()
+            {
+                Description = "text about danger of using drugs",
+                CreateDate = Now,
+                Title = "Druging",
+                User = UserContext.GetInstance().UserPerson
+            },
+            new()
+            {
+                Description = "text about danger of using seal",
+                CreateDate = Now,
+                Title = "Sealing",
+                User = UserContext.GetInstance().UserPerson
+            },
+            new()
+            {
+                Description = "text about danger of using seal",
+                CreateDate = Now,
+                Title = "Sealing",
+                User = UserContext.GetInstance().UserPerson
+            }
+        };
+
+        public Originator Originator = new();
+        public CareTaker Caretaker = new();
 
         private bool _habbitIsDone = false;
 
@@ -43,11 +72,11 @@ namespace HabitCracker.ViewModel
         public bool Monday
 
         {
-            get => daysBools[0];
+            get => DaysBools[0];
 
             set
             {
-                daysBools[0] = value;
+                DaysBools[0] = value;
 
                 OnPropertyChanged(nameof(Monday));
             }
@@ -55,80 +84,72 @@ namespace HabitCracker.ViewModel
 
         public bool Tuesday
         {
-            get => daysBools[1];
+            get => DaysBools[1];
             set
             {
-                daysBools[1] = value;
+                DaysBools[1] = value;
                 OnPropertyChanged(nameof(Tuesday));
             }
         }
 
         public bool Wednesday
         {
-            get => daysBools[2];
+            get => DaysBools[2];
             set
             {
-                daysBools[2] = value;
+                DaysBools[2] = value;
                 OnPropertyChanged(nameof(Wednesday));
             }
         }
 
         public bool Thursday
         {
-            get => daysBools[3];
+            get => DaysBools[3];
             set
             {
-                daysBools[3] = value;
+                DaysBools[3] = value;
                 OnPropertyChanged(nameof(Thursday));
             }
         }
 
         public bool Friday
         {
-            get => daysBools[4];
+            get => DaysBools[4];
             set
             {
-                daysBools[4] = value;
+                DaysBools[4] = value;
                 OnPropertyChanged(nameof(Friday));
             }
         }
 
         public bool Saturday
         {
-            get => daysBools[5];
+            get => DaysBools[5];
             set
             {
-                daysBools[5] = value;
+                DaysBools[5] = value;
                 OnPropertyChanged(nameof(Saturday));
             }
         }
 
         public bool Sunday
         {
-            get => daysBools[6];
+            get => DaysBools[6];
             set
             {
-                daysBools[6] = value;
+                DaysBools[6] = value;
                 OnPropertyChanged(nameof(Saturday));
             }
         }
 
-        public bool[] DaysBools
-        {
-            get => daysBools;
-            set => daysBools = value;
-        }
+        public bool[] DaysBools { get; set; } = new bool[7];
 
-        private Window addNewHabbitWindow;
-        private ObservableCollection<Habit> _personHabits = new ObservableCollection<Habit>();
+        private Window _addNewHabbitWindow;
+        private ObservableCollection<Habit> _personHabits = new();
         private Habit _selectedHabit;
-        private Person _person;
-        private Random _rand = new Random();
+        private readonly Random _rand = new();
 
-        public int Rand
-        {
-            get => _rand.Next();
-        }
+        public int Rand => _rand.Next();
 
         private Habit _newHabit = new();
 
@@ -159,85 +180,58 @@ namespace HabitCracker.ViewModel
             {
                 _selectedHabit = value;
                 Caretaker = Originator.FillDays(
-                    Model.Entities.CourseworkDbContext.GetInstance().Weekprogresses.Where(p => p.Habit == SelectedHabit.Id));
+                    Model.Entities.CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == SelectedHabit));
                 Switcher(Caretaker.GetCurrent());
 
-                if (_selectedHabit.Weekprogresses.Count(p => p.Weekday == DateTime.Today) != 0)
-                {
-                    IsDone = true;
-                }
-                else
-                {
-                    IsDone = false;
-                }
+                if (_selectedHabit is { }) 
+                    IsDone = _selectedHabit.HabitProgress.Count(p => p.Weekday.Date == Today.Date) != 0;
                 OnPropertyChanged(nameof(SelectedHabit));
                 OnPropertyChanged(nameof(Caretaker));
             }
         }
 
-        public RelayCommand ClearHabitList => new RelayCommand(obj => { PersonHabits.Clear(); }
+        public RelayCommand ClearHabitList => new(obj => { PersonHabits.Clear(); }
         );
 
-        public RelayCommand DeleteSelectedCommand => new RelayCommand(obj => { PersonHabits.Remove(SelectedHabit); });
+        public RelayCommand DeleteSelectedCommand => new(obj => { PersonHabits.Remove(SelectedHabit); });
 
-        public RelayCommand OpenNewHabitCtorCommand => new RelayCommand(obj =>
+        public RelayCommand OpenNewHabitCtorCommand => new(obj =>
         {
-            addNewHabbitWindow = new NewHabit();
-            addNewHabbitWindow.Show();
-            addNewHabbitWindow.DataContext = this;
+            _addNewHabbitWindow = new NewHabit();
+            _addNewHabbitWindow.Show();
+            _addNewHabbitWindow.DataContext = this;
         });
 
-        public RelayCommand AddNewHabitCommand => new RelayCommand(obj =>
+        public RelayCommand AddNewHabitCommand => new(obj =>
         {
             var tmpHabit = new Habit()
             {
-                Id = Rand,
-                Userid = UserContext.GetInstance().UserPerson.Id,
                 CurrentStreak = 0,
                 Description = NewHabit.Description,
-                CreateDate = DateTime.Now,
+                CreateDate = Now,
                 Title = NewHabit.Title,
                 DaysCount = NewHabit.DaysCount,
                 User = UserContext.GetInstance().UserPerson
             };
-            if (!String.IsNullOrWhiteSpace(NewHabit.Title) && !string.IsNullOrWhiteSpace(NewHabit.Description))
+            if (!string.IsNullOrWhiteSpace(NewHabit.Title) && !string.IsNullOrWhiteSpace(NewHabit.Description))
             {
                 PersonHabits.Add(tmpHabit);
-                Model.Entities.CourseworkDbContext.GetInstance().Habits.Add(tmpHabit);
+                CoolerContext.GetInstance().Habits.Add(tmpHabit);
 
-                Model.Entities.CourseworkDbContext.GetInstance().SaveChanges();
+                CoolerContext.GetInstance().SaveChanges();
             }
-            addNewHabbitWindow.Close();
+            _addNewHabbitWindow.Close();
             PersonHabits = _personHabits;
             OnPropertyChanged(nameof(PersonHabits));
         });
 
-        private int GetWeekNumberOfMonth(DateTime date)
-        {
-            date = date.Date;
-            DateTime firstMonthDay = new DateTime(date.Year, date.Month, 1);
-            DateTime firstMonthMonday = firstMonthDay.AddDays((DayOfWeek.Monday + 7 - firstMonthDay.DayOfWeek) % 7);
-            if (firstMonthMonday > date)
-            {
-                firstMonthDay = firstMonthDay.AddMonths(-1);
-                firstMonthMonday = firstMonthDay.AddDays((DayOfWeek.Monday + 7 - firstMonthDay.DayOfWeek) % 7);
-            }
-
-            return (date - firstMonthMonday).Days / 7 + 1;
-        }
-
-        //1 ........ end
-
-        //orderby date, createMementos(weekdiff(date1, date2)),
-        //найти понедельник, -7 дней, -7 дней
-
-        public RelayCommand GetPreviousDays => new RelayCommand(obj =>
+        public RelayCommand GetPreviousDays => new(obj =>
         {
             Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = Sunday = false;
             Switcher(Caretaker.GetPrevious());
         });
 
-        public RelayCommand GetNextDays => new RelayCommand(
+        public RelayCommand GetNextDays => new(
             obj =>
             {
                 Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = Sunday = false;
@@ -250,7 +244,7 @@ namespace HabitCracker.ViewModel
             {
                 return;
             }
-            foreach (var en in JsonConvert.DeserializeObject<List<DayOfWeek>>(memento.State))
+            foreach (var en in DeserializeObject<List<DayOfWeek>>(memento.State))
             {
                 switch (en)
                 {
@@ -295,96 +289,84 @@ namespace HabitCracker.ViewModel
                             Sunday = true;
                         }
                         break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
 
-        public RelayCommand HabitIsDone => new RelayCommand(obj =>
+
+        public RelayCommand SaveHabits => new(obj=>
+        {
+            foreach (var habit in PersonHabits)
             {
-                //! код ниже пришел на смену слишком гениального
-                //var tt = typeof(HabitViewModel).GetProperties().Where(p => p.PropertyType == typeof(bool)).ToArray();
-                //и установки значения в свойства через рефлексию
+                CoolerContext.GetInstance().Habits.Add(habit);
+            }
+        });
 
-                //JsonConvert.DeserializeObject<List<DayOfWeek>>(Caretaker.GetCurrent().State);
+        public RelayCommand HabitIsDone => new(obj =>
+            {
+
                 IsDone = true;
-                var w = new Weekprogress();
-                w.Id = Rand;
-                w.Habit = SelectedHabit.Id;
-                var t = Model.Entities.CourseworkDbContext.GetInstance().Weekprogresses;
+                var w = new HabitProgress();
+                w.Habit = SelectedHabit;
+                var t = Model.Entities.CoolerContext.GetInstance().HabitProgress;
 
-                if (SelectedHabit.CurrentStreak != null)
-                {
-                    SelectedHabit.CurrentStreak++;
-                }
+                SelectedHabit.CurrentStreak++;
+                var tempGiveReward = Rewarder.GiveReward((int)SelectedHabit.CurrentStreak);
 
-                if (SelectedHabit.CurrentStreak != null)
-                {
-                    var tempGiveReward = Rewarder.GiveReward((int)SelectedHabit.CurrentStreak);
+                Model.Entities.CoolerContext.GetInstance().Wallets
+                        .First(p => p.Id == UserContext.GetInstance().UserPerson.Id).Balance =
+                    tempGiveReward.Item1;
+                MessageBox.Show(tempGiveReward.Item2);
 
-                    Model.Entities.CourseworkDbContext.GetInstance().Wallets
-                            .First(p => p.Idwallet == UserContext.GetInstance().UserPerson.Idwallet).Balance =
-                        tempGiveReward.Item1;
-                    MessageBox.Show(tempGiveReward.Item2);
-                }
-
-                w.Weekday = DateTime.Now;
-                Model.Entities.CourseworkDbContext.GetInstance().Weekprogresses.Add(w);
-                Model.Entities.CourseworkDbContext.GetInstance().SaveChanges();
+                w.Weekday = Now;
+                Model.Entities.CoolerContext.GetInstance().HabitProgress.Add(w);
+                Model.Entities.CoolerContext.GetInstance().SaveChanges();
             });
 
         public HabitViewModel()
         {
-            //!получается, что я все это время делал неправильное, я делал для определенной привычки, а нужно было просто для дней, может, так и лучше, вроде для общего случая легче
-
             if (HabitContext.GetInstance().Habits.Count == 0)
             {
                 _personHabits.Add(new Habit()
                 {
-                    Id = Rand,
-                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of smoking",
-                    CreateDate = DateTime.Now,
+                    CreateDate = Now,
                     Title = "Smoking",
                     User = UserContext.GetInstance().UserPerson
                 });
                 _personHabits.Add(new Habit()
                 {
-                    Id = Rand,
-                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of drinking",
-                    CreateDate = DateTime.Now,
+                    CreateDate = Now,
                     Title = "Drinking",
                     User = UserContext.GetInstance().UserPerson
                 });
                 _personHabits.Add(new Habit()
                 {
-                    Id = Rand,
-                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of using drugs",
-                    CreateDate = DateTime.Now,
+                    CreateDate = Now,
                     Title = "Druging",
                     User = UserContext.GetInstance().UserPerson
                 });
                 _personHabits.Add(new Habit()
                 {
-                    Id = Rand,
-                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of using seal",
-                    CreateDate = DateTime.Now,
+                    CreateDate = Now,
                     Title = "Sealing",
                     User = UserContext.GetInstance().UserPerson
                 });
                 _personHabits.Add(new Habit()
                 {
-                    Id = Rand,
-                    Userid = UserContext.GetInstance().UserPerson.Id,
                     CurrentStreak = 0,
                     Description = "text about danger of using seal",
-                    CreateDate = DateTime.Now,
+                    CreateDate = Now,
                     Title = "Sealing",
                     User = UserContext.GetInstance().UserPerson
                 });
@@ -392,24 +374,6 @@ namespace HabitCracker.ViewModel
             else
             {
                 PersonHabits = HabitContext.GetInstance().Habits;
-            }
-        }
-
-        public class BoolToBrushConverter : IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                if (value == null)
-                    return Brushes.Transparent;
-
-                return System.Convert.ToBoolean(value)
-                    ? Brushes.Red
-                    : Brushes.Transparent;
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                throw new NotImplementedException();
             }
         }
     }
