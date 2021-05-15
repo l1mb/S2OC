@@ -1,15 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection;
-using System.Security.AccessControl;
-using System.Threading.Channels;
+﻿using HabitCracker.Model.Contexts;
+using HabitCracker.Model.Entities;
 using System.Windows;
 using System.Windows.Controls;
-using HabitCracker.Model.Contexts;
-using HabitCracker.Model.Entities;
-using HabitCracker.View.Menu;
-using HabitCracker.View.Menu.Challenge;
-using static System.Configuration.ConfigurationManager;
 
 namespace HabitCracker.ViewModel
 {

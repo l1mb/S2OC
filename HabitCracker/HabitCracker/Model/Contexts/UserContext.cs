@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Entities;
+﻿using HabitCracker.Model.Entities;
+using System;
 
 namespace HabitCracker.Model.Contexts
 {
     internal class UserContext : IDisposable
     {
-        public static readonly Lazy<UserContext> Instance = new(() => new UserContext());
+        private static readonly Lazy<UserContext> Instance = new(() => new UserContext());
 
         public Person UserPerson;
 

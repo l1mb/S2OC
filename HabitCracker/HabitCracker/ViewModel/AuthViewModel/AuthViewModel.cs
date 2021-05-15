@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HabitCracker.View.AuthView;
 using System.Windows.Controls;
-using HabitCracker.View.AuthView;
 
 namespace HabitCracker.ViewModel.Auth
 {

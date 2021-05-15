@@ -1,14 +1,12 @@
-﻿#nullable disable
-
-namespace HabitCracker.Model.Entities
+﻿namespace HabitCracker.Model.Entities
 {
-    public partial class Auth
+    public class Auth
     {
         public int Id { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
 
-        public virtual Person Person { get; set; }
+        public Person Person { get; set; }
     }
 }

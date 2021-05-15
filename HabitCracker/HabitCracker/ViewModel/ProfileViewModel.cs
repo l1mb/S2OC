@@ -1,30 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.Pkcs;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Contexts;
+﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
-using HabitCracker.View.Menu;
+using System;
+using System.Linq;
 
 namespace HabitCracker.ViewModel
 {
     internal class ProfileViewModel : BaseViewModel
     {
-        public string _pizdec;
-
-        public string Pizdec
-        {
-            get => _pizdec;
-            set => _pizdec = value;
-        }
-
-        public Decimal? PersonBalance
+        public Decimal PersonBalance
         {
             get
             {
-                return Model.Entities.CourseworkDbContext.GetInstance().Wallets.First(p => p.Idwallet == CurrentPerson.Idwallet).Balance;
+                return Model.Entities.CoolerContext.GetInstance().Wallets.First(p => p.Id == CurrentPerson.Wallet.Id).Balance;
             }
         }
 

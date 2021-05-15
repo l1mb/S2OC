@@ -85,9 +85,13 @@ create table CHALLENGE
 	TITLE VARCHAR(40),
 	TIP VARCHAR(100),
 	DAYSCOUNT INT,
-	CHALLENGERID INT,
+	Challenge INT,
 	EVENTID int
 )
+
+
+
+
 
 drop table CHALLENGE
 use OOP_COURSEWORK
@@ -99,6 +103,8 @@ CREATE TABLE EVENT
 	EVENT VARCHAR(50),
 	ISDONE bit
 )
+
+
 
 drop table event
 --go

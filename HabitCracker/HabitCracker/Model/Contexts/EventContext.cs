@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using HabitCracker.Model.Entities;
+using System;
 
 namespace HabitCracker.Model.Contexts
 {
-    internal class EventContext : DbContext
+    internal class EventContext
     {
-        public static readonly Lazy<EventContext> Instance = new(() => new EventContext());
+        private static readonly Lazy<EventContext> Instance = new(() => new EventContext());
 
         public Event Event;
 

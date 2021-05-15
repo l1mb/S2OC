@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Contexts;
-using HabitCracker.Model.Entities;
+﻿using HabitCracker.Model.Contexts;
 
 namespace HabitCracker.ViewModel
 {

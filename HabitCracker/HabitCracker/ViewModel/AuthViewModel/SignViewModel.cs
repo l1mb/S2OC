@@ -1,14 +1,11 @@
 ﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Documents;
 using HabitCracker.View.MainWindow;
-using Microsoft.EntityFrameworkCore;
-using static HabitCracker.Model.Entities.CourseworkDbContext;
+using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using static HabitCracker.Model.Entities.CoolerContext;
 
 namespace HabitCracker.ViewModel.AuthViewModel
 {
@@ -43,73 +40,44 @@ namespace HabitCracker.ViewModel.AuthViewModel
 
         private string lastname;
 
-        public bool IsUserIdUnique(int id) => GetInstance().Auths.All(p => p.Id != id);
-
-        //foreach (var item in CourseworkDbContext.GetInstance().Auths)
-        //{
-        //    if (id == item.Id)
-        //    {
-        //        return false;
-        //    }
-        //}
-        //return true;
-
-        public int GetUniqueId()
-        {
-            Random random = new Random();
-
-            int Id = random.Next();
-            while (!IsUserIdUnique(Id))
-            {
-                Id = random.Next();
-            }
-
-            return Id;
-        }
-
         public string Lastname
         {
             get => lastname;
             set => lastname = value;
         }
 
-        public Person currentPerson = UserContext.GetInstance().UserPerson;
+        public Person CurrentPerson = UserContext.GetInstance().UserPerson;
 
-        public RelayCommand SignUpButtonClickCommand => new RelayCommand(obj =>
+        public RelayCommand SignUpButtonClickCommand => new RelayCommand(PasswordBox =>
             {
                 try
                 {
-                    UserWallet.Idwallet = GetUniqueId();
+
+
+                    CurrentPerson.Wallet = UserWallet;
                     UserWallet.Balance = 0;
-                    UserWallet.Hash = "";
 
-                    currentPerson.Idwallet = UserWallet.Idwallet;
 
-                    currentPerson.Name = Name;
-                    currentPerson.Lastname = Lastname;
-                    var id = GetUniqueId();
+                    CurrentPerson.Name = Name;
+                    CurrentPerson.Lastname = Lastname;
                     SignAuth.Login = Login;
                     SignAuth.Salt = Hasher.GetSalt();
-                    SignAuth.Password = Hasher.Encrypt(Password, SignAuth.Salt);
-                    SignAuth.Id = id;
-                    currentPerson.Id = SignAuth.Id;
-                    SignAuth.Person = currentPerson;
-                    currentPerson.IdNavigation = SignAuth;
+                    if (PasswordBox is PasswordBox passwordBox)
+                    {
+                        SignAuth.Password = Hasher.Encrypt(passwordBox.Password, SignAuth.Salt);
 
-                    UserWallet.People.Add(currentPerson);
+                    }
+                    SignAuth.Person = CurrentPerson;
+                    CurrentPerson.Auth = SignAuth;
+
+                    UserWallet.Owner = CurrentPerson;
 
                     GetInstance().Auths.Add(SignAuth);
                     GetInstance().Wallets.Add(UserWallet);
-                    currentPerson.Id = SignAuth.Id;
                     SignAuth = null;
                     GetInstance().SaveChanges();
 
                     Passed();
-                }
-                catch (InvalidOperationException exception)
-                {
-                    MessageBox.Show("Скорее ");
-                    //!need to add exception and try catch
                 }
                 catch (Exception e)
                 {
@@ -118,21 +86,22 @@ namespace HabitCracker.ViewModel.AuthViewModel
             }
         );
 
-        public RelayCommand SignInButtonClickCommand => new RelayCommand(obj =>
+        public RelayCommand SignInButtonClickCommand => new RelayCommand(PasswordBox =>
             {
                 try
                 {
                     var eAuth = new Model.Entities.Auth();
-                    //todo GET MATCHES WITH AUTH.LOGIN => GET PERSON FROM DB WITH SIGN.AUTH ID
 
-                    //!tried using linq to ef, but it cant resolve my hasher methods
-                    foreach (var item in GetInstance().Auths)
+                    if ((PasswordBox is PasswordBox passwordBox))
                     {
-                        if ((item == null) || ((SignAuth.Login != item.Login) ||
-                                               (item.Password != Hasher.Encrypt(SignAuth.Password, item.Salt))))
-                            continue;
-                        eAuth = item;
-                        break;
+                        foreach (var item in GetInstance().Auths)
+                        {
+                            if ((item == null) || ((SignAuth.Login != item.Login) ||
+                                                   (item.Password != Hasher.Encrypt(passwordBox.Password, item.Salt))))
+                                continue;
+                            eAuth = item;
+                            break;
+                        }
                     }
 
                     UserContext.GetInstance().UserPerson = GetInstance().People
@@ -143,7 +112,7 @@ namespace HabitCracker.ViewModel.AuthViewModel
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Что-то пошло не так");
+                    MessageBox.Show(e.Message);
                 }
             }
         );
@@ -153,18 +122,12 @@ namespace HabitCracker.ViewModel.AuthViewModel
             Window window = null;
 
             if (UserContext.GetInstance().UserPerson.Role == "Администратор" || UserContext.GetInstance().UserPerson.Role == "Модератор")
-            {
                 window = new AdminMainWindow();
-            }
             else
-            {
                 window = new MainWindow();
-            }
             window?.Show();
 
-            if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
-
-            MessageBox.Show(nameof(Model.Entities.Auth));
+            Application.Current.MainWindow?.Close();
 
             //AuthWindow authWindow = new AuthWindow();
             //window.Close();

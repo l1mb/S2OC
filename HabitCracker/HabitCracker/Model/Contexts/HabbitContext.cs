@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HabitCracker.Model.Entities;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace HabitCracker.Model.Contexts
 {
-    internal class HabitContext : DbContext
+    internal class HabitContext
     {
-        public static readonly Lazy<HabitContext> Instance = new(() => new HabitContext());
+        private static readonly Lazy<HabitContext> Instance = new(() => new HabitContext());
 
         public static HabitContext GetInstance()
         {
@@ -20,16 +16,12 @@ namespace HabitCracker.Model.Contexts
 
         public ObservableCollection<Habit> Habits = new();
 
-        private readonly Entities.CourseworkDbContext _dbContext;
+        private readonly Entities.CoolerContext _dbContext;
 
         public HabitContext()
         {
-            _dbContext = Entities.CourseworkDbContext.GetInstance();
+            _dbContext = Entities.CoolerContext.GetInstance();
             Habits = GetHabits();
-        }
-
-        public void GetCurrentContext()
-        {
         }
 
         private ObservableCollection<Habit> GetHabits()
@@ -37,7 +29,7 @@ namespace HabitCracker.Model.Contexts
             var Habits = new ObservableCollection<Habit>();
 
             foreach (var item in _dbContext.Habits.Where(p =>
-                p.Userid == UserContext.GetInstance().UserPerson.Id).ToList())
+                p.User.Id == UserContext.GetInstance().UserPerson.Id).ToList())
             {
                 Habits.Add(item);
             }

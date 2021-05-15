@@ -9,12 +9,6 @@
       d:DesignHeight="200" d:DesignWidth="400"
       Title="SignIn">
     <Page.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="Padding" Value="5" />
-            <Setter Property="Margin" Value="20,5,20,0" />
-            <Setter Property="Width" Value="400" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="20,5,0,0" />
             <Setter Property="FontSize" Value="20" />
@@ -42,12 +36,12 @@
                 </Border.Effect>
                 <StackPanel>
                     <StackPanel  DataContext="{Binding SignAuth}"  HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="Логин" />
-                        <TextBox Text="{Binding Path=Login}" />
+                        <TextBlock Text="Логин"  />
+                        <TextBox Text="{Binding Path=Login}" Margin="12,5" Padding="2"  MinWidth="300" HorizontalAlignment="Center"/>
                         <TextBlock Text="Пароль" />
-                        <TextBox Text="{Binding Path=Password}" />
+                        <PasswordBox HorizontalAlignment="Center" Name="Box" Margin="12,5" Padding="2" MinWidth="300" />
                     </StackPanel>
-                    <Button Content="Войти" HorizontalAlignment="Center" Padding="15,5,15,5" Margin="20" Command="{Binding SignInButtonClickCommand}"></Button>
+                    <Button Content="Войти" CommandParameter="{Binding ElementName=Box}" HorizontalAlignment="Center" Padding="15,5,15,5"  Margin="20" Command="{Binding SignInButtonClickCommand}"></Button>
                 </StackPanel>
             </Border>
         </Grid>
