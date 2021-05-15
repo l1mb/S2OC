@@ -16,6 +16,14 @@
             <Setter Property="Width" Value="400" />
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Padding" Value="3" />
+            <Setter Property="Margin" Value="20,5,20,0" />
+            <Setter Property="Width" Value="400" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="20,5,0,0" />
             <Setter Property="FontSize" Value="20" />
@@ -59,7 +67,7 @@
                             <TextBlock Text="Логин" />
                             <TextBox x:Name="Login" Text="{Binding Login}" />
                             <TextBlock Text="Пароль" />
-                            <TextBox x:Name="Password" Text="{Binding Password}" />
+                            <PasswordBox x:Name="Password" />
                         </StackPanel>
                     </Border>
                     <Border
@@ -79,10 +87,12 @@
                                 <TextBox  Text="{Binding Path=Lastname}" />
                             </StackPanel>
                             <Button
+                                Margin="5"
                                 Padding="20,7,20,7"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Command="{Binding SignUpButtonClickCommand}"
+                                CommandParameter="{Binding ElementName=Password}"
                                 Content="Sign Up" />
                         </StackPanel>
                     </Border>
