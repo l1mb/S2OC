@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Icons\challenges.png" />
-    <None Remove="Resources\Icons\DataBase.ico" />
-    <None Remove="Resources\Icons\database.png" />
-    <None Remove="Resources\Icons\habit.png" />
-    <None Remove="Resources\Icons\profile.png" />
+    <None Remove="Resources\Fonts\Comfortaa\Comfortaa-VariableFont_wght.ttf" />
+    <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Light.ttf" />
+    <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Regular.ttf" />
+    <None Remove="Resources\Icons\Arrow.png" />
+    <None Remove="Resources\Icons\Challenges.png" />
+    <None Remove="Resources\Icons\Checkbox.gif" />
+    <None Remove="Resources\Icons\Cross.png" />
+    <None Remove="Resources\Icons\Database.png" />
+    <None Remove="Resources\Icons\Habits.png" />
+    <None Remove="Resources\Icons\Logout.png" />
+    <None Remove="Resources\Icons\Profile.png" />
+    <None Remove="Resources\Icons\Settings.gif" />
+    <None Remove="Resources\Icons\Settings.png" />
     <None Remove="Resources\ProfilePic.jpg" />
     <None Remove="View\Menu\icons8-arrow-100.png" />
   </ItemGroup>
@@ -19,6 +27,8 @@
   <ItemGroup>
     <PackageReference Include="Divis.DarkHelpers.WPF" Version="0.1.3" />
     <PackageReference Include="JetBrains.Annotations" Version="2021.1.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
@@ -27,14 +37,23 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Icons\challenges.png" />
-    <Resource Include="Resources\Icons\DataBase.ico" />
-    <Resource Include="Resources\Icons\database.png" />
-    <Resource Include="Resources\Icons\habit.png" />
-    <Resource Include="Resources\Icons\profile.png" />
+    <Resource Include="Resources\Fonts\Comfortaa\Comfortaa-VariableFont_wght.ttf" />
+    <Resource Include="Resources\Fonts\Comfortaa\static\Comfortaa-Light.ttf" />
+    <Resource Include="Resources\Fonts\Comfortaa\static\Comfortaa-Regular.ttf" />
+    <Resource Include="Resources\Icons\Arrow.png" />
+    <Resource Include="Resources\Icons\Challenges.png" />
+    <Resource Include="Resources\Icons\Checkbox.gif" />
+    <Resource Include="Resources\Icons\Cross.png" />
+    <Resource Include="Resources\Icons\Database.png" />
+    <Resource Include="Resources\Icons\Habits.png" />
+    <Resource Include="Resources\Icons\Logout.png" />
+    <Resource Include="Resources\Icons\Profile.png" />
+    <Resource Include="Resources\Icons\Settings.gif" />
+    <Resource Include="Resources\Icons\Settings.png" />
     <Resource Include="Resources\ProfilePic.jpg" />
     <Resource Include="View\Menu\icons8-arrow-100.png" />
   </ItemGroup>

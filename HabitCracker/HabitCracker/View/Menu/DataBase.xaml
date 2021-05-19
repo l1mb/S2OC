@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:HabitCracker.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:HabitCracker.ViewModel"
+    FontFamily="Comfortaa"
     Title="DataBase"
     d:DesignHeight="450"
     d:DesignWidth="800"

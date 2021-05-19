@@ -9,6 +9,7 @@
     Title="MainWindow"
     Width="1280"
     Height="720"
+    FontFamily="Comfortaa"
     MinWidth="800"
     mc:Ignorable="d">
     <Window.Resources>
@@ -51,16 +52,20 @@
                             Margin="5"
                             Command="{Binding SetHabitPageCommand}"
                             Style="{StaticResource ButtonIcon}">
-                        <Image Source="../../Resources/Icons/Habit.png" Style="{StaticResource ImageIcon}" />
+                        <Image Source="../../Resources/Icons/Habits.png" Style="{StaticResource ImageIcon}" />
                     </Button>
                     <Button
                             Margin="5"
                             Command="{Binding SetChallengesPageCommand}"
                             Style="{StaticResource ButtonIcon}">
-                        <Image Source="../../Resources/Icons/challenges.png" Style="{StaticResource ImageIcon}" />
+                        <Image Source="../../Resources/Icons/Challenges.png" Style="{StaticResource ImageIcon}" />
                     </Button>
                 </StackPanel>
-                <Button Command="{Binding Logout}" VerticalAlignment="Bottom" Style="{StaticResource ButtonIcon}" Content="Logout" Padding="15, 10" ></Button>
+
+                <Button Command="{Binding Logout}" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Style="{StaticResource ButtonIcon}" Padding="15, 10">
+                    <Image Source="../../Resources/Icons/Logout.png" Style="{StaticResource ImageIcon}"></Image>
+                </Button>
+                <ToggleButton IsChecked="True" Name="styleBox" Content="Change" VerticalAlignment="Bottom" DockPanel.Dock="Bottom"></ToggleButton>
             </DockPanel>
         </Grid>
         <Grid Grid.Column="1">

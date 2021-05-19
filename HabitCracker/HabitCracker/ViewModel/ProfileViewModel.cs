@@ -11,7 +11,14 @@ namespace HabitCracker.ViewModel
         {
             get
             {
-                return Model.Entities.CoolerContext.GetInstance().Wallets.First(p => p.Id == CurrentPerson.Wallet.Id).Balance;
+                if (CurrentPerson.Wallet == null)
+                {
+                    CurrentPerson.Wallet = new Wallet();
+                    CoolerContext.GetInstance().People.First(p => p.Id == CurrentPerson.Id).Wallet =
+                        new Wallet();
+                    CoolerContext.GetInstance().SaveChanges();
+                }
+                return CurrentPerson.Wallet.Balance;
             }
         }
 

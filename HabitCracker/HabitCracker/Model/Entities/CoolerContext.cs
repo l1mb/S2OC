@@ -1,5 +1,4 @@
-﻿using HabitCracker.Model.Contexts;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace HabitCracker.Model.Entities

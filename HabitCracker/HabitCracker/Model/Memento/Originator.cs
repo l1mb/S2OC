@@ -8,10 +8,9 @@ namespace HabitCracker.Model.Memento
 {
     internal class Originator
     {
-        public CareTaker Caretaker = new();
-
         public CareTaker FillDays(System.Linq.IQueryable<HabitCracker.Model.Entities.HabitProgress> origin)
         {
+            CareTaker Caretaker = new();
             List<DayOfWeek> tempDayOfWeeks = new();
 
             DateTime currenTime = DateTime.Today;

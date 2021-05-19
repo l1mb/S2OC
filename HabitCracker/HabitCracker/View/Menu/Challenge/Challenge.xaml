@@ -8,6 +8,7 @@
     xmlns:i="clr-namespace:Microsoft.Xaml.Behaviors;assembly=Microsoft.Xaml.Behaviors"
     Title="Challenges"
     d:DesignHeight="450"
+    FontFamily="Comfortaa"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
@@ -37,7 +38,6 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Click="GoBack_OnClick"
-                Command="{Binding SetPersonPage}"
                 Content="Fuck go back" />
             <Border
                 x:Name="MainChallenge"
@@ -241,9 +241,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="1">
-                                    <Label Content="{Binding Path=Challengeid}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Challenge}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Creatorid}" Style="{StaticResource HabitLabel}" />
+                                    <Label Content="{Binding Path=Id}" Style="{StaticResource HabitLabel}" />
+                                    <Label Content="{Binding Path=Title}" Style="{StaticResource HabitLabel}" />
                                     <Label Content="{Binding Path=Tip}" Style="{StaticResource HabitLabel}" />
                                     <Label Content="{Binding Path=Title}" Style="{StaticResource HabitLabel}" />
                                 </StackPanel>

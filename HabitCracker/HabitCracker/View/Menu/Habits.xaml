@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:HabitCracker.View.Menu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:HabitCracker.ViewModel"
+    FontFamily="Comfortaa"
     Title="Habits"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -29,7 +30,7 @@
         <Grid x:Name="SearchGrid" Visibility="Collapsed">
             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Command="{Binding GetPreviousDays}" Style="{StaticResource ButtonIcon}">
-                    <Image FlowDirection="RightToLeft" Source="/View/Menu/icons8-arrow-100.png" />
+                    <Image FlowDirection="RightToLeft" Source="../../Resources/Icons/Arrow.png" />
                 </Button>
                 <Grid>
                     <Ellipse />
@@ -87,7 +88,7 @@
                     Content="Вс"
                     Style="{StaticResource SundayLabel}" />
                 <Button Command="{Binding GetNextDays}" Style="{StaticResource ButtonIcon}">
-                    <Image Source="/View/Menu/icons8-arrow-100.png" />
+                    <Image Source="../../Resources/Icons/Arrow.png" />
                 </Button>
             </DockPanel>
         </Grid>
@@ -159,6 +160,7 @@
                             </StackPanel>
                             <DockPanel>
                                 <Button
+                                    Margin="15,5"
                                     Padding="15,5"
                                     VerticalAlignment="Bottom"
                                     Command="{Binding HabitIsDone}">
@@ -171,6 +173,7 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>
+                                    <Image Source="../../Resources/Icons/Checkbox.gif" Style="{StaticResource ImageIcon}" />
                                 </Button>
                                 <Button
                                     Padding="15,5,15,5"

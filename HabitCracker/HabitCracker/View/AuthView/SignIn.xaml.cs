@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace HabitCracker.View.AuthView
 {
@@ -10,6 +11,7 @@ namespace HabitCracker.View.AuthView
         public SignIn()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Page));
         }
     }
 }

@@ -52,11 +52,8 @@ namespace HabitCracker.ViewModel.AuthViewModel
             {
                 try
                 {
-
-
                     CurrentPerson.Wallet = UserWallet;
                     UserWallet.Balance = 0;
-
 
                     CurrentPerson.Name = Name;
                     CurrentPerson.Lastname = Lastname;
@@ -65,7 +62,6 @@ namespace HabitCracker.ViewModel.AuthViewModel
                     if (PasswordBox is PasswordBox passwordBox)
                     {
                         SignAuth.Password = Hasher.Encrypt(passwordBox.Password, SignAuth.Salt);
-
                     }
                     SignAuth.Person = CurrentPerson;
                     CurrentPerson.Auth = SignAuth;
@@ -104,6 +100,7 @@ namespace HabitCracker.ViewModel.AuthViewModel
                         }
                     }
 
+                    UserContext.GetInstance().UserPerson.Wallet = GetInstance().Wallets.First(p => p.PersonRef == eAuth.Id);
                     UserContext.GetInstance().UserPerson = GetInstance().People
                         .Single(p => p.Id == eAuth.Id);
                     //currentPerson = null;

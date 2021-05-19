@@ -61,9 +61,10 @@ namespace HabitCracker.ViewModel
         {
             _databasePage = new View.Menu.DataBase();
 
-            _profilePage = new View.Menu.Profile();
             _HabitPage = new View.Menu.Habits();
             _challengePage = new View.Menu.Challenge.Challenges();
+            _profilePage = new View.Menu.Profile();
+
             CurrentPage = _profilePage;
         }
     }

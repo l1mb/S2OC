@@ -8,47 +8,45 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using static System.DateTime;
 using static Newtonsoft.Json.JsonConvert;
 
 namespace HabitCracker.ViewModel
 {
     internal class HabitViewModel : BaseViewModel
     {
-
         public Habit[] Habits = {
             new()
             {
                 Description = "text about danger of smoking",
-                CreateDate = Now,
+                CreateDate = DateTime.Now,
                 Title = "Smoking",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
                 Description = "text about danger of drinking",
-                CreateDate = Now,
+                CreateDate = DateTime.Now,
                 Title = "Drinking",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
                 Description = "text about danger of using drugs",
-                CreateDate = Now,
+                CreateDate = DateTime.Now,
                 Title = "Druging",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
                 Description = "text about danger of using seal",
-                CreateDate = Now,
+                CreateDate = DateTime.Now,
                 Title = "Sealing",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
                 Description = "text about danger of using seal",
-                CreateDate = Now,
+                CreateDate = DateTime.Now,
                 Title = "Sealing",
                 User = UserContext.GetInstance().UserPerson
             }
@@ -178,13 +176,14 @@ namespace HabitCracker.ViewModel
             get => _selectedHabit;
             set
             {
+                Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = Sunday = false;
                 _selectedHabit = value;
                 Caretaker = Originator.FillDays(
                     Model.Entities.CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == SelectedHabit));
                 Switcher(Caretaker.GetCurrent());
 
-                if (_selectedHabit is { }) 
-                    IsDone = _selectedHabit.HabitProgress.Count(p => p.Weekday.Date == Today.Date) != 0;
+                if (_selectedHabit != null)
+                    IsDone = _selectedHabit.HabitProgress.Count(p => p.Weekday.Date == DateTime.Today.Date) != 0;
                 OnPropertyChanged(nameof(SelectedHabit));
                 OnPropertyChanged(nameof(Caretaker));
             }
@@ -208,7 +207,7 @@ namespace HabitCracker.ViewModel
             {
                 CurrentStreak = 0,
                 Description = NewHabit.Description,
-                CreateDate = Now,
+                CreateDate = DateTime.Now,
                 Title = NewHabit.Title,
                 DaysCount = NewHabit.DaysCount,
                 User = UserContext.GetInstance().UserPerson
@@ -296,8 +295,7 @@ namespace HabitCracker.ViewModel
             }
         }
 
-
-        public RelayCommand SaveHabits => new(obj=>
+        public RelayCommand SaveHabits => new(obj =>
         {
             foreach (var habit in PersonHabits)
             {
@@ -307,7 +305,6 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand HabitIsDone => new(obj =>
             {
-
                 IsDone = true;
                 var w = new HabitProgress();
                 w.Habit = SelectedHabit;
@@ -321,7 +318,7 @@ namespace HabitCracker.ViewModel
                     tempGiveReward.Item1;
                 MessageBox.Show(tempGiveReward.Item2);
 
-                w.Weekday = Now;
+                w.Weekday = DateTime.Now;
                 Model.Entities.CoolerContext.GetInstance().HabitProgress.Add(w);
                 Model.Entities.CoolerContext.GetInstance().SaveChanges();
             });
@@ -330,46 +327,7 @@ namespace HabitCracker.ViewModel
         {
             if (HabitContext.GetInstance().Habits.Count == 0)
             {
-                _personHabits.Add(new Habit()
-                {
-                    CurrentStreak = 0,
-                    Description = "text about danger of smoking",
-                    CreateDate = Now,
-                    Title = "Smoking",
-                    User = UserContext.GetInstance().UserPerson
-                });
-                _personHabits.Add(new Habit()
-                {
-                    CurrentStreak = 0,
-                    Description = "text about danger of drinking",
-                    CreateDate = Now,
-                    Title = "Drinking",
-                    User = UserContext.GetInstance().UserPerson
-                });
-                _personHabits.Add(new Habit()
-                {
-                    CurrentStreak = 0,
-                    Description = "text about danger of using drugs",
-                    CreateDate = Now,
-                    Title = "Druging",
-                    User = UserContext.GetInstance().UserPerson
-                });
-                _personHabits.Add(new Habit()
-                {
-                    CurrentStreak = 0,
-                    Description = "text about danger of using seal",
-                    CreateDate = Now,
-                    Title = "Sealing",
-                    User = UserContext.GetInstance().UserPerson
-                });
-                _personHabits.Add(new Habit()
-                {
-                    CurrentStreak = 0,
-                    Description = "text about danger of using seal",
-                    CreateDate = Now,
-                    Title = "Sealing",
-                    User = UserContext.GetInstance().UserPerson
-                });
+                _personHabits = new ObservableCollection<Habit>(Habits);
             }
             else
             {

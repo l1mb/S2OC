@@ -9,6 +9,7 @@
     Width="460"
     Height="615"
     MinHeight="610"
+    FontFamily="Comfortaa"
     mc:Ignorable="d">
     <Window.Resources>
         <Style TargetType="Button">

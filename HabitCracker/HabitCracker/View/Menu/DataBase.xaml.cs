@@ -71,9 +71,10 @@ namespace HabitCracker.View.Menu
                 {
                     case "AuthGrid":
                         {
-                            foreach (var t in item.SelectedItems)
+                            for (int i = 0; i < item.SelectedItems.Count; i++)
                             {
-                                if (t is Auth auth)
+                                Auth auth = item.SelectedItems[i] as Auth;
+                                if (auth != null)
                                 {
                                     db.Auths.Remove(auth);
                                 }
@@ -83,9 +84,10 @@ namespace HabitCracker.View.Menu
 
                     case "ChallengeGrid":
                         {
-                            foreach (var t in item.SelectedItems)
+                            for (int i = 0; i < item.SelectedItems.Count; i++)
                             {
-                                if (t is Model.Entities.Challenge challenge)
+                                Model.Entities.Challenge challenge = item.SelectedItems[i] as Model.Entities.Challenge;
+                                if (challenge != null)
                                 {
                                     db.Challenges.Remove(challenge);
                                 }
@@ -95,9 +97,10 @@ namespace HabitCracker.View.Menu
 
                     case "EventGrid":
                         {
-                            foreach (var t in item.SelectedItems)
+                            for (int i = 0; i < item.SelectedItems.Count; i++)
                             {
-                                if (t is Event @event)
+                                Event @event = item.SelectedItems[i] as Event;
+                                if (@event != null)
                                 {
                                     db.Events.Remove(@event);
                                 }
@@ -107,9 +110,10 @@ namespace HabitCracker.View.Menu
 
                     case "PersonGrid":
                         {
-                            foreach (var t in item.SelectedItems)
+                            for (int i = 0; i < item.SelectedItems.Count; i++)
                             {
-                                if (t is Person person)
+                                Person person = item.SelectedItems[i] as Person;
+                                if (person != null)
                                 {
                                     db.People.Remove(person);
                                 }
@@ -119,9 +123,10 @@ namespace HabitCracker.View.Menu
 
                     case "WalletGrid":
                         {
-                            foreach (var t in item.SelectedItems)
+                            for (int i = 0; i < item.SelectedItems.Count; i++)
                             {
-                                if (t is Wallet wallet)
+                                Wallet wallet = item.SelectedItems[i] as Wallet;
+                                if (wallet != null)
                                 {
                                     db.Wallets.Remove(wallet);
                                 }
@@ -133,7 +138,8 @@ namespace HabitCracker.View.Menu
                         {
                             for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                if (item.SelectedItems[i] is Model.Entities.Habit Habit)
+                                Model.Entities.Habit Habit = item.SelectedItems[i] as Model.Entities.Habit;
+                                if (Habit != null)
                                 {
                                     db.Habits.Remove(Habit);
                                 }
