@@ -4,12 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\Fonts\Comfortaa\Comfortaa-VariableFont_wght.ttf" />
     <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Light.ttf" />
     <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Regular.ttf" />
+    <None Remove="Resources\Icons\AppIcon.png" />
     <None Remove="Resources\Icons\Arrow.png" />
     <None Remove="Resources\Icons\Challenges.png" />
     <None Remove="Resources\Icons\Checkbox.gif" />
@@ -21,7 +23,6 @@
     <None Remove="Resources\Icons\Settings.gif" />
     <None Remove="Resources\Icons\Settings.png" />
     <None Remove="Resources\ProfilePic.jpg" />
-    <None Remove="View\Menu\icons8-arrow-100.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,7 +56,6 @@
     <Resource Include="Resources\Icons\Settings.gif" />
     <Resource Include="Resources\Icons\Settings.png" />
     <Resource Include="Resources\ProfilePic.jpg" />
-    <Resource Include="View\Menu\icons8-arrow-100.png" />
   </ItemGroup>
 
   <ItemGroup>

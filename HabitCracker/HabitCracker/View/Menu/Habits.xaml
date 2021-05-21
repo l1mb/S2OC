@@ -29,7 +29,7 @@
         </Grid>
         <Grid x:Name="SearchGrid" Visibility="Collapsed">
             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Command="{Binding GetPreviousDays}" Style="{StaticResource ButtonIcon}">
+                <Button Command="{Binding GetPreviousDays}" >
                     <Image FlowDirection="RightToLeft" Source="../../Resources/Icons/Arrow.png" />
                 </Button>
                 <Grid>
@@ -87,7 +87,7 @@
                     VerticalAlignment="Center"
                     Content="Вс"
                     Style="{StaticResource SundayLabel}" />
-                <Button Command="{Binding GetNextDays}" Style="{StaticResource ButtonIcon}">
+                <Button Command="{Binding GetNextDays}" >
                     <Image Source="../../Resources/Icons/Arrow.png" />
                 </Button>
             </DockPanel>
@@ -134,10 +134,8 @@
                 <Grid x:Name="DisplayGrid" Visibility="Hidden">
 
                     <Border
-                        Margin="20"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top"
-                        Background="Beige">
+                        Style="{StaticResource MainBorder}"
+                        >
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="40" ShadowDepth="0" />
                         </Border.Effect>

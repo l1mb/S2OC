@@ -1,21 +1,26 @@
 ﻿using HabitCracker.Model.Contexts;
+using HabitCracker.Model.Entities;
+
 
 namespace HabitCracker.ViewModel
 {
     internal class DataBaseViewModel : BaseViewModel
     {
         public Model.Entities.Auth AuthObject { get; set; } = new();
-        public Model.Entities.Challenge ChallengeObject { get; set; } = new();
-        public Model.Entities.Event EventObject { get; set; } = new();
-        public Model.Entities.Habit HabitObject { get; set; } = new();
-        public Model.Entities.Person PersonObject { get; set; } = new();
-        public Model.Entities.Wallet WalletObject { get; set; } = new();
+        public Challenge ChallengeObject { get; set; } = new();
+        public Event EventObject { get; set; } = new();
+        public Habit HabitObject { get; set; } = new();
+        public Person PersonObject { get; set; } = new();
+        public Wallet WalletObject { get; set; } = new();
+
+        public HabitProgress HabitProgressObject { get; set; } = new();
+
 
         private bool _isModerator;
 
         public bool IsModerator
         {
-            get { return _isModerator; }
+            get => _isModerator;
             set
             {
                 _isModerator = value;

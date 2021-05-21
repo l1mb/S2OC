@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Drawing;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace HabitCracker.View.AuthView
 {
@@ -10,6 +13,16 @@ namespace HabitCracker.View.AuthView
         public SignUp()
         {
             InitializeComponent();
+        }
+
+        private void PasswordCheck_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (Password.Password != PasswordCheck.Password)
+            {
+                PasswordCheck.Background = Brushes.LightCoral;
+            }
+            else
+                PasswordCheck.Background = Brushes.Transparent;
         }
     }
 }

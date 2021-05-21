@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.EntityFrameworkCore;
 using static HabitCracker.Model.Entities.CoolerContext;
 
 namespace HabitCracker.ViewModel.AuthViewModel
@@ -99,10 +100,9 @@ namespace HabitCracker.ViewModel.AuthViewModel
                             break;
                         }
                     }
-
-                    UserContext.GetInstance().UserPerson.Wallet = GetInstance().Wallets.First(p => p.PersonRef == eAuth.Id);
-                    UserContext.GetInstance().UserPerson = GetInstance().People
-                        .Single(p => p.Id == eAuth.Id);
+                    UserContext.GetInstance().UserPerson = GetInstance().People.Include(p=>p.Wallet).Include(p=>p.Habits).ThenInclude(p=>p.HabitProgress).Single(p => p.AuthRef == eAuth.Id);
+                    UserContext.GetInstance().UserPerson.Wallet = GetInstance().Wallets.First(p => p.PersonRef == UserContext.GetInstance().UserPerson.Id);
+                    
                     //currentPerson = null;
                     //SignAuth = null;
                     Passed();

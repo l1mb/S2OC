@@ -54,19 +54,20 @@
                         <DataGrid DataContext="{Binding AuthObject}" x:Name="AuthGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                    Width="100"
+                                    Width="70"
+                                    IsReadOnly="True"
                                     Binding="{Binding Path=Id}"
-                                    Header="ID" />
+                                    Header="Id" />
                                 <DataGridTextColumn
-                                    Width="110"
+                                    Width="200"
                                     Binding="{Binding Path=Login}"
                                     Header="Логин" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="200"
                                     Binding="{Binding Path=Salt}"
                                     Header="Соль" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="200"
                                     Binding="{Binding Path=Password}"
                                     Header="Пароль" />
                             </DataGrid.Columns>
@@ -81,29 +82,31 @@
                         <DataGrid DataContext="{Binding PersonObject}" x:Name="PersonGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                    Width="100"
+                                    Width="70"
+                                    IsReadOnly="True"
                                     Binding="{Binding Path=Id}"
-                                    Header="ID" />
+                                    Header="Id" />
                                 <DataGridTextColumn
-                                    Width="110"
+                                    Width="100"
                                     Binding="{Binding Path=Name}"
                                     Header="Имя" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="100"
                                     Binding="{Binding Path=Lastname}"
                                     Header="Фамилия" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="150"
                                     Binding="{Binding Path=Role}"
                                     Header="Роль" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="80"
                                     Binding="{Binding Path=Picture}"
-                                    Header="Роль" />
+                                    Header="Фото" />
                                 <DataGridTextColumn
-                                    Width="70"
-                                    Binding="{Binding Path=Idwallet}"
-                                    Header="Роль" />
+                                    IsReadOnly="True"
+                                    Width="120"
+                                    Binding="{Binding Path=Wallet.Id}"
+                                    Header="Id кошелька" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem.Content>
@@ -117,29 +120,26 @@
                         <DataGrid  DataContext="{Binding ChallengeObject}" x:Name="ChallengesGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding Path=Challengeid}"
-                                    Header="ChallengeID" />
+                                    Width="130"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Path=Id}"
+                                    Header="Id челленджа" />
                                 <DataGridTextColumn
                                     Width="110"
-                                    Binding="{Binding Path=Creatorid}"
-                                    Header="CreatorID" />
+                                    Binding="{Binding Path=DaysCount}"
+                                    Header="Количество дней" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="110"
                                     Binding="{Binding Path=Title}"
-                                    Header="Title" />
+                                    Header="Название" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="120"
                                     Binding="{Binding Path=Tip}"
-                                    Header="Tip" />
+                                    Header="Полезная информация" />
                                 <DataGridTextColumn
                                     Width="70"
-                                    Binding="{Binding Path=Dayscount}"
+                                    Binding="{Binding Path=DaysCount}"
                                     Header="Dayscount" />
-                                <DataGridTextColumn
-                                    Width="70"
-                                    Binding="{Binding Path=Challenge}"
-                                    Header="Challenge" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem.Content>
@@ -152,34 +152,53 @@
                     <TabItem.Content>
                         <DataGrid DataContext="{Binding HabitObject}" x:Name="HabitGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
+
                                 <DataGridTextColumn
-                                    Width="100"
+                                    IsReadOnly="True"
+                                    Width="70"
                                     Binding="{Binding Path=Id}"
-                                    Header="ID" />
+                                    Header="Id" />
                                 <DataGridTextColumn
                                     Width="110"
-                                    Binding="{Binding Path=Userid}"
-                                    Header="Userid" />
-                                <DataGridTextColumn
-                                    Width="70"
                                     Binding="{Binding Path=Title}"
-                                    Header="Title" />
+                                    Header="Название" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="110"
                                     Binding="{Binding Path=Description}"
-                                    Header="Description" />
+                                    Header="Описание" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="110"
                                     Binding="{Binding Path=DaysCount}"
-                                    Header="Dayscount" />
+                                    Header="Количество дней" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="100"
                                     Binding="{Binding Path=CreateDate}"
-                                    Header="Createdate" />
+                                    Header="Дата создания" />
                                 <DataGridTextColumn
                                     Width="70"
                                     Binding="{Binding Path=CurrentStreak}"
-                                    Header="Currentstreak" />
+                                    Header="Стрик убийств" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem.Content>
+                </TabItem> 
+                <TabItem Style="{StaticResource TabIsEnabled}">
+                    <TabItem.Header>
+                        <TextBlock FontSize="14" Text="Habit" />
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <DataGrid DataContext="{Binding HabitProgressObject}" x:Name="HabitProgressGrid" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="110"
+                                    IsReadOnly="True"
+                                    Binding="{Binding Path=Habit.Id}"
+                                    Header="Id привычки" />
+                                <DataGridTextColumn
+                                    Width="110"
+                                    Binding="{Binding Path=Weekday}"
+                                    Header="Описание" />
+
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem.Content>
@@ -194,19 +213,16 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn
                                     Width="100"
-                                    Binding="{Binding Path=Challengeid}"
-                                    Header="Challengeid" />
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding Path=Eventid}"
-                                    Header="Eventid" />
+                                    IsReadOnly="True"
+                                    Binding="{Binding Path=Challenge.Id}"
+                                    Header="Id" />
                                 <DataGridTextColumn
                                     Width="110"
                                     Binding="{Binding Path=Day}"
                                     Header="Day" />
                                 <DataGridTextColumn
-                                    Width="70"
-                                    Binding="{Binding Path=Event1}"
+                                    Width="150"
+                                    Binding="{Binding Path=EventName}"
                                     Header="Event" />
                             </DataGrid.Columns>
                         </DataGrid>
@@ -221,17 +237,13 @@
                         <DataGrid DataContext="{Binding WalletObject}" x:Name="WalletGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding Path=Idwallet}"
-                                    Header="Idwallet" />
+                                    Width="150"
+                                    Binding="{Binding Path=PersonRef}"
+                                    Header="Id пользователя" />
                                 <DataGridTextColumn
                                     Width="110"
                                     Binding="{Binding Path=Balance}"
-                                    Header="Balance" />
-                                <DataGridTextColumn
-                                    Width="70"
-                                    Binding="{Binding Path=Hash}"
-                                    Header="Hash" />
+                                    Header="Баланс" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem.Content>

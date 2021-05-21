@@ -47,15 +47,16 @@
                                 Color="LightBlue" />
                 </Border.Effect>
                 <DockPanel Width="320">
-                    <TextBox DockPanel.Dock="Top" x:Name="Login" Margin="10" materialDesign:HintAssist.Hint="Логин" Text="{Binding Login}" />
-                    <PasswordBox DockPanel.Dock="Top"  x:Name="Password" Margin="10" materialDesign:HintAssist.Hint="Пароль" />
+                    <TextBox MaxLength="48"  TextWrapping="Wrap" DockPanel.Dock="Top" x:Name="Login" Margin="10" materialDesign:HintAssist.Hint="Введите логин" Text="{Binding Login}" />
+                    <PasswordBox MaxLength="33"    DockPanel.Dock="Top"  x:Name="Password" Margin="10" materialDesign:HintAssist.Hint="Введите пароль" />
+                    <PasswordBox MaxLength="33"   DockPanel.Dock="Top"  x:Name="PasswordCheck" PasswordChar="?" PasswordChanged="PasswordCheck_OnPasswordChanged"  Margin="10" materialDesign:HintAssist.Hint="Повторите пароль" />
                     <StackPanel DockPanel.Dock="Top"  Margin="0,20">
                         <StackPanel DockPanel.Dock="Top">
-                            <TextBox Text="{Binding Path=Name}" Margin="10" materialDesign:HintAssist.Hint="Имя" />
-                            <TextBox Text="{Binding Path=Lastname}" Margin="10" materialDesign:HintAssist.Hint="Фамилия" />
+                            <TextBox MaxLength="25"   TextWrapping="Wrap" Text="{Binding Path=Name}" Margin="10" materialDesign:HintAssist.Hint="Имя" />
+                            <TextBox MaxLength="26" TextWrapping="Wrap" Text="{Binding Path=Lastname}" Margin="10" materialDesign:HintAssist.Hint="Фамилия" />
                         </StackPanel>
                     </StackPanel>
-                    <Button DockPanel.Dock="Bottom"
+                    <Button DockPanel.Dock="Bottom" 
                                 Command="{Binding SignUpButtonClickCommand}"
                                 CommandParameter="{Binding ElementName=Password}"
                                 Content="Sign Up" />

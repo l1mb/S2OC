@@ -1,6 +1,7 @@
 ﻿<Window
     x:Class="HabitCracker.View.Menu.Habit.NewHabit"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     FontFamily="Comfortaa"
@@ -23,23 +24,21 @@
             </Border.Effect>
             <Grid DataContext="{Binding NewHabit}">
                 <StackPanel>
-                    <TextBlock
-                        HorizontalAlignment="Left"
-                        Style="{StaticResource DockPanelTextBlock}"
-                        Text="Название" />
                     <TextBox
+                        TextWrapping="Wrap"
+                        materialDesign:HintAssist.Hint="Название"
                         x:Name="TitleBox"
-                        Margin="5"
-                        Padding="3"
+                        Margin="10"
+                        Padding="5"
                         MaxLength="39"
                         Text="{Binding Path=Title}" />
-                    <TextBlock
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource DockPanelTextBlock}"
-                        Text="Описание" />
+                    
                     <TextBox
+                        materialDesign:HintAssist.Hint="Описание"
+                        Margin="10"
+                        Padding="5"
+                        TextWrapping="Wrap"
                         x:Name="DescriptionBox"
-                        Margin="5"
                         MaxLength="99"
                         Text="{Binding Path=Description}" />
                     <DockPanel>
@@ -60,10 +59,13 @@
         </Border>
 
         <Button
-            Padding="7"
+            Padding="50,5"
+            HorizontalAlignment="Center"
+            Margin="10"
+
             VerticalAlignment="Bottom"
-            Command="{Binding AddNewHabitCommand}"
-            Content="Добавить привычку"
-            Style="{StaticResource ButtonIcon}" />
+            Command="{Binding AddNewHabitCommand}">
+            <Label Foreground="#F2F2F2">Добавить привычку </Label>
+        </Button>
     </Grid>
 </Window>

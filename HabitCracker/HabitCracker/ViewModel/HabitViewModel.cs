@@ -178,8 +178,9 @@ namespace HabitCracker.ViewModel
             {
                 Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = Sunday = false;
                 _selectedHabit = value;
-                Caretaker = Originator.FillDays(
-                    Model.Entities.CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == SelectedHabit));
+                var sho =
+                    Model.Entities.CoolerContext.GetInstance().HabitProgress;
+                Caretaker = /*Originator.FillDays(sho)*/new ();
                 Switcher(Caretaker.GetCurrent());
 
                 if (_selectedHabit != null)
@@ -314,7 +315,7 @@ namespace HabitCracker.ViewModel
                 var tempGiveReward = Rewarder.GiveReward((int)SelectedHabit.CurrentStreak);
 
                 Model.Entities.CoolerContext.GetInstance().Wallets
-                        .First(p => p.Id == UserContext.GetInstance().UserPerson.Id).Balance =
+                        .First(p => p.PersonRef == UserContext.GetInstance().UserPerson.Id).Balance +=
                     tempGiveReward.Item1;
                 MessageBox.Show(tempGiveReward.Item2);
 

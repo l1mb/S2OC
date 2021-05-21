@@ -10,16 +10,10 @@
     Width="1280"
     Height="720"
     MinWidth="800"
+    Closing="AdminMainWindow_OnClosing"
     FontFamily="Comfortaa"
     mc:Ignorable="d">
     <Window.Resources>
-
-        <Style x:Key="ButtonIcon" TargetType="Button">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-        </Style>
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="#F2F2F2"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
@@ -55,12 +49,12 @@
                         </DockPanel>
                     </Button>
                     <Button
-                        Width="190"
+                        Width="210"
                         Height="45"
                         Command="{Binding SetProfilePageCommand}"
                         Style="{StaticResource ButtonIcon}">
                         <DockPanel
-                            Width="190"
+                            Width="210"
                             Height="45"
                             HorizontalAlignment="Center">
                             <Image
@@ -72,7 +66,7 @@
                     </Button>
                     <Button Command="{Binding SetHabitPageCommand}" Style="{StaticResource ButtonIcon}">
                         <DockPanel
-                            Width="190"
+                            Width="210"
                             Height="45"
                             HorizontalAlignment="Center">
                             <Image
@@ -84,7 +78,7 @@
                     </Button>
                     <Button Command="{Binding SetChallengesPageCommand}" Style="{StaticResource ButtonIcon}">
                         <DockPanel
-                            Width="190"
+                            Width="210"
                             Height="45"
                             HorizontalAlignment="Center">
                             <Image
@@ -102,7 +96,7 @@
                     DockPanel.Dock="Bottom"
                     Style="{StaticResource ButtonIcon}">
                     <DockPanel
-                        Width="190"
+                        Width="210"
                         Height="45"
                         HorizontalAlignment="Center">
                         <Image Source="../../Resources/Icons/Logout.png" Style="{StaticResource ImageIcon}" />
@@ -115,7 +109,7 @@
                     DockPanel.Dock="Bottom"
                     Style="{StaticResource ButtonIcon}">
                     <DockPanel
-                        Width="190"
+                        Width="210"
                         Height="45"
                         HorizontalAlignment="Center">
                         <Image

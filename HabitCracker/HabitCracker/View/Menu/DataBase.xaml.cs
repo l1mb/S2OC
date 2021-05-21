@@ -1,5 +1,6 @@
 ﻿using HabitCracker.Model.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace HabitCracker.View.Menu
     /// </summary>
     public partial class DataBase : Page
     {
-        private Model.Entities.CoolerContext db;
+        private readonly Model.Entities.CoolerContext db;
 
         public DataBase()
         {
@@ -49,110 +50,124 @@ namespace HabitCracker.View.Menu
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            List<DataGrid> grids = new();
-
-            grids.Add(AuthGrid);
-            grids.Add(PersonGrid);
-            grids.Add(EventGrid);
-            grids.Add(ChallengesGrid);
-            grids.Add(HabitGrid);
-            grids.Add(WalletGrid);
-
-            var selected = grids.Where(p => p.SelectedItems.Count > 0);
-
-            foreach (var item in selected)
+            try
             {
-                switch (item.Name)
+                List<DataGrid> grids = new();
+
+                grids.Add(AuthGrid);
+                grids.Add(PersonGrid);
+                grids.Add(EventGrid);
+                grids.Add(ChallengesGrid);
+                grids.Add(HabitGrid);
+                grids.Add(WalletGrid);
+
+                var selected = grids.Where(p => p.SelectedItems.Count > 0);
+
+                foreach (var item in selected)
                 {
-                    case "AuthGrid":
-                        {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                    switch (item.Name)
+                    {
+                        case "AuthGrid":
                             {
-                                Auth auth = item.SelectedItems[i] as Auth;
-                                if (auth != null)
+                                for (int i = 0; i < item.SelectedItems.Count;)
                                 {
-                                    db.Auths.Remove(auth);
+                                    if (item.SelectedItems[i] is Auth auth)
+                                    {
+                                        db.Auths.Remove(auth);
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
 
-                    case "ChallengeGrid":
-                        {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                        case "ChallengeGrid":
                             {
-                                Model.Entities.Challenge challenge = item.SelectedItems[i] as Model.Entities.Challenge;
-                                if (challenge != null)
+                                for (int i = 0; i < item.SelectedItems.Count;)
                                 {
-                                    db.Challenges.Remove(challenge);
+                                    if (item.SelectedItems[i] is Model.Entities.Challenge challenge)
+                                    {
+                                        db.Challenges.Remove(challenge);
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
 
-                    case "EventGrid":
-                        {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                        case "EventGrid":
                             {
-                                Event @event = item.SelectedItems[i] as Event;
-                                if (@event != null)
+                                for (int i = 0; i < item.SelectedItems.Count;)
                                 {
-                                    db.Events.Remove(@event);
+                                    if (item.SelectedItems[i] is Event @event)
+                                    {
+                                        db.Events.Remove(@event);
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
 
-                    case "PersonGrid":
-                        {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                        case "PersonGrid":
                             {
-                                Person person = item.SelectedItems[i] as Person;
-                                if (person != null)
+                                for (int i = 0; i < item.SelectedItems.Count;)
                                 {
-                                    db.People.Remove(person);
+                                    if (item.SelectedItems[i] is Person person)
+                                    {
+                                        db.People.Remove(person);
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
 
-                    case "WalletGrid":
-                        {
-                            for (int i = 0; i < item.SelectedItems.Count; i++)
+                        case "WalletGrid":
                             {
-                                Wallet wallet = item.SelectedItems[i] as Wallet;
-                                if (wallet != null)
+                                for (int i = 0; i < item.SelectedItems.Count;)
                                 {
-                                    db.Wallets.Remove(wallet);
+                                    if (item.SelectedItems[i] is Wallet wallet)
+                                    {
+                                        db.Wallets.Remove(wallet);
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
 
-                    case "HabitGrid":
-                        {
-                            for (int i = 0; i < item.SelectedItems.Count;)
+                        case "HabitGrid":
                             {
-                                Model.Entities.Habit Habit = item.SelectedItems[i] as Model.Entities.Habit;
-                                if (Habit != null)
+                                for (int i = 0; i < item.SelectedItems.Count;)
                                 {
-                                    db.Habits.Remove(Habit);
+                                    if (item.SelectedItems[i] is Model.Entities.Habit habit)
+                                    {
+                                        if (db.HabitProgress.Count(p => p.Habit == habit) != 0)
+                                        {
+                                            db.HabitProgress.Remove(db.HabitProgress.First(p => p.Habit == habit));
+
+                                        }
+                                        db.Habits.Remove(habit);
+                                    }
                                 }
                             }
-                        }
-                        break;
+                            break;
+                    }
                 }
+
+                //!tried to use generic methods, but something went wrong
+                //also tried map datagrid with DbSet<"EntityName"> but do not finished it
+
+                db.SaveChanges();
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
 
-            //!tried to use generic methods, but something went wrong
-            //also tried map datagrid with DbSet<"EntityName"> but do not finished it
-
-            db.SaveChanges();
+            }
         }
     }
 }

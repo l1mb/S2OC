@@ -2,6 +2,7 @@
 using HabitCracker.Model.Entities;
 using System.Windows;
 using System.Windows.Controls;
+using HabitCracker.View.Menu;
 
 namespace HabitCracker.ViewModel
 {
@@ -42,6 +43,7 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand SetProfilePageCommand => new RelayCommand(obj =>
             {
+                _profilePage = new Profile();
                 CurrentPage = _profilePage;
             }
         );

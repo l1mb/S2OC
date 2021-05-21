@@ -69,7 +69,7 @@
                         Margin="10"
                         Padding="7"
                         FontSize="14"
-                        Text="{Binding Challengeid}"
+                        Text="{Binding Id}"
                         TextAlignment="Left" />
                 </StackPanel>
             </Border>
@@ -219,7 +219,7 @@
                 <ListBox
                     Margin="15"
                     BorderBrush="Transparent"
-                    ItemContainerStyle="{StaticResource ListBox}"
+                    
                     ItemsPanel="{StaticResource WrapTemplate}"
                     ItemsSource="{Binding AllChallenges, Mode=TwoWay}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -241,10 +241,10 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="1">
-                                    <Label Content="{Binding Path=Id}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Title}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Tip}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Title}" Style="{StaticResource HabitLabel}" />
+                                    <Label Content="{Binding Path=Id}" />
+                                    <Label Content="{Binding Path=Title}" />
+                                    <Label Content="{Binding Path=Tip}" />
+                                    <Label Content="{Binding Path=Title}"  />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
