@@ -17,7 +17,7 @@ namespace HabitCracker.Model.Entities
             if (optionsBuilder.IsConfigured) return;
             //optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["CoolerDaniel"].ConnectionString);
             optionsBuilder.UseSqlServer(
-                "Data Source=DESKTOP-O8V49SL;Initial Catalog=CoolerOopDatabase;Integrated Security=True");
+                "Data Source=DESKTOP-O8V49SL;Initial Catalog=CoolerOopDatabase;Integrated Security=True;MultipleActiveResultSets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,11 +47,16 @@ namespace HabitCracker.Model.Entities
             var auth = modelBuilder.Entity<Auth>();
             var person = modelBuilder.Entity<Person>();
             var wallet = modelBuilder.Entity<Wallet>();
+            var habitProgress = modelBuilder.Entity<HabitProgress>();
             var habit = modelBuilder.Entity<Habit>();
+
+            habit.HasMany(p =>p.HabitProgress).WithOne(p =>p.Habit).OnDelete(DeleteBehavior.Cascade);
+            habitProgress.HasOne(p => p.Habit).WithMany(p => p.HabitProgress).OnDelete(DeleteBehavior.Cascade);
 
             auth.HasOne(a => a.Person).WithOne(p => p.Auth).HasForeignKey<Person>(p => p.AuthRef);
             person.HasOne(p => p.Wallet).WithOne(w => w.Owner).HasForeignKey<Wallet>(w => w.PersonRef);
             person.Property(p => p.Role).HasDefaultValue("Пользователь");
+
 
             // auth.HasData(new[]
             // {

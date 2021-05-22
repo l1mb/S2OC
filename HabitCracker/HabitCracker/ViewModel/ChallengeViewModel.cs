@@ -37,8 +37,10 @@ namespace HabitCracker.ViewModel
             //tempChallenge.Challengers.Add(UserContext.GetInstance().UserPerson);
 
             SelectedChallenge.Challengers.Add(UserContext.GetInstance().UserPerson);
-            PersonChallenges.Add(SelectedChallenge);
-
+            var t = SelectedChallenge;
+            t.Id = 0;
+            PersonChallenges.Add(t);
+            GetInstance().Challenges.FirstOrDefault(p=>p == SelectedChallenge)?.Challengers.Add(UserContext.GetInstance().UserPerson);
             GetInstance().Challenges.Add(SelectedChallenge);
             GetInstance().SaveChanges();
         });

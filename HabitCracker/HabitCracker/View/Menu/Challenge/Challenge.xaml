@@ -101,11 +101,10 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="1">
-                                    <Label Content="{Binding Path=Challengeid}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Challenge}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Creatorid}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Tip}" Style="{StaticResource HabitLabel}" />
-                                    <Label Content="{Binding Path=Title}" Style="{StaticResource HabitLabel}" />
+
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=Id}"  />
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=Tip}"  />
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=Title}"  />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -241,10 +240,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="1">
-                                    <Label Content="{Binding Path=Id}" />
-                                    <Label Content="{Binding Path=Title}" />
-                                    <Label Content="{Binding Path=Tip}" />
-                                    <Label Content="{Binding Path=Title}"  />
+                                    <TextBlock Text="{Binding Path=Id}" />
+                                    <TextBlock Text="{Binding Path=Title}" />
+                                    <TextBlock Text="{Binding Path=Tip}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>

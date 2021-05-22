@@ -19,7 +19,7 @@ namespace HabitCracker.ViewModel
             //            new Wallet();
             //        CoolerContext.GetInstance().SaveChanges();
             //    }
-            CurrentPerson.Wallet.Balance;
+            decimal.Round(CurrentPerson.Wallet.Balance, 2,MidpointRounding.AwayFromZero);
 
         //public string LastHabbit
         //{
