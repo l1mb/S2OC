@@ -97,6 +97,9 @@ namespace HabitCracker.ViewModel
             }
         }
 
+
+
+
         public RelayCommand AddSelectedToPersonChallenge => new RelayCommand(obj =>
         {
             if (SelectedChallenge == null) return;
@@ -191,9 +194,36 @@ namespace HabitCracker.ViewModel
 
         private ObservableCollection<Challenge> UpdatePersonChallenges() => new ObservableCollection<Challenge>(CoolerContext.GetInstance().Challenges.Where(p => p.Challengers.Contains(UserContext.GetInstance().UserPerson)));
 
+
+
+        private void RemoveEvents(Event @event)
+        {
+            CoolerContext.GetInstance().EventProgress.RemoveRange(CoolerContext.GetInstance().EventProgress.Where(p => p.Event ==@event).AsEnumerable());
+            CoolerContext.GetInstance().Events.Remove(@event);
+        }
+
+
+        public void RemoveExpiredEvents()
+        {
+            List<Model.Entities.Event> events = new List<Model.Entities.Event>();
+
+            DateTime currentTime = DateTime.Today.AddDays(2);
+            foreach (var @event in CoolerContext.GetInstance().Events)
+            {
+                if ((@event.Day - currentTime.Date).TotalDays <-1)
+                {
+                    events.Add(@event);
+                    RemoveEvents(@event);
+                }
+            }
+            CoolerContext.GetInstance().SaveChanges();
+
+        }
+
+
         public ChallengeViewModel()
         {
-            
+         RemoveExpiredEvents();   
             AllChallenges = ChallengeContext.GetInstance().GetChallenges();
             PersonChallenges = UpdatePersonChallenges();
         }
