@@ -36,9 +36,5 @@ namespace HabitCracker.View.Menu.Challenge
         {
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MessageBox.Show("Ghbrjk");
-        }
     }
 }

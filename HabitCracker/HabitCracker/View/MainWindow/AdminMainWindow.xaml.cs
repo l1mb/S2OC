@@ -1,5 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Media;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 
 namespace HabitCracker.View.MainWindow
 {
@@ -8,23 +13,19 @@ namespace HabitCracker.View.MainWindow
     /// </summary>
     public partial class AdminMainWindow : Window
     {
+        
         public AdminMainWindow()
         {
             InitializeComponent();
+            
         }
 
-        private void AdminMainWindow_OnClosing(object sender, CancelEventArgs e)
+
+        private void ToggleTheme_Check(object sender, RoutedEventArgs e)
         {
-            
-            MessageBoxResult dialogResult = MessageBox.Show("Are you sure you want to exist", "Exist", MessageBoxButton.YesNo);
-            if (dialogResult == MessageBoxResult.Yes)
+            if (sender is ToggleButton btn)
             {
-                e.Cancel = false;
-            }
-            else if (dialogResult == MessageBoxResult.No)
-            {
-                e.Cancel = true;
-                //do something else
+                
             }
         }
     }

@@ -145,6 +145,7 @@
                         <Run Text="{Binding BiggestHabbitStreak.Item1.Title}" />
                     </TextBlock>
                     <Separator Margin="0,10"/>
+                    <Button Content="Сменить фотографию"></Button>
                 </StackPanel>
             </Border>
         </Grid>

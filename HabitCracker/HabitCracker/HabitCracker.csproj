@@ -8,20 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\BackAudio.wav" />
     <None Remove="Resources\Fonts\Comfortaa\Comfortaa-VariableFont_wght.ttf" />
     <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Light.ttf" />
     <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Regular.ttf" />
     <None Remove="Resources\Icons\AppIcon.png" />
     <None Remove="Resources\Icons\Arrow.png" />
+    <None Remove="Resources\Icons\Audio.gif" />
     <None Remove="Resources\Icons\Challenges.png" />
     <None Remove="Resources\Icons\Checkbox.gif" />
     <None Remove="Resources\Icons\Cross.png" />
     <None Remove="Resources\Icons\Database.png" />
     <None Remove="Resources\Icons\Habits.png" />
     <None Remove="Resources\Icons\Logout.png" />
+    <None Remove="Resources\Icons\Moon.png" />
     <None Remove="Resources\Icons\Profile.png" />
     <None Remove="Resources\Icons\Settings.gif" />
     <None Remove="Resources\Icons\Settings.png" />
+    <None Remove="Resources\Icons\Sun.png" />
     <None Remove="Resources\ProfilePic.jpg" />
   </ItemGroup>
 
@@ -42,25 +46,33 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\BackAudio.wav" />
     <Resource Include="Resources\Fonts\Comfortaa\Comfortaa-VariableFont_wght.ttf" />
     <Resource Include="Resources\Fonts\Comfortaa\static\Comfortaa-Light.ttf" />
     <Resource Include="Resources\Fonts\Comfortaa\static\Comfortaa-Regular.ttf" />
     <Resource Include="Resources\Icons\Arrow.png" />
+    <Resource Include="Resources\Icons\Audio.gif" />
     <Resource Include="Resources\Icons\Challenges.png" />
     <Resource Include="Resources\Icons\Checkbox.gif" />
     <Resource Include="Resources\Icons\Cross.png" />
     <Resource Include="Resources\Icons\Database.png" />
     <Resource Include="Resources\Icons\Habits.png" />
     <Resource Include="Resources\Icons\Logout.png" />
+    <Resource Include="Resources\Icons\Moon.png" />
     <Resource Include="Resources\Icons\Profile.png" />
     <Resource Include="Resources\Icons\Settings.gif" />
     <Resource Include="Resources\Icons\Settings.png" />
+    <Resource Include="Resources\Icons\Sun.png" />
     <Resource Include="Resources\ProfilePic.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Model\Database\" />
     <Folder Include="Model\Tools\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
   </ItemGroup>
 
 </Project>

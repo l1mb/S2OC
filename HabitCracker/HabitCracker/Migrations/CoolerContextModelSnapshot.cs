@@ -95,11 +95,38 @@ namespace HabitCracker.Migrations
                     b.Property<bool>("IsDone")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ChallengeId");
 
+                    b.HasIndex("PersonId");
+
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("HabitCracker.Model.Entities.EventProgress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("EventProgress");
                 });
 
             modelBuilder.Entity("HabitCracker.Model.Entities.Habit", b =>
@@ -228,7 +255,28 @@ namespace HabitCracker.Migrations
                         .WithMany("Events")
                         .HasForeignKey("ChallengeId");
 
+                    b.HasOne("HabitCracker.Model.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
                     b.Navigation("Challenge");
+
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("HabitCracker.Model.Entities.EventProgress", b =>
+                {
+                    b.HasOne("HabitCracker.Model.Entities.Event", "Event")
+                        .WithMany("EventProgress")
+                        .HasForeignKey("EventId");
+
+                    b.HasOne("HabitCracker.Model.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("HabitCracker.Model.Entities.Habit", b =>
@@ -244,7 +292,8 @@ namespace HabitCracker.Migrations
                 {
                     b.HasOne("HabitCracker.Model.Entities.Habit", "Habit")
                         .WithMany("HabitProgress")
-                        .HasForeignKey("HabitId");
+                        .HasForeignKey("HabitId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Habit");
                 });
@@ -279,6 +328,11 @@ namespace HabitCracker.Migrations
             modelBuilder.Entity("HabitCracker.Model.Entities.Challenge", b =>
                 {
                     b.Navigation("Events");
+                });
+
+            modelBuilder.Entity("HabitCracker.Model.Entities.Event", b =>
+                {
+                    b.Navigation("EventProgress");
                 });
 
             modelBuilder.Entity("HabitCracker.Model.Entities.Habit", b =>

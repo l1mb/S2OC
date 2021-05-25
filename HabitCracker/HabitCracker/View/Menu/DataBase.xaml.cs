@@ -91,7 +91,7 @@ namespace HabitCracker.View.Menu
                             }
                             break;
 
-                        case "ChallengeGrid":
+                        case "ChallengesGrid":
                             {
                                 for (int i = 0; i < item.SelectedItems.Count;)
                                 {

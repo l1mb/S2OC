@@ -53,6 +53,8 @@ namespace HabitCracker.ViewModel.AuthViewModel
             {
                 try
                 {
+
+                    
                     CurrentPerson.Wallet = UserWallet;
                     UserWallet.Balance = 0;
 

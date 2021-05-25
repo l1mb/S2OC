@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using HabitCracker.View.Menu;
+using Microsoft.IdentityModel.Tokens;
 using static Newtonsoft.Json.JsonConvert;
 
 namespace HabitCracker.ViewModel
@@ -63,18 +64,27 @@ namespace HabitCracker.ViewModel
                 {
                     habits.Add(habit);
                  
-                    CoolerContext.GetInstance().HabitProgress.RemoveRange(CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == habit).AsEnumerable());
-                    CoolerContext.GetInstance().Habits.Remove(habit);
+                    RemoveHabits(habit);
                 }
             }
             NotifyHabit(habits);
             CoolerContext.GetInstance().SaveChanges();
         }
 
+        private void RemoveHabits(Habit habit)
+        {
+            CoolerContext.GetInstance().HabitProgress.RemoveRange(CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == habit).AsEnumerable());
+            CoolerContext.GetInstance().Habits.Remove(habit);
+            CoolerContext.GetInstance().SaveChangesAsync();
+        }
+
         public void NotifyHabit(List<Model.Entities.Habit> habits)
         {
             string tempString = habits.Aggregate<Habit, string>(null, (current, habit) => current + (habit.Title + "\n"));
-            MessageBox.Show($"Пока вы были в отключке, у вас закончились следующие привычки\n{ tempString}", "Просрочено", MessageBoxButton.OK);
+            if (!String.IsNullOrWhiteSpace(tempString))
+            {
+                MessageBox.Show($"Пока вы были в отключке, у вас закончились следующие привычки\n{ tempString}", "Просрочено", MessageBoxButton.OK);
+            }
         }
 
         public Originator Originator = new();
@@ -161,7 +171,7 @@ namespace HabitCracker.ViewModel
             set
             {
                 DaysBools[6] = value;
-                OnPropertyChanged(nameof(Saturday));
+                OnPropertyChanged(nameof(Sunday));
             }
         }
 
@@ -214,10 +224,28 @@ namespace HabitCracker.ViewModel
             }
         }
 
-        public RelayCommand ClearHabitList => new(obj => { PersonHabits.Clear(); }
+        public RelayCommand ClearHabitList => new(obj =>
+            {
+                foreach (var VARIABLE in PersonHabits)
+                {
+                    RemoveHabits(VARIABLE);
+                }
+                PersonHabits.Clear();
+
+            }
+
         );
 
-        public RelayCommand DeleteSelectedCommand => new(obj => { PersonHabits.Remove(SelectedHabit); });
+        public RelayCommand DeleteSelectedCommand => new(obj =>
+        {
+            PersonHabits.Remove(SelectedHabit);
+            if (SelectedHabit!=null)
+            {
+                RemoveHabits(SelectedHabit);
+                SelectedHabit = null;
+            }
+
+        });
 
         public RelayCommand OpenNewHabitCtorCommand => new(obj =>
         {
@@ -269,16 +297,26 @@ namespace HabitCracker.ViewModel
 
         private void Switcher(WeekMemento memento, DayOfWeek? day = null)
         {
-            if (memento == null)
+           
+            List<DayOfWeek> tmpList = new();
+            if (day!=null)
+            {
+                tmpList.Add((DayOfWeek) day);
+            }
+            else if (memento == null)
             {
                 return;
             }
-
-
-            foreach (var en in DeserializeObject<List<DayOfWeek>>(memento.State))
+            else
             {
-                day ??= en;
-                switch (day)
+                tmpList = DeserializeObject<List<DayOfWeek>>(memento.State);
+
+            }
+
+
+            foreach (var en in tmpList)
+            {
+                switch (en)
                 {
                     case DayOfWeek.Monday:
                         {
@@ -332,7 +370,10 @@ namespace HabitCracker.ViewModel
         {
             foreach (var habit in PersonHabits)
             {
-                CoolerContext.GetInstance().Habits.Add(habit);
+                if (!CoolerContext.GetInstance().Habits.Contains(habit))
+                {
+                    CoolerContext.GetInstance().Habits.Add(habit);
+                }
             }
         });
 

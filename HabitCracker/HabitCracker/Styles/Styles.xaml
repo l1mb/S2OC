@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ItemsPanelTemplate x:Key="WrapTemplate">
-        <WrapPanel ItemWidth="300px" />
+        <WrapPanel ItemWidth="330px" ItemHeight="180px" />
     </ItemsPanelTemplate>
 
     <Style x:Key="MainBorder" TargetType="Border">

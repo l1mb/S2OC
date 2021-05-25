@@ -24,5 +24,10 @@ namespace HabitCracker.View.AuthView
             else
                 PasswordCheck.Background = Brushes.Transparent;
         }
+
+        private void Login_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
     }
 }

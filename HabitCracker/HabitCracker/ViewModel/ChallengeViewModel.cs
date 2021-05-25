@@ -1,8 +1,16 @@
-﻿using HabitCracker.Model.Contexts;
+﻿using System;
+using System.Collections.Generic;
+using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media.TextFormatting;
+using HabitCracker.View.Menu.Challenge;
+using MaterialDesignThemes.Wpf;
 using static HabitCracker.Model.Entities.CoolerContext;
 
 namespace HabitCracker.ViewModel
@@ -14,7 +22,56 @@ namespace HabitCracker.ViewModel
 
         private Page _currentPage;
 
-        public Page CurrentPage
+        private string _eventName = "";
+        
+        public List<string> AllChallengesHeadersList
+        {
+            get
+            {
+                var lsit = new List<string>();
+                foreach (var s in AllChallenges.Select(p => p.Title))
+                {
+                    lsit.Add(s);
+                }
+                return lsit;
+            }
+        }
+
+
+        public String EventName
+        {
+            get => _eventName;
+            set
+            {
+                _eventName = value;
+                OnPropertyChanged(nameof(EventName));
+            }
+        }
+
+        private DateTime? _eventDate;
+
+        public DateTime? EventDateTime
+        {
+            get => _eventDate;
+            set
+            {
+                _eventDate = value;
+                OnPropertyChanged(nameof(EventDateTime));
+            }
+        }
+
+        public RelayCommand AddEvent => new RelayCommand(obj =>
+        {
+            var t = new Event();
+            t.EventName = EventName;
+            t.Day = (DateTime) EventDateTime;
+            t.Challenge = _selectedEventChallenge;
+            CoolerContext.GetInstance().Events.Add(t);
+            Events.Add(t);
+            CoolerContext.GetInstance().SaveChanges();
+        });
+
+    public Page CurrentPage
         {
             get => _currentPage;
             set
@@ -29,21 +86,46 @@ namespace HabitCracker.ViewModel
         private Challenge _selectedChallenge = new Challenge();
         private Event _selectedEvent = new Event();
 
+
+        private Challenge _selectedEventChallenge;
+
+        public string SelectedEventChallenge
+        {
+            set
+            {
+                _selectedEventChallenge = AllChallenges.FirstOrDefault(p=>p.Title==value);
+            }
+        }
+
         public RelayCommand AddSelectedToPersonChallenge => new RelayCommand(obj =>
         {
             if (SelectedChallenge == null) return;
 
-            //var tempChallenge = SelectedChallenge;
-            //tempChallenge.Challengers.Add(UserContext.GetInstance().UserPerson);
+            if (!SelectedChallenge.Challengers.Contains(UserContext.GetInstance().UserPerson))
+            {
+                PersonChallenges.Add(SelectedChallenge);
+                GetInstance().Challenges.FirstOrDefault(p => p == SelectedChallenge)?.Challengers.Add(UserContext.GetInstance().UserPerson);
+                GetInstance().SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Этот челлендж уже добавлен вами");
+            }
 
-            SelectedChallenge.Challengers.Add(UserContext.GetInstance().UserPerson);
-            var t = SelectedChallenge;
-            t.Id = 0;
-            PersonChallenges.Add(t);
-            GetInstance().Challenges.FirstOrDefault(p=>p == SelectedChallenge)?.Challengers.Add(UserContext.GetInstance().UserPerson);
-            GetInstance().Challenges.Add(SelectedChallenge);
-            GetInstance().SaveChanges();
+            
+
         });
+
+        private Window newWindow;
+        public RelayCommand AddEventWindowSpawnCommand => new RelayCommand(obj =>
+        {
+            newWindow = new AddEvent();
+            newWindow.DataContext = this;
+            newWindow.ShowDialog();
+            MessageBox.Show("Прикалдес");
+        });
+
+
 
         private ObservableCollection<Event> GetEvents()
         {
@@ -72,8 +154,8 @@ namespace HabitCracker.ViewModel
             set
             {
                 _selectedChallenge = value;
-                OnPropertyChanged(nameof(SelectedChallenge));
                 Events = GetEvents();
+                OnPropertyChanged(nameof(SelectedChallenge));
             }
         }
 
@@ -107,10 +189,13 @@ namespace HabitCracker.ViewModel
             }
         }
 
+        private ObservableCollection<Challenge> UpdatePersonChallenges() => new ObservableCollection<Challenge>(CoolerContext.GetInstance().Challenges.Where(p => p.Challengers.Contains(UserContext.GetInstance().UserPerson)));
+
         public ChallengeViewModel()
         {
+            
             AllChallenges = ChallengeContext.GetInstance().GetChallenges();
-            PersonChallenges = new ObservableCollection<Challenge>(UserContext.GetInstance().UserPerson.Challenges);
+            PersonChallenges = UpdatePersonChallenges();
         }
     }
 }

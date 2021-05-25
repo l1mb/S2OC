@@ -85,6 +85,7 @@ namespace HabitCracker.Model.Entities
         public DbSet<Habit> Habits { get; set; }
         public DbSet<HabitProgress> HabitProgress { get; set; }
         public DbSet<Person> People { get; set; }
+        public DbSet<EventProgress> EventProgress { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
     }
 }

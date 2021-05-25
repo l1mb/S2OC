@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:HabitCracker.View.Menu"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:HabitCracker.ViewModel"
-    FontFamily="Comfortaa"
     Title="Habits"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    FontFamily="Comfortaa"
     mc:Ignorable="d">
     <Page.Resources />
     <Grid Style="{StaticResource MainGridBackground}">
@@ -29,7 +29,7 @@
         </Grid>
         <Grid x:Name="SearchGrid" Visibility="Collapsed">
             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Command="{Binding GetPreviousDays}" >
+                <Button Command="{Binding GetPreviousDays}">
                     <Image FlowDirection="RightToLeft" Source="../../Resources/Icons/Arrow.png" />
                 </Button>
                 <Grid>
@@ -87,7 +87,7 @@
                     VerticalAlignment="Center"
                     Content="Вс"
                     Style="{StaticResource SundayLabel}" />
-                <Button Command="{Binding GetNextDays}" >
+                <Button Command="{Binding GetNextDays}">
                     <Image Source="../../Resources/Icons/Arrow.png" />
                 </Button>
             </DockPanel>
@@ -111,16 +111,28 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid MinWidth="300px">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition Width="2*" />
-                            </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="1">
-                                <Label Content="{Binding Id}" Style="{StaticResource HabitLabel}" />
-                                <Label Content="{Binding Description}" Style="{StaticResource HabitLabel}" />
-                                <Label Content="{Binding Title}" Style="{StaticResource HabitLabel}" />
-                                <Label Content="{Binding CreateDate}" Style="{StaticResource HabitLabel}" />
+
+                            <StackPanel Margin="20">
+                                <TextBlock Padding="15,2" TextWrapping="Wrap">
+                                    <Run FontSize="16" Text="{Binding Title}" />
+                                </TextBlock>
+                                <Separator />
+
+                                <TextBlock Padding="7,1" TextWrapping="Wrap">
+                                    <Run Text="Номер" />
+                                    <Run FontSize="12" Text="{Binding Id}" />
+
+                                </TextBlock>
+
+                                <TextBlock Padding="7,1" TextWrapping="Wrap">
+                                    <Run Text="Дата создания: " />
+                                    <Run FontSize="12" Text="{Binding CreateDate}" />
+
+                                </TextBlock>
+
+                                <Separator />
+
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
@@ -133,28 +145,45 @@
                 </Grid.RowDefinitions>
                 <Grid x:Name="DisplayGrid" Visibility="Hidden">
 
-                    <Border
-                        Style="{StaticResource MainBorder}"
-                        >
+                    <Border Style="{StaticResource MainBorder}">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="40" ShadowDepth="0" />
                         </Border.Effect>
-                        <Grid>
+                        <Grid>  
 
                             <StackPanel
                                 MinWidth="220"
                                 MinHeight="220"
                                 DataContext="{Binding SelectedHabit}">
-                                <DockPanel>
-                                    <TextBlock
-                                        HorizontalAlignment="Left"
-                                        Style="{StaticResource DockPanelTextBlock}"
-                                        Text="Title" />
-                                    <TextBlock
-                                        HorizontalAlignment="Right"
-                                        Style="{StaticResource DockPanelTextBlock}"
-                                        Text="{Binding Path=Id}" />
-                                </DockPanel>
+
+                                <TextBlock FontSize="23" Padding="5">
+                                        <Run Text="Привычка '" />
+                                        <Run Text="{Binding Title}" />
+                                        <Run Text="'" />
+                                    </TextBlock>
+                                    <Separator />
+                                    <TextBlock TextWrapping="Wrap" Padding="4">
+                                        <Run Text="Уникальный идентификатор:" />
+                                        <Run Text="{Binding Id}" />
+                                    </TextBlock>
+
+
+                                <TextBlock TextWrapping="Wrap" Padding="4">
+                                        <Run Text="Дата создания:" />
+                                        <Run Text="{Binding CreateDate}" />
+                                    </TextBlock>
+                                    <Separator />
+                                <TextBlock TextWrapping="Wrap" Padding="4">
+                                        <Run Text="Серия убийств:" />
+                                        <Run Text="{Binding CurrentStreak}" />
+                                    </TextBlock>
+                                    <Separator></Separator>
+                                <TextBlock TextWrapping="Wrap" Padding="4">
+                                        <Run Text="Описание:"></Run>
+                                        <Run Text="{Binding Description}"></Run>
+                                    </TextBlock>
+                                    
+                               
                             </StackPanel>
                             <DockPanel>
                                 <Button
