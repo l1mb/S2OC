@@ -62,8 +62,7 @@ namespace HabitCracker.View.Menu
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+
                 List<DataGrid> grids = new();
 
                 grids.Add(AuthGrid);
@@ -109,7 +108,9 @@ namespace HabitCracker.View.Menu
                                 {
                                     if (item.SelectedItems[i] is Event @event)
                                     {
+                                        db.EventProgress.RemoveRange(db.EventProgress.Where(p=>p.Event==@event));
                                         db.Events.Remove(@event);
+                                        
                                     }
                                 }
                             }
@@ -162,12 +163,8 @@ namespace HabitCracker.View.Menu
                 //also tried map datagrid with DbSet<"EntityName"> but do not finished it
 
                 db.SaveChanges();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
+            
 
-            }
         }
     }
 }

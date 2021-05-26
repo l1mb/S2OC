@@ -167,6 +167,7 @@
                     BorderBrush="Transparent"
                     ItemsPanel="{StaticResource WrapTemplate}"
                     ItemsSource="{Binding Events}"
+                    SelectedItem="{Binding SelectedEvent}"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     Style="{StaticResource List}"
                     ItemTemplate="{DynamicResource MemberList}">

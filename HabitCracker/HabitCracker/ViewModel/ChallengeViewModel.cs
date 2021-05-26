@@ -5,6 +5,7 @@ using HabitCracker.Model.Entities;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -66,10 +67,14 @@ namespace HabitCracker.ViewModel
             var t = new Event();
             t.EventName = EventName;
             t.Day = (DateTime) EventDateTime;
+            t.EventProgress = new List<EventProgress>();
             t.Challenge = _selectedEventChallenge;
             CoolerContext.GetInstance().Events.Add(t);
             Events.Add(t);
+            Events = sortEvents(Events);
             CoolerContext.GetInstance().SaveChanges();
+            newWindow.Close();
+
         });
 
         public Page CurrentPage
@@ -133,11 +138,16 @@ namespace HabitCracker.ViewModel
         private ObservableCollection<Event> GetEvents()
         {
             ObservableCollection<Event> events = new();
-            foreach (var var in GetInstance().Events.Where(p => p.Challenge == SelectedChallenge).ToList())
+            foreach (var var in GetInstance().Events.Where(p => (p.Challenge == SelectedChallenge)).ToList())
             {
-                events.Add(var);
-            }
+                if ((var.EventProgress==null)||(var.EventProgress.FirstOrDefault(p => p.Person == UserContext.GetInstance().UserPerson) == null))
+                {
 
+                    events.ToList().ForEach(p => p.EventProgress = new List<EventProgress>());
+                    events.Add(var);
+                }
+
+            }
             return events;
         }
 
@@ -151,10 +161,19 @@ namespace HabitCracker.ViewModel
             }
         }
 
+
+        private ObservableCollection<Event> sortEvents(ObservableCollection<Event> events)
+        {
+            return new ObservableCollection<Event>(events.ToList().OrderBy(p => p.Day));
+        }
+
         public RelayCommand EventIsDone => new(obj =>
         {
 
-            MessageBox.Show("Prikaldes");
+            CoolerContext.GetInstance().Events.FirstOrDefault(p => p == SelectedEvent)?.EventProgress.Add(new EventProgress(){Event = SelectedEvent, Person = UserContext.GetInstance().UserPerson});
+            Events.Remove(SelectedEvent);
+            Events = sortEvents(Events);
+            CoolerContext.GetInstance().SaveChanges();
         });
 
         public Challenge SelectedChallenge
