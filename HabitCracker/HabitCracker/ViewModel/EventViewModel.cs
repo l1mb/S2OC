@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace HabitCracker.ViewModel
 {
-    class EventViewModel
+    class EventViewModel:BaseViewModel
     {
+
+        
+
     }
 }

@@ -23,7 +23,7 @@ namespace HabitCracker.ViewModel
         private Page _currentPage;
 
         private string _eventName = "";
-        
+
         public List<string> AllChallengesHeadersList
         {
             get
@@ -33,6 +33,7 @@ namespace HabitCracker.ViewModel
                 {
                     lsit.Add(s);
                 }
+
                 return lsit;
             }
         }
@@ -71,7 +72,7 @@ namespace HabitCracker.ViewModel
             CoolerContext.GetInstance().SaveChanges();
         });
 
-    public Page CurrentPage
+        public Page CurrentPage
         {
             get => _currentPage;
             set
@@ -86,16 +87,13 @@ namespace HabitCracker.ViewModel
         private Challenge _selectedChallenge = new Challenge();
         private Event _selectedEvent = new Event();
 
-
         private Challenge _selectedEventChallenge;
 
         public string SelectedEventChallenge
         {
-            set
-            {
-                _selectedEventChallenge = AllChallenges.FirstOrDefault(p=>p.Title==value);
-            }
+            set { _selectedEventChallenge = AllChallenges.FirstOrDefault(p => p.Title == value); }
         }
+
 
 
 
@@ -107,7 +105,8 @@ namespace HabitCracker.ViewModel
             if (!SelectedChallenge.Challengers.Contains(UserContext.GetInstance().UserPerson))
             {
                 PersonChallenges.Add(SelectedChallenge);
-                GetInstance().Challenges.FirstOrDefault(p => p == SelectedChallenge)?.Challengers.Add(UserContext.GetInstance().UserPerson);
+                GetInstance().Challenges.FirstOrDefault(p => p == SelectedChallenge)?.Challengers
+                    .Add(UserContext.GetInstance().UserPerson);
                 GetInstance().SaveChanges();
             }
             else
@@ -115,11 +114,12 @@ namespace HabitCracker.ViewModel
                 MessageBox.Show("Этот челлендж уже добавлен вами");
             }
 
-            
+
 
         });
 
         private Window newWindow;
+
         public RelayCommand AddEventWindowSpawnCommand => new RelayCommand(obj =>
         {
             newWindow = new AddEvent();
@@ -150,6 +150,12 @@ namespace HabitCracker.ViewModel
                 OnPropertyChanged(nameof(Events));
             }
         }
+
+        public RelayCommand EventIsDone => new(obj =>
+        {
+
+            MessageBox.Show("Prikaldes");
+        });
 
         public Challenge SelectedChallenge
         {
@@ -207,7 +213,7 @@ namespace HabitCracker.ViewModel
         {
             List<Model.Entities.Event> events = new List<Model.Entities.Event>();
 
-            DateTime currentTime = DateTime.Today.AddDays(2);
+            DateTime currentTime = DateTime.Today;
             foreach (var @event in CoolerContext.GetInstance().Events)
             {
                 if ((@event.Day - currentTime.Date).TotalDays <-1)

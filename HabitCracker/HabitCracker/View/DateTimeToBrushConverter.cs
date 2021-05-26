@@ -20,6 +20,8 @@ using System.Threading.Tasks;
             if (dateTime.Date > DateTime.Now)
                 return false;
 
+            //return dateTime.Date == F
+
             return false;
         }
 
