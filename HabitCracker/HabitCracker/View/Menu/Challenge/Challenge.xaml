@@ -63,7 +63,7 @@
                     Margin="15"
                     Padding="15,5"
                     Click="GoBack_OnClick"
-                    Content="Fuck go back" />
+                    Content="Вернуться" />
                 <Button
                     Margin="15"
                     Padding="15,5"

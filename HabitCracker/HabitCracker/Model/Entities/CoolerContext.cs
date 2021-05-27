@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Configuration;
 
 namespace HabitCracker.Model.Entities
 {
@@ -15,35 +16,13 @@ namespace HabitCracker.Model.Entities
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured) return;
-            //optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["CoolerDaniel"].ConnectionString);
             optionsBuilder.UseSqlServer(
-                "Data Source=DESKTOP-O8V49SL;Initial Catalog=CoolerOopDatabase;Integrated Security=True;MultipleActiveResultSets=True");
+                ConfigurationManager.ConnectionStrings["CoolerDaniel"].ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // public class Author
-            // {
-            //     public AuthorBiography Biography { get; set; }
-            //     public int AuthorId { get; set; }
-            //     public string FirstName { get; set; }
-            //     public string LastName { get; set; }
-            // }
-            // public class AuthorBiography
-            // {
-            //     public Author Author { get; set; }
-            //     public DateTime DateOfBirth { get; set; }
-            //     public int AuthorBiographyId { get; set; }
-            //     public int AuthorRef { get; set; }
-            //     public string Biography { get; set; }
-            //     public string Nationality { get; set; }
-            //     public string PlaceOfBirth { get; set; }
-            // }
-
-            //  modelBuilder.Entity<Author>()
-            // .HasOne(a => a.Biography)
-            // .WithOne(b => b.Author)
-            // .HasForeignKey<AuthorBiography>(b => b.AuthorRef);
+            
             var auth = modelBuilder.Entity<Auth>();
             var person = modelBuilder.Entity<Person>();
             var wallet = modelBuilder.Entity<Wallet>();
@@ -58,24 +37,7 @@ namespace HabitCracker.Model.Entities
             person.Property(p => p.Role).HasDefaultValue("Пользователь");
 
 
-            // auth.HasData(new[]
-            // {
-            //     new Auth
-            //     {
-            //         Id = ...,
-            //         Login = ...,
-            //         Password = ...,
-            //         Salt = ...
-            //     },
-            //     new Auth
-            //     {
-            //         Id = ...,
-            //         Login = ...,
-            //         Password = ...,
-            //         Salt = ...
-            //     }
-            // });
-
+       
             base.OnModelCreating(modelBuilder);
         }
 
