@@ -8,26 +8,21 @@
     xmlns:vm ="clr-namespace:HabitCracker.ViewModel.AuthViewModel"
     Title="Greeting"
     Width="800"
-    Height="450"
+    Height="500"
     mc:Ignorable="d">
     <Grid Style="{StaticResource MainGridBackground}">
         <Grid.DataContext>
             <vm:SignViewModel></vm:SignViewModel>
         </Grid.DataContext>
-        <Border Margin="40" Background="White">
+        <Border Margin="20" Background="White">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="40" ShadowDepth="0" />
             </Border.Effect>
             <Grid>
-                <TextBlock
-                    Margin="20"
-                    HorizontalAlignment="Center"
-                    FontSize="24"
-                    Text="Как к вам обращаться?" />
+                
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBox MinWidth="250" Margin ="15" Padding="5"  MaxWidth= "250" Text="{Binding Name}" />
-                    <TextBox MinWidth="250" Margin="15" Padding="5" MaxWidth="250" Text="{Binding Lastname}" />
-                    <Button Content="Продолжить" ></Button>
+                    <Image Width="450"  Source="../../Resources/Icons/Ad.jpg"></Image>
+                    <Button Content="Продолжить" Click="ButtonBase_OnClick" ></Button>
                 </StackPanel>
             </Grid>
         </Border>

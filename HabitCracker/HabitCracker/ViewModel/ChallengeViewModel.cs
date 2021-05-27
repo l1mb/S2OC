@@ -130,7 +130,6 @@ namespace HabitCracker.ViewModel
             newWindow = new AddEvent();
             newWindow.DataContext = this;
             newWindow.ShowDialog();
-            MessageBox.Show("Прикалдес");
         });
 
 
@@ -235,7 +234,7 @@ namespace HabitCracker.ViewModel
             DateTime currentTime = DateTime.Today;
             foreach (var @event in CoolerContext.GetInstance().Events)
             {
-                if ((@event.Day - currentTime.Date).TotalDays <-1)
+                if ((@event.Day - currentTime.Date).TotalDays <=-1)
                 {
                     events.Add(@event);
                     RemoveEvents(@event);

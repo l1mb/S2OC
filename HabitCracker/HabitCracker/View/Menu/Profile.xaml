@@ -17,7 +17,13 @@
             <Setter Property="FontSize" Value="14" />
         </Style>
     </Page.Resources>
-    <Grid Style="{StaticResource MainGridBackground}">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0.5" EndPoint="1,0">
+                <GradientStop Offset="0" Color="#9172A6"/>
+                <GradientStop Offset="1.0" Color="#F283A5" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.DataContext>
             <vm:ProfileViewModel />
         </Grid.DataContext>
@@ -38,7 +44,7 @@
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="45" ShadowDepth="0" />
                 </Border.Effect>
-                <Image Source="\Resources\ProfilePic.jpg" />
+                <Image Source="{Binding PicSource}" />
             </Border>
         </Grid>
         <Grid Column="3">
@@ -145,7 +151,8 @@
                         <Run Text="{Binding BiggestHabbitStreak.Item1.Title}" />
                     </TextBlock>
                     <Separator Margin="0,10"/>
-                    <Button Content="Сменить фотографию"></Button>
+                    <Button Margin="5,1" Content="Сменить фотографию" Command="{Binding ChangeProfilePic}"></Button>
+                    <Button Margin="5,1" Content="Убрать рекламу" Command="{Binding BuyAd}"></Button>
                 </StackPanel>
             </Border>
         </Grid>

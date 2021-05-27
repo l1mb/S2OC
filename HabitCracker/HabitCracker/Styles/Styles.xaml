@@ -2,8 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ItemsPanelTemplate x:Key="WrapTemplate">
-        <WrapPanel ItemWidth="330px" ItemHeight="180px" />
+        <WrapPanel ItemWidth="330px" ItemHeight="152px" />
     </ItemsPanelTemplate>
+
+    <Style x:Key="MainWindowGrid"  TargetType="Grid">
+        <Setter Property="Background" Value="#9172A6"></Setter>
+    </Style>
 
     <Style x:Key="MainBorder" TargetType="Border">
         <Setter Property="Background" Value="#F2F2F2" />
@@ -56,11 +60,15 @@
         </Setter>
     </Style>
 
+
     <Style x:Key="List" TargetType="ListBox">
         <Setter Property="Background" Value="Transparent" />
     </Style>
     <Style x:Key="MainGridBackground" TargetType="Grid">
-        <Setter Property="Background" Value="#FFE6E6" />
+        <Setter Property="Background" Value="#9172A6" />
+    </Style>
+    <Style x:Key="DefaultGridBackground" TargetType="Grid">
+        <Setter Property="Background" Value="#ACB7D0" />
     </Style>
 
     <Style x:Key="HabitLabel" TargetType="Label">

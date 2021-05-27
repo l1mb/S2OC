@@ -12,6 +12,7 @@
     <None Remove="Resources\Fonts\Comfortaa\Comfortaa-VariableFont_wght.ttf" />
     <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Light.ttf" />
     <None Remove="Resources\Fonts\Comfortaa\static\Comfortaa-Regular.ttf" />
+    <None Remove="Resources\Icons\Ad.jpg" />
     <None Remove="Resources\Icons\AppIcon.png" />
     <None Remove="Resources\Icons\Arrow.png" />
     <None Remove="Resources\Icons\Audio.gif" />
@@ -20,6 +21,7 @@
     <None Remove="Resources\Icons\Cross.png" />
     <None Remove="Resources\Icons\Database.png" />
     <None Remove="Resources\Icons\Habits.png" />
+    <None Remove="Resources\Icons\icons8-checkmark-64.png" />
     <None Remove="Resources\Icons\Logout.png" />
     <None Remove="Resources\Icons\Moon.png" />
     <None Remove="Resources\Icons\Profile.png" />
@@ -50,6 +52,7 @@
     <Resource Include="Resources\Fonts\Comfortaa\Comfortaa-VariableFont_wght.ttf" />
     <Resource Include="Resources\Fonts\Comfortaa\static\Comfortaa-Light.ttf" />
     <Resource Include="Resources\Fonts\Comfortaa\static\Comfortaa-Regular.ttf" />
+    <Resource Include="Resources\Icons\Ad.jpg" />
     <Resource Include="Resources\Icons\Arrow.png" />
     <Resource Include="Resources\Icons\Audio.gif" />
     <Resource Include="Resources\Icons\Challenges.png" />
@@ -57,6 +60,7 @@
     <Resource Include="Resources\Icons\Cross.png" />
     <Resource Include="Resources\Icons\Database.png" />
     <Resource Include="Resources\Icons\Habits.png" />
+    <Resource Include="Resources\Icons\icons8-checkmark-64.png" />
     <Resource Include="Resources\Icons\Logout.png" />
     <Resource Include="Resources\Icons\Moon.png" />
     <Resource Include="Resources\Icons\Profile.png" />

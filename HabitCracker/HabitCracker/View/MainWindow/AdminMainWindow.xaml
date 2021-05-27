@@ -18,7 +18,7 @@
             <Setter Property="FontSize" Value="20" />
         </Style>
     </Window.Resources>
-    <Grid Background="#9172A6">
+    <Grid >
         <Grid.DataContext>
             <viewModels:MainViewModel />
         </Grid.DataContext>
@@ -26,7 +26,7 @@
             <ColumnDefinition MinWidth="220" />
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Style="{StaticResource MainGridBackground}">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="9*" />
@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="1">
-                <StackPanel DockPanel.Dock="Top">
+                <StackPanel DockPanel.Dock="Top" Margin="0, 10">
                     <Button Command="{Binding SetDatabasePageCommand}" Style="{StaticResource ButtonIcon}">
                         <DockPanel
                             Width="210"
@@ -106,21 +106,7 @@
                     VerticalAlignment="Bottom"
                     DockPanel.Dock="Bottom"
                     Style="{StaticResource ButtonIcon}">
-                    <DockPanel
-                        Width="210"
-                        Height="70"
-                        HorizontalAlignment="Center">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="2*"  />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="../../Resources/Icons/Moon.png" Width="35" HorizontalAlignment="Right"></Image>
-                            <Image Source="../../Resources/Icons/Sun.png" Grid.Column="2" Width="35" HorizontalAlignment="Left"></Image>
-                            <ToggleButton Grid.Column="1" />
-                        </Grid>
-                    </DockPanel>
+                    
                 </Button>
             </DockPanel>
         </Grid>

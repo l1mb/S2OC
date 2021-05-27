@@ -22,7 +22,7 @@ namespace HabitCracker.Model.Memento
             }
             else
             {
-                MessageBox.Show("Не лезь бля");
+                MessageBox.Show("Прошлого не существует");
             }
 
             return GetCurrent();
@@ -36,7 +36,7 @@ namespace HabitCracker.Model.Memento
             }
             else
             {
-                MessageBox.Show("Не лезь бля");
+                MessageBox.Show("Живи настоящим");
             }
 
             return GetCurrent();

@@ -3,13 +3,20 @@ using HabitCracker.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
+using System.Reflection;
+using System.Windows;
+using HabitCracker.View.AuthView;
 using JetBrains.Annotations;
+using Microsoft.Win32;
 
 namespace HabitCracker.ViewModel
 {
     internal class ProfileViewModel : BaseViewModel
     {
+        public int AdCost = 50;
         public Decimal PersonBalance =>
             //{
             //    if (CurrentPerson.Wallet == null)
@@ -55,11 +62,57 @@ namespace HabitCracker.ViewModel
             }
         }
 
+        public RelayCommand BuyAd => new RelayCommand(obj =>
+        {
+            if (CurrentPerson.Role=="Пользователь")
+            {
+                if (CurrentPerson.Wallet.Balance<AdCost)
+                {
+                    MessageBox.Show($"Тебе не хватает ещё {AdCost - CurrentPerson.Wallet.Balance} монет");
+                }
+                else
+                {
+                    CoolerContext.GetInstance().People.FirstOrDefault(p => p == CurrentPerson).Role = "Cooler Пользователь";
+                    CoolerContext.GetInstance().People.FirstOrDefault(p => p == CurrentPerson).Wallet.Balance -= AdCost;
+                    CoolerContext.GetInstance().SaveChanges();
+                }
+                
+            }
+            
+        });
+
+
+        public string PicSource
+        {
+            get
+            {
+                return String.IsNullOrWhiteSpace(CoolerContext.GetInstance().People.FirstOrDefault(p => p == CurrentPerson).Picture) ? @"\Resources\ProfilePic.jpg" : CoolerContext.GetInstance().People.FirstOrDefault(p => p == CurrentPerson).Picture;
+            }
+            set
+            {
+                CoolerContext.GetInstance().People.FirstOrDefault(p => p == CurrentPerson).Picture = value;
+                OnPropertyChanged(nameof(PicSource));
+            }
+        }
+
+        public RelayCommand ChangeProfilePic => new RelayCommand(obj =>
+        {
+            var fileDialog = new OpenFileDialog { Filter = "Image files(*.jpg)|*.jpg" };
+            if (fileDialog.ShowDialog() != true) return;
+            PicSource = fileDialog.FileName;
+        });
+
+
+        private Window _AdWindow ;
 
         public ProfileViewModel()
         {
-            ;
+            if (UserContext.GetInstance().UserPerson.Role=="Пользователь")
+            {
+                _AdWindow = new Greeting();
+                _AdWindow.ShowDialog();
 
+            }
         }
     }
 }

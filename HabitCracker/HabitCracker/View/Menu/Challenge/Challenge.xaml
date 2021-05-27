@@ -35,10 +35,16 @@
         </DataTemplate>
     </Page.Resources>
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0.5" EndPoint="1,0">
+                <GradientStop Offset="0" Color="#9172A6"/>
+                <GradientStop Offset="1.0" Color="#AAB3CD" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid
             x:Name="Person"
-            Grid.Visibility="Visible"
-            Style="{StaticResource MainGridBackground}">
+            Grid.Visibility="Collapsed"
+            >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="10*" />
@@ -66,7 +72,7 @@
             </StackPanel>
             <Border
                 x:Name="MainChallenge"
-                Grid.RowSpan="2"
+                Grid.Row="0" Grid.RowSpan="2"
                 Grid.Column="1"
                 Margin="20"
                 HorizontalAlignment="Left"
@@ -177,8 +183,7 @@
 
         <Grid
             Name="All"
-            Style="{StaticResource MainGridBackground}"
-            Visibility="Collapsed">
+            Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="6*" />
@@ -191,6 +196,7 @@
 
             <Border Grid.Column="1">
                 <ListBox
+                    Foreground="#F2F2F2"
                     Grid.Column="1"
                     Margin="15"
                     Padding="10"

@@ -11,5 +11,10 @@ namespace HabitCracker.View.AuthView
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

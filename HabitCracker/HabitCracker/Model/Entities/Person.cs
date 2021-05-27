@@ -16,7 +16,6 @@ namespace HabitCracker.Model.Entities
         public string Role { get; set; }
         public string Picture { get; set; }
         public int AuthRef { get; set; }
-
         public Auth Auth { get; set; }
         public Wallet Wallet { get; set; }
         public ICollection<Challenge> Challenges { get; set; }

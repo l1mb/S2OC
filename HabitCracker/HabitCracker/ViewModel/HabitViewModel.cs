@@ -249,9 +249,8 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand OpenNewHabitCtorCommand => new(obj =>
         {
-            _addNewHabbitWindow = new NewHabit();
-            _addNewHabbitWindow.Show();
-            _addNewHabbitWindow.DataContext = this;
+            _addNewHabbitWindow = new NewHabit {DataContext = this};
+            _addNewHabbitWindow.ShowDialog();
         });
 
         public RelayCommand AddNewHabitCommand => new(obj =>

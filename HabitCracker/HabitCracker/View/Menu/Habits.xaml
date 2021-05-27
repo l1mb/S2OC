@@ -12,7 +12,13 @@
     FontFamily="Comfortaa"
     mc:Ignorable="d">
     <Page.Resources />
-    <Grid Style="{StaticResource MainGridBackground}">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0.5" EndPoint="1,0">
+                <GradientStop Offset="0" Color="#9172A6" />
+                <GradientStop Offset="1.0" Color="#85CBF8" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.DataContext>
             <vm:HabitViewModel />
         </Grid.DataContext>
@@ -149,58 +155,74 @@
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="40" ShadowDepth="0" />
                         </Border.Effect>
-                        <Grid>  
+                        <Grid>
 
                             <StackPanel
                                 MinWidth="220"
                                 MinHeight="220"
                                 DataContext="{Binding SelectedHabit}">
 
-                                <TextBlock FontSize="23" Padding="5">
-                                        <Run Text="Привычка '" />
-                                        <Run Text="{Binding Title}" />
-                                        <Run Text="'" />
-                                    </TextBlock>
-                                    <Separator />
-                                    <TextBlock TextWrapping="Wrap" Padding="4">
-                                        <Run Text="Уникальный идентификатор:" />
-                                        <Run Text="{Binding Id}" />
-                                    </TextBlock>
+                                <TextBlock Padding="5" FontSize="23">
+                                    <Run Text="Привычка '" />
+                                    <Run Text="{Binding Title}" />
+                                    <Run Text="'" />
+                                </TextBlock>
+                                <Separator />
+                                <TextBlock Padding="4" TextWrapping="Wrap">
+                                    <Run Text="Уникальный идентификатор:" />
+                                    <Run Text="{Binding Id}" />
+                                </TextBlock>
 
 
-                                <TextBlock TextWrapping="Wrap" Padding="4">
-                                        <Run Text="Дата создания:" />
-                                        <Run Text="{Binding CreateDate}" />
-                                    </TextBlock>
-                                    <Separator />
-                                <TextBlock TextWrapping="Wrap" Padding="4">
-                                        <Run Text="Серия убийств:" />
-                                        <Run Text="{Binding CurrentStreak}" />
-                                    </TextBlock>
-                                    <Separator></Separator>
-                                <TextBlock TextWrapping="Wrap" Padding="4">
-                                        <Run Text="Описание:"></Run>
-                                        <Run Text="{Binding Description}"></Run>
-                                    </TextBlock>
-                                    
-                               
+                                <TextBlock Padding="4" TextWrapping="Wrap">
+                                    <Run Text="Дата создания:" />
+                                    <Run Text="{Binding CreateDate}" />
+                                </TextBlock>
+                                <Separator />
+                                <TextBlock Padding="4" TextWrapping="Wrap">
+                                    <Run Text="Серия убийств:" />
+                                    <Run Text="{Binding CurrentStreak}" />
+                                </TextBlock>
+                                <Separator />
+                                <TextBlock Padding="4" TextWrapping="Wrap">
+                                    <Run Text="Описание:" />
+                                    <Run Text="{Binding Description}" />
+                                </TextBlock>
+
+
                             </StackPanel>
                             <DockPanel>
                                 <Button
                                     Margin="15,5"
-                                    Padding="15,5"
+                                    Padding="30,5"
                                     VerticalAlignment="Bottom"
                                     Command="{Binding HabitIsDone}">
                                     <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
+                                        <Style TargetType="Button">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsDone}" Value="True">
                                                     <Setter Property="IsEnabled" Value="False" />
+                                                    <Setter Property="Background" Value="LightGray"></Setter>
                                                 </DataTrigger>
                                             </Style.Triggers>
+                                            <Setter Property="Background" Value="LightGreen" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
                                         </Style>
+
+
                                     </Button.Style>
-                                    <Image Source="../../Resources/Icons/Checkbox.gif" Style="{StaticResource ImageIcon}" />
+                                    <Image Source="../../Resources/Icons/icons8-checkmark-64.png" Style="{StaticResource ImageIcon}" />
                                 </Button>
                                 <Button
                                     Padding="15,5,15,5"
