@@ -14,14 +14,16 @@ namespace HabitCracker.Model.Contexts
             return Instance.Value;
         }
 
-        public ObservableCollection<Habit> Habits = new();
+        public ObservableCollection<Habit> Habits
+        {
+            get => GetHabits();
+        }
 
         private readonly Entities.CoolerContext _dbContext;
 
         public HabitContext()
         {
             _dbContext = Entities.CoolerContext.GetInstance();
-            Habits = GetHabits();
         }
 
         private ObservableCollection<Habit> GetHabits()

@@ -6,10 +6,16 @@ using HabitCracker.View.Menu.Habit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
+using HabitCracker.Model.Builders;
 using HabitCracker.View.Menu;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using static System.String;
+using static System.Windows.MessageBox;
+using static HabitCracker.Model.Entities.CoolerContext;
 using static Newtonsoft.Json.JsonConvert;
 
 namespace HabitCracker.ViewModel
@@ -21,14 +27,14 @@ namespace HabitCracker.ViewModel
             {
                 Description = "text about danger of smoking",
                 CreateDate = DateTime.Now,
-                Title = "Smoking",
+                Title = "Выпить воды",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
                 Description = "text about danger of drinking",
                 CreateDate = DateTime.Now,
-                Title = "Drinking",
+                Title = "Помедитировать",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
@@ -54,42 +60,40 @@ namespace HabitCracker.ViewModel
             }
         };
 
+
         private void RemoveOverduedHabit()
         {
-            List<Model.Entities.Habit> habits = new List<Model.Entities.Habit>();
-            DateTime currentTime = DateTime.Today;
-            foreach (var habit in CoolerContext.GetInstance().Habits)
+            List<Habit> habits = new();
+            var currentTime = DateTime.Today;
+            foreach (var habit in GetInstance().Habits)
             {
-                if ((currentTime.Date-habit.CreateDate).TotalDays>habit.DaysCount)
-                {
-                    habits.Add(habit);
-                    RemoveHabits(habit);
-                }
+                if (!((currentTime.Date - habit.CreateDate).TotalDays > habit.DaysCount)) continue;
+                habits.Add(habit);
+                RemoveHabits(habit);
             }
 
             NotifyHabit(habits);
-            CoolerContext.GetInstance().SaveChanges();
+            GetInstance().SaveChanges();
         }
 
-        private void RemoveHabits(Habit habit)
+        private static void RemoveHabits(Habit habit)
         {
-            CoolerContext.GetInstance().HabitProgress.RemoveRange(CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == habit).ToList());
-            CoolerContext.GetInstance().Habits.Remove(habit);
+            GetInstance().HabitProgress.RemoveRange(GetInstance().HabitProgress.Where(p => p.Habit == habit).ToList());
+            GetInstance().Habits.Remove(habit);
         }
 
-        public void NotifyHabit(List<Model.Entities.Habit> habits)
+        private void NotifyHabit(List<Habit> habits)
         {
-            string tempString = habits.Aggregate<Habit, string>(null, (current, habit) => current + (habit.Title + "\n"));
-            if (!String.IsNullOrWhiteSpace(tempString))
-            {
-                MessageBox.Show($"Пока вы были в отключке, у вас закончились следующие привычки\n{ tempString}", "Просрочено", MessageBoxButton.OK);
-            }
+            var tempString = habits.Aggregate<Habit, string>(null, (current, habit) => current + (habit.Title + "\n"));
+            if (!IsNullOrWhiteSpace(tempString))
+                Show($"Пока вы были в отключке, у вас закончились следующие привычки\n{tempString}", "Просрочено",
+                    MessageBoxButton.OK);
         }
 
         public Originator Originator = new();
         public CareTaker Caretaker = new();
 
-        private bool _habitIsDone = false;
+        private bool _habitIsDone;
 
         public bool IsDone
         {
@@ -212,8 +216,7 @@ namespace HabitCracker.ViewModel
             {
                 NullDays();
                 _selectedHabit = value;
-                Caretaker = Originator.FillDays(Model.Entities.CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == SelectedHabit));
-                //тут могут быть некоторые косяки с выбором
+                Caretaker = Originator.FillDays(GetInstance().HabitProgress.Where(p => p.Habit == SelectedHabit));
                 Switcher(Caretaker.GetCurrent());
 
                 if (_selectedHabit != null)
@@ -225,9 +228,9 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand ClearHabitList => new(obj =>
             {
-                foreach (var VARIABLE in PersonHabits)
+                foreach (var variable in PersonHabits)
                 {
-                    RemoveHabits(VARIABLE);
+                    RemoveHabits(variable);
                 }
                 PersonHabits.Clear();
 
@@ -237,13 +240,11 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand DeleteSelectedCommand => new(obj =>
         {
-            PersonHabits.Remove(SelectedHabit);
-            if (SelectedHabit!=null)
-            {
-                RemoveHabits(SelectedHabit);
-                SelectedHabit = null;
-            }
+            if (SelectedHabit!=null) RemoveHabits(SelectedHabit);
 
+            PersonHabits.Remove(SelectedHabit);
+            SelectedHabit = null;
+            GetInstance().SaveChanges();
         });
 
         public RelayCommand OpenNewHabitCtorCommand => new(obj =>
@@ -254,22 +255,23 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand AddNewHabitCommand => new(obj =>
         {
-            var tmpHabit = new Habit()
-            {
-                CurrentStreak = 0,
-                Description = NewHabit.Description,
-                CreateDate = DateTime.Now,
-                Title = NewHabit.Title,
-                DaysCount = NewHabit.DaysCount,
-                User = UserContext.GetInstance().UserPerson
-            };
-            if (!string.IsNullOrWhiteSpace(NewHabit.Title) && !string.IsNullOrWhiteSpace(NewHabit.Description))
+            HabitBuilder builder = new();
+            var tmpHabit = builder.SetStreak(0).SetDescription(NewHabit.Description).SetDate(DateTime.Now)
+                .SetTitle(NewHabit.Title).SetDays(NewHabit.DaysCount).SetPerson(UserContext.GetInstance().UserPerson)
+                .GetHabit();
+
+
+            if (!IsNullOrWhiteSpace(NewHabit.Title) && !IsNullOrWhiteSpace(NewHabit.Description))
             {
                 PersonHabits.Add(tmpHabit);
-                CoolerContext.GetInstance().Habits.Add(tmpHabit);
-
-                CoolerContext.GetInstance().SaveChanges();
+                GetInstance().Habits.Add(tmpHabit);
+                GetInstance().SaveChanges();
             }
+            else
+            {
+                Show("Проверьте правильность заполнения формы");
+            }
+
             _addNewHabbitWindow.Close();
             PersonHabits = _personHabits;
             OnPropertyChanged(nameof(PersonHabits));
@@ -289,7 +291,6 @@ namespace HabitCracker.ViewModel
             obj =>
             {
                 NullDays();
-
                 Switcher(Caretaker.GetNext());
             });
 
@@ -312,50 +313,37 @@ namespace HabitCracker.ViewModel
             }
 
 
+            if (tmpList == null) return;
             foreach (var en in tmpList)
             {
                 switch (en)
                 {
                     case DayOfWeek.Monday:
-                        {
-                            Monday = true;
-                        }
+                        Monday = true;
                         break;
 
                     case DayOfWeek.Tuesday:
-                        {
-                            Tuesday = true;
-                        }
+                        Tuesday = true;
                         break;
 
                     case DayOfWeek.Wednesday:
-                        {
-                            Wednesday = true;
-                        }
+                        Wednesday = true;
                         break;
 
                     case DayOfWeek.Thursday:
-                        {
-                            Thursday = true;
-                        }
+                        Thursday = true;
                         break;
 
                     case DayOfWeek.Friday:
-                        {
-                            Friday = true;
-                        }
+                        Friday = true;
                         break;
 
                     case DayOfWeek.Saturday:
-                        {
-                            Saturday = true;
-                        }
+                        Saturday = true;
                         break;
 
                     case DayOfWeek.Sunday:
-                        {
-                            Sunday = true;
-                        }
+                        Sunday = true;
                         break;
 
                     default:
@@ -368,9 +356,9 @@ namespace HabitCracker.ViewModel
         {
             foreach (var habit in PersonHabits)
             {
-                if (!CoolerContext.GetInstance().Habits.Contains(habit))
+                if (!GetInstance().Habits.Contains(habit))
                 {
-                    CoolerContext.GetInstance().Habits.Add(habit);
+                    GetInstance().Habits.Add(habit);
                 }
             }
         });
@@ -378,21 +366,18 @@ namespace HabitCracker.ViewModel
         public RelayCommand HabitIsDone => new(obj =>
             {
                 IsDone = true;
-                var w = new HabitProgress();
-                w.Habit = SelectedHabit;
+                var w = new HabitProgress {Habit = SelectedHabit};
 
                 SelectedHabit.CurrentStreak++;
                 var tempGiveReward = Rewarder.GiveReward((int)SelectedHabit.CurrentStreak);
 
-                Model.Entities.CoolerContext.GetInstance().Wallets
-                        .First(p => p.PersonRef == UserContext.GetInstance().UserPerson.Id).Balance +=
-                    tempGiveReward.Item1;
-                MessageBox.Show(tempGiveReward.Item2);
+                GetInstance().Wallets.First(p => p.PersonRef == UserContext.GetInstance().UserPerson.Id).Balance += tempGiveReward.Item1;
+                Show(tempGiveReward.Item2);
 
                 Switcher(Caretaker.GetCurrent(), DateTime.Today.DayOfWeek);
                 w.Weekday = DateTime.Now;
-                Model.Entities.CoolerContext.GetInstance().HabitProgress.Add(w);
-                Model.Entities.CoolerContext.GetInstance().SaveChanges();
+                GetInstance().HabitProgress.Add(w);
+                GetInstance().SaveChanges();
             });
 
         public HabitViewModel()

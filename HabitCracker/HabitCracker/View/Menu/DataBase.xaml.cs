@@ -36,6 +36,8 @@ namespace HabitCracker.View.Menu
             db.Habits.Load();
             db.Wallets.Load();
             db.Events.Load();
+            db.HabitProgress.Load();
+            db.EventProgress.Load();
         }
 
         private void SetItemSource()
@@ -46,6 +48,7 @@ namespace HabitCracker.View.Menu
             EventGrid.ItemsSource = db.Events.Local.ToBindingList();
             ChallengesGrid.ItemsSource = db.Challenges.Local.ToBindingList();
             WalletGrid.ItemsSource = db.Wallets.Local.ToBindingList();
+            HabitProgressGrid.ItemsSource = db.HabitProgress.Local.ToBindingList();
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
@@ -56,7 +59,7 @@ namespace HabitCracker.View.Menu
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Инвалидная операция с базой данных, проверьте корректность введенных значений");
             }
         }
 

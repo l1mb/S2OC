@@ -7,7 +7,7 @@ namespace HabitCracker.Model.Contexts
     {
         private static readonly Lazy<UserContext> Instance = new(() => new UserContext());
 
-        public Person UserPerson;
+        public Person UserPerson { get; set; }
 
         public static UserContext GetInstance()
         {

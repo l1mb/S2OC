@@ -6,11 +6,8 @@ namespace HabitCracker.ViewModel.Auth
     internal class AuthViewModel : BaseViewModel
     {
         private Page _currentPage;
-
-        private Page _SignInPage
-            ;
-
-        private Page _SignUpPage;
+        private readonly Page _signInPage;
+        private readonly Page _signUpPage;
 
         public Page CurrentPage
         {
@@ -22,30 +19,22 @@ namespace HabitCracker.ViewModel.Auth
             }
         }
 
-        public RelayCommand SetSignUpPage => new RelayCommand(obj =>
+        public RelayCommand SetSignUpPage => new(obj =>
         {
-            CurrentPage = _SignUpPage;
+            CurrentPage = _signUpPage;
         }
         );
 
-        public RelayCommand SetSignInPage => new RelayCommand(obj =>
+        public RelayCommand SetSignInPage => new(obj =>
         {
-            //CurrentPage = _databasePage;
-            CurrentPage = _SignInPage;
-        }
-        );
-
-        public RelayCommand SignUp => new RelayCommand(obj =>
-         {
-             //SqlCommand sql = new SqlCommand($"insert into Auth values ({})");
-         }
-        );
+            CurrentPage = _signInPage;
+        });
 
         public AuthViewModel()
         {
-            _SignInPage = new SignIn();
-            _SignUpPage = new SignUp();
-            _currentPage = _SignUpPage;
+            _signInPage = new SignIn();
+            _signUpPage = new SignUp();
+            _currentPage = _signUpPage;
         }
     }
 }

@@ -229,7 +229,7 @@
                                     VerticalAlignment="Bottom"
                                     Command="{Binding DeleteSelectedCommand}"
                                     Content="Удалить"
-                                    Style="{StaticResource ButtonIcon}" />
+                                    />
                             </DockPanel>
                         </Grid>
                     </Border>

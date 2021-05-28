@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using HabitCracker.Model.Contexts;
 
 namespace HabitCracker.View.Menu.Challenge
 {
@@ -12,6 +13,7 @@ namespace HabitCracker.View.Menu.Challenge
         public Challenges()
         {
             InitializeComponent();
+            EventButton.Visibility = UserContext.GetInstance().UserPerson.Role is "Пользователь" or "Cooler пользователь" ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -177,11 +177,11 @@
                                     Binding="{Binding Path=DaysCount}"
                                     Header="Количество дней" />
                                 <DataGridTextColumn
-                                    Width="100"
+                                    Width="170"
                                     Binding="{Binding Path=CreateDate}"
                                     Header="Дата создания" />
                                 <DataGridTextColumn
-                                    Width="70"
+                                    Width="100"
                                     Binding="{Binding Path=CurrentStreak}"
                                     Header="Серия" />
                             </DataGrid.Columns>
@@ -190,18 +190,18 @@
                 </TabItem> 
                 <TabItem Style="{StaticResource TabIsEnabled}">
                     <TabItem.Header>
-                        <TextBlock FontSize="14" Text="Habit" />
+                        <TextBlock FontSize="14" Text="Habit progress" />
                     </TabItem.Header>
                     <TabItem.Content>
                         <DataGrid DataContext="{Binding HabitProgressObject}" x:Name="HabitProgressGrid" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                    Width="110"
+                                    Width="100"
                                     IsReadOnly="True"
                                     Binding="{Binding Path=Habit.Id}"
                                     Header="Id привычки" />
                                 <DataGridTextColumn
-                                    Width="110"
+                                    Width="180"
                                     Binding="{Binding Path=Weekday}"
                                     Header="Описание" />
 
@@ -223,11 +223,11 @@
                                     Binding="{Binding Path=Challenge.Id}"
                                     Header="Id" />
                                 <DataGridTextColumn
-                                    Width="110"
+                                    Width="190"
                                     Binding="{Binding Path=Day}"
                                     Header="Day" />
                                 <DataGridTextColumn
-                                    Width="150"
+                                    Width="200"
                                     Binding="{Binding Path=EventName}"
                                     Header="Event" />
                             </DataGrid.Columns>

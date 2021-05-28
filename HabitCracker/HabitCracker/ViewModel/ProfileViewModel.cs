@@ -99,9 +99,13 @@ namespace HabitCracker.ViewModel
         {
             var fileDialog = new OpenFileDialog { Filter = "Image files(*.jpg)|*.jpg" };
             if (fileDialog.ShowDialog() != true)
+            {
+
+
                 MessageBox.Show("Картинка не была выбрана");
-                return;
+            }
             PicSource = fileDialog.FileName;
+
         });
 
 

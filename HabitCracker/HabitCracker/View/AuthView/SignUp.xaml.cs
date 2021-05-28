@@ -10,6 +10,7 @@ namespace HabitCracker.View.AuthView
     /// </summary>
     public partial class SignUp : Page
     {
+        private bool openGates;
         public SignUp()
         {
             InitializeComponent();
@@ -22,12 +23,21 @@ namespace HabitCracker.View.AuthView
                 PasswordCheck.Background = Brushes.LightCoral;
             }
             else
+            {
+                if ((sender is TextBox tBox)&&!string.IsNullOrWhiteSpace(tBox.Text)&&(Password.Password!=""&& PasswordCheck.Password!=""))
+                {
+                    Gates.IsEnabled = true;
+                }
+                else
+                {
+                    Gates.IsEnabled = false;
+                }
                 PasswordCheck.Background = Brushes.Transparent;
+            }
         }
 
-        private void Login_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
+     
+
+       
     }
 }
