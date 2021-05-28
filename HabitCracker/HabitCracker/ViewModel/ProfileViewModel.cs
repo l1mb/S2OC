@@ -98,7 +98,9 @@ namespace HabitCracker.ViewModel
         public RelayCommand ChangeProfilePic => new RelayCommand(obj =>
         {
             var fileDialog = new OpenFileDialog { Filter = "Image files(*.jpg)|*.jpg" };
-            if (fileDialog.ShowDialog() != true) return;
+            if (fileDialog.ShowDialog() != true)
+                MessageBox.Show("Картинка не была выбрана");
+                return;
             PicSource = fileDialog.FileName;
         });
 

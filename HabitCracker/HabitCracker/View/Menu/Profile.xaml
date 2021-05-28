@@ -132,7 +132,7 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
-                        <Run Text="Наибольший текущий стрик убийств:" />
+                        <Run Text="Наибольшая текущая серия:" />
                         <Run Text="{Binding BiggestHabbitStreak.Item2, Mode=OneWay}" />
                     </TextBlock>
                     <TextBlock>

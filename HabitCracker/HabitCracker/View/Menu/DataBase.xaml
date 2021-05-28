@@ -183,7 +183,7 @@
                                 <DataGridTextColumn
                                     Width="70"
                                     Binding="{Binding Path=CurrentStreak}"
-                                    Header="Стрик убийств" />
+                                    Header="Серия" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem.Content>

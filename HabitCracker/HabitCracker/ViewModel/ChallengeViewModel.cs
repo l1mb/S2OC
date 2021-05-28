@@ -168,7 +168,12 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand EventIsDone => new(obj =>
         {
-
+            if (SelectedEvent.Challenge==null)
+            {
+                MessageBox.Show("Не выбрано событие");
+                return;
+                
+            }
             CoolerContext.GetInstance().Events.FirstOrDefault(p => p == SelectedEvent)?.EventProgress.Add(new EventProgress(){Event = SelectedEvent, Person = UserContext.GetInstance().UserPerson});
             Events.Remove(SelectedEvent);
             Events = sortEvents(Events);
@@ -232,7 +237,7 @@ namespace HabitCracker.ViewModel
             List<Model.Entities.Event> events = new List<Model.Entities.Event>();
 
             DateTime currentTime = DateTime.Today;
-            foreach (var @event in CoolerContext.GetInstance().Events)
+            foreach (var @event in CoolerContext.GetInstance().Events.ToList())
             {
                 if ((@event.Day - currentTime.Date).TotalDays <=-1)
                 {

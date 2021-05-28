@@ -102,9 +102,15 @@ namespace HabitCracker.ViewModel.AuthViewModel
                             break;
                         }
                     }
-                    UserContext.GetInstance().UserPerson = GetInstance().People.Include(p=>p.Wallet).Include(p=>p.Habits).ThenInclude(p=>p.HabitProgress).Single(p => p.AuthRef == eAuth.Id);
-                    UserContext.GetInstance().UserPerson.Wallet = GetInstance().Wallets.First(p => p.PersonRef == UserContext.GetInstance().UserPerson.Id);
                     
+                    
+                    if (CoolerContext.GetInstance().People.FirstOrDefault(p => p.AuthRef == eAuth.Id)==null)
+                    {
+                        MessageBox.Show("Такого пользователя не существует");
+                        return;
+                    }
+                    UserContext.GetInstance().UserPerson = GetInstance().People.Include(p => p.Wallet).Include(p => p.Habits).ThenInclude(p => p.HabitProgress).FirstOrDefault(p => p.AuthRef == eAuth.Id);
+                    UserContext.GetInstance().UserPerson.Wallet = GetInstance().Wallets.First(p => p.PersonRef == UserContext.GetInstance().UserPerson.Id);
                     //currentPerson = null;
                     //SignAuth = null;
                     Passed();

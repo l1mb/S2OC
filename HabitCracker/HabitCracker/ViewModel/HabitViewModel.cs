@@ -63,19 +63,18 @@ namespace HabitCracker.ViewModel
                 if ((currentTime.Date-habit.CreateDate).TotalDays>habit.DaysCount)
                 {
                     habits.Add(habit);
-                 
                     RemoveHabits(habit);
                 }
             }
+
             NotifyHabit(habits);
             CoolerContext.GetInstance().SaveChanges();
         }
 
         private void RemoveHabits(Habit habit)
         {
-            CoolerContext.GetInstance().HabitProgress.RemoveRange(CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == habit).AsEnumerable());
+            CoolerContext.GetInstance().HabitProgress.RemoveRange(CoolerContext.GetInstance().HabitProgress.Where(p => p.Habit == habit).ToList());
             CoolerContext.GetInstance().Habits.Remove(habit);
-            CoolerContext.GetInstance().SaveChangesAsync();
         }
 
         public void NotifyHabit(List<Model.Entities.Habit> habits)

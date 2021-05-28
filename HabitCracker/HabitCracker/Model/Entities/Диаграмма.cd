@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HabitCracker.Model.Entities.Валеты.Rewarder" Collapsed="true">
+    <Position X="3.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Entities\Валеты\Rewarder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.Auth" Collapsed="true">
+    <Position X="1.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIBCAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAAAAAA=</HashCode>
+      <FileName>Model\Entities\Auth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.Challenge" Collapsed="true">
+    <Position X="3.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAQAAACAEAAACAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Entities\Challenge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.CoolerContext" Collapsed="true">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAIYAEAAAIAAAAAABAFgAAAAAAQAAQAAAAAAA=</HashCode>
+      <FileName>Model\Entities\CoolerContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.Event" Collapsed="true">
+    <Position X="6.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAAEAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Model\Entities\Event.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.EventProgress" Collapsed="true">
+    <Position X="1.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Entities\EventProgress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.Habit" Collapsed="true">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAIAQAAAgAEAAAAAAAAAAAAAAAAABAAABAAAAAAA=</HashCode>
+      <FileName>Model\Entities\Habit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.HabitProgress" Collapsed="true">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAA=</HashCode>
+      <FileName>Model\Entities\HabitProgress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.Hasher" Collapsed="true">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Entities\Hash.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.Person" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAMAAAAAAIEAAAAAQAACAAAAAAAAAQABAAAAA=</HashCode>
+      <FileName>Model\Entities\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Entities.Wallet" Collapsed="true">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAABAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Entities\Wallet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.App" Collapsed="true">
+    <Position X="1.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Contexts.ChallengeContext" Collapsed="true">
+    <Position X="1.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABAAAAAAAAAAAAAAAAAAAABAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Model\Contexts\ChallengeContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Contexts.EventContext" Collapsed="true">
+    <Position X="3.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAQAAAAAAACAA=</HashCode>
+      <FileName>Model\Contexts\EventContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Contexts.HabitContext" Collapsed="true">
+    <Position X="1.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAQAAAAAAAAAAAAAAAABAAAAAAAQAAQAAAAAAA=</HashCode>
+      <FileName>Model\Contexts\HabbitContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.Model.Contexts.UserContext" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAIAABAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Model\Contexts\UserContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.AuthWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AuthView\AuthWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.AuthView.Greeting" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AuthView\Greeting.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.AuthView.SignIn" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AuthView\SignIn.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.AuthView.SignUp" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\AuthView\SignUp.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.Menu.Habit.NewHabit" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Menu\Habbit\NewHabbit.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.Menu.Challenge.AddEvent" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Menu\Challenge\AddEvent.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.Menu.Challenge.Challenges" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAMAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>View\Menu\Challenge\Challenge.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.Menu.DataBase" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAQAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Menu\DataBase.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.Menu.Habits" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Menu\Habits.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.Menu.Profile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Menu\Profile.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.Menu.Settings" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\Menu\Settings.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.MainWindow.AdminMainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAABAAAAAAAAAAAAAAAAAAAAAAAAABAAAAACAAA=</HashCode>
+      <FileName>View\MainWindow\AdminMainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.MainWindow.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\MainWindow\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.View.DateTimeToBrushConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>View\DateTimeToBrushConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HabitCracker.ViewModel.Auth.AuthViewModel" Collapsed="true">
+    <Position X="1.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAIAAACAAAAAAAAAAAAgAAAAAAAABAAAAIAAI=</HashCode>
+      <FileName>ViewModel\AuthViewModel\AuthViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.AuthViewModel.SignViewModel" Collapsed="true">
+    <Position X="8" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAAAggAAAIIAQAAAwAAAIEAAACAAAQIAAAAAA=</HashCode>
+      <FileName>ViewModel\AuthViewModel\SignViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.BaseViewModel" Collapsed="true">
+    <Position X="9" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="HabitCracker.ViewModel.ChallengeViewModel" Collapsed="true">
+    <Position X="14.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEBIAAIhAgAAAoBAICQAQAAAAoAAEAAAAABBAxEMiAI=</HashCode>
+      <FileName>ViewModel\ChallengeViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.DataBaseViewModel" Collapsed="true">
+    <Position X="3.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAIAQAAAQgAQAAAAwIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\DataBaseViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.EventViewModel" Collapsed="true">
+    <Position X="10.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\EventViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.HabitViewModel" Collapsed="true">
+    <Position X="12.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAASAGOAhKgAAAAIAAAIACBAKACCIAAZAACRAAAAQMQ=</HashCode>
+      <FileName>ViewModel\HabitViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.MainViewModel" Collapsed="true">
+    <Position X="17" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAAABgAQAAAAAIAAAAAAAABAABAAAAEAAI=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.ProfileViewModel" Collapsed="true">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABAAAAABAgAAQAAAEEAAAwAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ProfileViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HabitCracker.ViewModel.RelayCommand" Collapsed="true">
+    <Position X="11.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

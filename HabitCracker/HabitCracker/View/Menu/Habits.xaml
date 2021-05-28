@@ -180,7 +180,7 @@
                                 </TextBlock>
                                 <Separator />
                                 <TextBlock Padding="4" TextWrapping="Wrap">
-                                    <Run Text="Серия убийств:" />
+                                    <Run Text="Серия:" />
                                     <Run Text="{Binding CurrentStreak}" />
                                 </TextBlock>
                                 <Separator />
