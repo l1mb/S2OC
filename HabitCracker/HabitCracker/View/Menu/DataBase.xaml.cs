@@ -57,7 +57,7 @@ namespace HabitCracker.View.Menu
             {
                 db.SaveChanges();
             }
-            catch (Exception exception)
+            catch (Exception )
             {
                 MessageBox.Show("Инвалидная операция с базой данных, проверьте корректность введенных значений");
             }

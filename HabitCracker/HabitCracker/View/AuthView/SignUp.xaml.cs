@@ -10,13 +10,12 @@ namespace HabitCracker.View.AuthView
     /// </summary>
     public partial class SignUp : Page
     {
-        private bool openGates;
         public SignUp()
         {
             InitializeComponent();
         }
 
-        private void PasswordCheck_OnPasswordChanged(object sender, RoutedEventArgs e)
+        public void PasswordCheck_OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             if (Password.Password != PasswordCheck.Password)
             {
@@ -24,7 +23,7 @@ namespace HabitCracker.View.AuthView
             }
             else
             {
-                if ((sender is TextBox tBox)&&!string.IsNullOrWhiteSpace(tBox.Text)&&(Password.Password!=""&& PasswordCheck.Password!=""))
+                if ((!string.IsNullOrWhiteSpace(TextBox.Text))&&(Password.Password!=""&& PasswordCheck.Password!=""))
                 {
                     Gates.IsEnabled = true;
                 }

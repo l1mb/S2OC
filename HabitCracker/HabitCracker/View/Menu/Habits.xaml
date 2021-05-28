@@ -162,7 +162,7 @@
                                 MinHeight="220"
                                 DataContext="{Binding SelectedHabit}">
 
-                                <TextBlock Padding="5" FontSize="23">
+                                <TextBlock TextWrapping="Wrap" Padding="5" FontSize="23">
                                     <Run Text="Привычка '" />
                                     <Run Text="{Binding Title}" />
                                     <Run Text="'" />

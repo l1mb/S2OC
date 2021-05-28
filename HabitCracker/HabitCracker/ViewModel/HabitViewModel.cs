@@ -25,37 +25,37 @@ namespace HabitCracker.ViewModel
         public Habit[] Habits = {
             new()
             {
-                Description = "text about danger of smoking",
+                Description = "При употреблении чистой питьевой воды метаболизм ускоряется. По информации учёных, 500 мл жидкости уже буквально через 30 минут могут повысить обмен веществ на 30%.",
                 CreateDate = DateTime.Now,
                 Title = "Выпить воды",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
-                Description = "text about danger of drinking",
+                Description = "Медитация — отличный способ от них избавиться и прервать замкнутый круг напряжённости. Но на этом плюсы восточных практик не заканчиваются.",
                 CreateDate = DateTime.Now,
                 Title = "Помедитировать",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
-                Description = "text about danger of using drugs",
+                Description = "Список дел помогает расставить приоритеты и не сбиться с курса своего развития",
                 CreateDate = DateTime.Now,
-                Title = "Druging",
+                Title = "Завести список дел",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
-                Description = "text about danger of using seal",
+                Description = "Каждое третье перечитывание курса философии постмодерна Дугина повышает понимание окружающего мира примерно на 82% ",
                 CreateDate = DateTime.Now,
-                Title = "Sealing",
+                Title = "Читать книги",
                 User = UserContext.GetInstance().UserPerson
             },
             new()
             {
-                Description = "text about danger of using seal",
+                Description = "Ежедневная пробежка ускоряет метаболизм и помогает не засиживаться на одном месте",
                 CreateDate = DateTime.Now,
-                Title = "Sealing",
+                Title = "Пробежка",
                 User = UserContext.GetInstance().UserPerson
             }
         };
