@@ -1,13 +1,9 @@
-﻿    using System;
-using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-    using System.Windows.Data;
-    using System.Windows.Media;
+﻿using System;
+using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Media;
 
-    namespace HabitCracker.View
+namespace HabitCracker.View
 {
     [ValueConversion(typeof(DateTime), typeof(Brush))]
     public class DateTimeToBrushConverter : IValueConverter

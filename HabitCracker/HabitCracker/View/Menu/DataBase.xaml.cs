@@ -13,13 +13,13 @@ namespace HabitCracker.View.Menu
     /// </summary>
     public partial class DataBase : Page
     {
-        private readonly Model.Entities.CoolerContext db;
+        private readonly CoolerContext db;
 
         public DataBase()
         {
             InitializeComponent();
 
-            db = new Model.Entities.CoolerContext();
+            db = new CoolerContext();
             LoadData();
             SetItemSource();
 
@@ -57,7 +57,7 @@ namespace HabitCracker.View.Menu
             {
                 db.SaveChanges();
             }
-            catch (Exception )
+            catch (Exception)
             {
                 MessageBox.Show("Инвалидная операция с базой данных, проверьте корректность введенных значений");
             }
@@ -65,109 +65,101 @@ namespace HabitCracker.View.Menu
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
+            List<DataGrid> grids = new()
+            {
+                AuthGrid,
+                PersonGrid,
+                EventGrid,
+                ChallengesGrid,
+                HabitGrid,
+                WalletGrid
+            };
 
-                List<DataGrid> grids = new();
+            var selected = grids.Where(p => p.SelectedItems.Count > 0);
 
-                grids.Add(AuthGrid);
-                grids.Add(PersonGrid);
-                grids.Add(EventGrid);
-                grids.Add(ChallengesGrid);
-                grids.Add(HabitGrid);
-                grids.Add(WalletGrid);
-
-                var selected = grids.Where(p => p.SelectedItems.Count > 0);
-
-                foreach (var item in selected)
+            foreach (var item in selected)
+            {
+                switch (item.Name)
                 {
-                    switch (item.Name)
-                    {
-                        case "AuthGrid":
+                    case "AuthGrid":
+                        {
+                            for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                for (int i = 0; i < item.SelectedItems.Count;)
+                                if (item.SelectedItems[i] is Auth auth)
                                 {
-                                    if (item.SelectedItems[i] is Auth auth)
-                                    {
-                                        db.Auths.Remove(auth);
-                                    }
+                                    db.Auths.Remove(auth);
                                 }
                             }
-                            break;
+                        }
+                        break;
 
-                        case "ChallengesGrid":
+                    case "ChallengesGrid":
+                        {
+                            for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                for (int i = 0; i < item.SelectedItems.Count;)
+                                if (item.SelectedItems[i] is Model.Entities.Challenge challenge)
                                 {
-                                    if (item.SelectedItems[i] is Model.Entities.Challenge challenge)
-                                    {
-                                        db.Challenges.Remove(challenge);
-                                    }
+                                    db.Challenges.Remove(challenge);
                                 }
                             }
-                            break;
+                        }
+                        break;
 
-                        case "EventGrid":
+                    case "EventGrid":
+                        {
+                            for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                for (int i = 0; i < item.SelectedItems.Count;)
+                                if (item.SelectedItems[i] is Event @event)
                                 {
-                                    if (item.SelectedItems[i] is Event @event)
-                                    {
-                                        db.EventProgress.RemoveRange(db.EventProgress.Where(p=>p.Event==@event));
-                                        db.Events.Remove(@event);
-                                        
-                                    }
+                                    db.EventProgress.RemoveRange(db.EventProgress.Where(p => p.Event == @event));
+                                    db.Events.Remove(@event);
                                 }
                             }
-                            break;
+                        }
+                        break;
 
-                        case "PersonGrid":
+                    case "PersonGrid":
+                        {
+                            for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                for (int i = 0; i < item.SelectedItems.Count;)
+                                if (item.SelectedItems[i] is Person person)
                                 {
-                                    if (item.SelectedItems[i] is Person person)
-                                    {
-                                        db.People.Remove(person);
-                                    }
+                                    db.People.Remove(person);
                                 }
                             }
-                            break;
+                        }
+                        break;
 
-                        case "WalletGrid":
+                    case "WalletGrid":
+                        {
+                            for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                for (int i = 0; i < item.SelectedItems.Count;)
+                                if (item.SelectedItems[i] is Wallet wallet)
                                 {
-                                    if (item.SelectedItems[i] is Wallet wallet)
-                                    {
-                                        db.Wallets.Remove(wallet);
-                                    }
+                                    db.Wallets.Remove(wallet);
                                 }
                             }
-                            break;
+                        }
+                        break;
 
-                        case "HabitGrid":
+                    case "HabitGrid":
+                        {
+                            for (int i = 0; i < item.SelectedItems.Count;)
                             {
-                                for (int i = 0; i < item.SelectedItems.Count;)
+                                if (item.SelectedItems[i] is Model.Entities.Habit habit)
                                 {
-                                    if (item.SelectedItems[i] is Model.Entities.Habit habit)
+                                    if (db.HabitProgress.Count(p => p.Habit == habit) != 0)
                                     {
-                                        if (db.HabitProgress.Count(p => p.Habit == habit) != 0)
-                                        {
-                                            db.HabitProgress.Remove(db.HabitProgress.First(p => p.Habit == habit));
-
-                                        }
-                                        db.Habits.Remove(habit);
+                                        db.HabitProgress.Remove(db.HabitProgress.First(p => p.Habit == habit));
                                     }
+                                    db.Habits.Remove(habit);
                                 }
                             }
-                            break;
-                    }
+                        }
+                        break;
                 }
-
-                //!tried to use generic methods, but something went wrong
-                //also tried map datagrid with DbSet<"EntityName"> but do not finished it
-
-                db.SaveChanges();
-            
-
+            }
+            db.SaveChanges();
         }
     }
 }

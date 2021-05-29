@@ -1,13 +1,13 @@
-﻿using System;
+﻿using HabitCracker.Model.Builders;
+using HabitCracker.Model.Contexts;
+using HabitCracker.Model.Entities;
+using HabitCracker.View.Menu.Challenge;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using HabitCracker.Model.Builders;
-using HabitCracker.Model.Contexts;
-using HabitCracker.Model.Entities;
-using HabitCracker.View.Menu.Challenge;
 using static HabitCracker.Model.Entities.CoolerContext;
 
 namespace HabitCracker.ViewModel
@@ -28,7 +28,6 @@ namespace HabitCracker.ViewModel
         }
 
         public List<string> AllChallengesHeadersList => AllChallenges.Select(p => p.Title).ToList();
-
 
         public string EventName
         {
@@ -61,7 +60,7 @@ namespace HabitCracker.ViewModel
                 {
                     if (EventDateTime != null)
                     {
-                        var t = builder.SetName(EventName).SetDate((DateTime) EventDateTime)
+                        var t = builder.SetName(EventName).SetDate((DateTime)EventDateTime)
                             .SetChallenge(_selectedEventChallenge).GetEvent();
                         GetInstance().Events.Add(t);
                         Events.Add(t);
@@ -96,10 +95,6 @@ namespace HabitCracker.ViewModel
             set { _selectedEventChallenge = AllChallenges.FirstOrDefault(p => p.Title == value); }
         }
 
-
-
-
-
         public RelayCommand AddSelectedToPersonChallenge => new(obj =>
         {
             if (SelectedChallenge == null) return;
@@ -115,26 +110,20 @@ namespace HabitCracker.ViewModel
             {
                 MessageBox.Show("Этот челлендж уже добавлен вами");
             }
-
-
-
         });
-
 
         public RelayCommand AddEventWindowSpawnCommand => new(obj =>
         {
-            _newWindow = new AddEvent {DataContext = this};
+            _newWindow = new AddEvent { DataContext = this };
             _newWindow.ShowDialog();
         });
-
-
 
         private ObservableCollection<Event> GetEvents()
         {
             ObservableCollection<Event> events = new();
             foreach (var var in GetInstance().Events.Where(p => p != null && p.Challenge == SelectedChallenge).ToList().Where(var => var.EventProgress?.FirstOrDefault(p => p.Person == UserContext.GetInstance().UserPerson) == null))
             {
-                events.ToList().ForEach(p=> p.EventProgress = new List<EventProgress>());
+                events.ToList().ForEach(p => p.EventProgress = new List<EventProgress>());
                 events.Add(var);
             }
             return events;
@@ -150,18 +139,16 @@ namespace HabitCracker.ViewModel
             }
         }
 
-
         private static ObservableCollection<Event> SortEvents(IEnumerable<Event> events) => new(events.ToList().OrderBy(p => p.Day));
 
         public RelayCommand EventIsDone => new(obj =>
         {
-            if (SelectedEvent.Challenge==null)
+            if (SelectedEvent.Challenge == null)
             {
                 MessageBox.Show("Не выбрано событие");
                 return;
-                
             }
-            GetInstance().Events.FirstOrDefault(p => p == SelectedEvent)?.EventProgress.Add(new EventProgress {Event = SelectedEvent, Person = UserContext.GetInstance().UserPerson});
+            GetInstance().Events.FirstOrDefault(p => p == SelectedEvent)?.EventProgress.Add(new EventProgress { Event = SelectedEvent, Person = UserContext.GetInstance().UserPerson });
             Events.Remove(SelectedEvent);
             Events = SortEvents(Events);
             GetInstance().SaveChanges();
@@ -210,31 +197,25 @@ namespace HabitCracker.ViewModel
 
         private ObservableCollection<Challenge> UpdatePersonChallenges() => new(GetInstance().Challenges.Where(p => p.Challengers.Contains(UserContext.GetInstance().UserPerson)));
 
-
-
         private static void RemoveEvents(Event @event)
         {
-            GetInstance().EventProgress.RemoveRange(GetInstance().EventProgress.Where(p => p.Event ==@event).AsEnumerable());
+            GetInstance().EventProgress.RemoveRange(GetInstance().EventProgress.Where(p => p.Event == @event).AsEnumerable());
             GetInstance().Events.Remove(@event);
         }
 
-
         public void RemoveExpiredEvents()
         {
-
             var currentTime = DateTime.Today;
             foreach (var @event in GetInstance().Events.ToList().Where(@event => (@event.Day - currentTime.Date).TotalDays <= -1))
             {
                 RemoveEvents(@event);
             }
             GetInstance().SaveChanges();
-
         }
-
 
         public ChallengeViewModel()
         {
-         RemoveExpiredEvents();   
+            RemoveExpiredEvents();
             AllChallenges = ChallengeContext.GetInstance().GetChallenges();
             PersonChallenges = UpdatePersonChallenges();
         }

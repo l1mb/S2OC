@@ -90,7 +90,6 @@
                         <Label VerticalAlignment="Center" Content="Выйти" />
                     </DockPanel>
                 </Button></DockPanel>
-               
         </Grid>
         <Grid Grid.Column="1">
             <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />

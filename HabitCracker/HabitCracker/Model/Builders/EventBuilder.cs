@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Entities;
+﻿using HabitCracker.Model.Entities;
+using System;
 
 namespace HabitCracker.Model.Builders
 {
     internal class EventBuilder
     {
-        private readonly Event _event = new ();
+        private readonly Event _event = new();
 
         public EventBuilder SetDate(DateTime value)
         {
             _event.Day = value;
             return this;
         }
+
         public EventBuilder SetChallenge(Challenge value)
         {
             _event.Challenge = value;

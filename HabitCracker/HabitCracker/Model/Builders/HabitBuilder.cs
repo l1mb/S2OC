@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HabitCracker.Model.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HabitCracker.Model.Entities;
+using System;
 
 namespace HabitCracker.Model.Builders
 {
@@ -52,7 +47,5 @@ namespace HabitCracker.Model.Builders
         {
             return _habit;
         }
-
-
     }
 }

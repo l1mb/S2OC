@@ -1,7 +1,7 @@
 ﻿using HabitCracker.Model.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.ObjectModel;
-using Microsoft.EntityFrameworkCore;
 
 namespace HabitCracker.Model.Contexts
 {
@@ -24,7 +24,7 @@ namespace HabitCracker.Model.Contexts
         public ObservableCollection<Challenge> GetChallenges()
         {
             var challenges = new ObservableCollection<Challenge>();
-            foreach (var challenge in _dbContext.Challenges.Include(p=>p.Challengers).Include(p=>p.Events))
+            foreach (var challenge in _dbContext.Challenges.Include(p => p.Challengers).Include(p => p.Events))
             {
                 challenges.Add(challenge);
             }

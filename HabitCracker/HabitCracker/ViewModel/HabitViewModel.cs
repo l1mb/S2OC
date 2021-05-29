@@ -1,4 +1,5 @@
-﻿using HabitCracker.Model.Contexts;
+﻿using HabitCracker.Model.Builders;
+using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
 using HabitCracker.Model.Entities.Валеты;
 using HabitCracker.Model.Memento;
@@ -6,17 +7,12 @@ using HabitCracker.View.Menu.Habit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Windows;
-using HabitCracker.Model.Builders;
-using HabitCracker.View.Menu;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using static System.String;
-using static System.Windows.MessageBox;
 using static HabitCracker.Model.Entities.CoolerContext;
 using static Newtonsoft.Json.JsonConvert;
+using static System.String;
+using static System.Windows.MessageBox;
 
 namespace HabitCracker.ViewModel
 {
@@ -59,7 +55,6 @@ namespace HabitCracker.ViewModel
                 User = UserContext.GetInstance().UserPerson
             }
         };
-
 
         private void RemoveOverduedHabit()
         {
@@ -233,14 +228,13 @@ namespace HabitCracker.ViewModel
                     RemoveHabits(variable);
                 }
                 PersonHabits.Clear();
-
             }
 
         );
 
         public RelayCommand DeleteSelectedCommand => new(obj =>
         {
-            if (SelectedHabit!=null) RemoveHabits(SelectedHabit);
+            if (SelectedHabit != null) RemoveHabits(SelectedHabit);
 
             PersonHabits.Remove(SelectedHabit);
             SelectedHabit = null;
@@ -249,7 +243,7 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand OpenNewHabitCtorCommand => new(obj =>
         {
-            _addNewHabbitWindow = new NewHabit {DataContext = this};
+            _addNewHabbitWindow = new NewHabit { DataContext = this };
             _addNewHabbitWindow.ShowDialog();
         });
 
@@ -259,7 +253,6 @@ namespace HabitCracker.ViewModel
             var tmpHabit = builder.SetStreak(0).SetDescription(NewHabit.Description).SetDate(DateTime.Now)
                 .SetTitle(NewHabit.Title).SetDays(NewHabit.DaysCount).SetPerson(UserContext.GetInstance().UserPerson)
                 .GetHabit();
-
 
             if (!IsNullOrWhiteSpace(NewHabit.Title) && !IsNullOrWhiteSpace(NewHabit.Description))
             {
@@ -287,6 +280,7 @@ namespace HabitCracker.ViewModel
         {
             Monday = Tuesday = Wednesday = Thursday = Friday = Saturday = Sunday = false;
         }
+
         public RelayCommand GetNextDays => new(
             obj =>
             {
@@ -296,11 +290,10 @@ namespace HabitCracker.ViewModel
 
         private void Switcher(WeekMemento memento, DayOfWeek? day = null)
         {
-           
             List<DayOfWeek> tmpList = new();
-            if (day!=null)
+            if (day != null)
             {
-                tmpList.Add((DayOfWeek) day);
+                tmpList.Add((DayOfWeek)day);
             }
             else if (memento == null)
             {
@@ -309,9 +302,7 @@ namespace HabitCracker.ViewModel
             else
             {
                 tmpList = DeserializeObject<List<DayOfWeek>>(memento.State);
-
             }
-
 
             if (tmpList == null) return;
             foreach (var en in tmpList)
@@ -366,7 +357,7 @@ namespace HabitCracker.ViewModel
         public RelayCommand HabitIsDone => new(obj =>
             {
                 IsDone = true;
-                var w = new HabitProgress {Habit = SelectedHabit};
+                var w = new HabitProgress { Habit = SelectedHabit };
 
                 SelectedHabit.CurrentStreak++;
                 var tempGiveReward = Rewarder.GiveReward((int)SelectedHabit.CurrentStreak);

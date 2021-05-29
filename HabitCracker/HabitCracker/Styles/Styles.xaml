@@ -60,7 +60,6 @@
         </Setter>
     </Style>
 
-
     <Style x:Key="List" TargetType="ListBox">
         <Setter Property="Background" Value="Transparent" />
     </Style>
@@ -96,8 +95,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         Background="{TemplateBinding Background}"
-                        CornerRadius="7"
-                        >
+                        CornerRadius="7">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
@@ -115,7 +113,6 @@
                     </BeginStoryboard>
                 </EventTrigger.Actions>
             </EventTrigger>
-            
         </Style.Triggers>
     </Style>
 

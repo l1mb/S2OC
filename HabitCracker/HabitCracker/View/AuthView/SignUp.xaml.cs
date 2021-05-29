@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -23,7 +22,7 @@ namespace HabitCracker.View.AuthView
             }
             else
             {
-                if ((!string.IsNullOrWhiteSpace(TextBox.Text))&&(Password.Password!=""&& PasswordCheck.Password!=""))
+                if ((!string.IsNullOrWhiteSpace(TextBox.Text)) && (Password.Password != "" && PasswordCheck.Password != ""))
                 {
                     Gates.IsEnabled = true;
                 }
@@ -34,9 +33,5 @@ namespace HabitCracker.View.AuthView
                 PasswordCheck.Background = Brushes.Transparent;
             }
         }
-
-     
-
-       
     }
 }

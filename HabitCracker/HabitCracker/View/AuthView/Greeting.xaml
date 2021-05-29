@@ -19,7 +19,7 @@
                 <DropShadowEffect BlurRadius="40" ShadowDepth="0" />
             </Border.Effect>
             <Grid>
-                
+
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Width="450"  Source="../../Resources/Icons/Ad.jpg"></Image>
                     <Button Content="Продолжить" Click="ButtonBase_OnClick" ></Button>

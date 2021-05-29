@@ -1,11 +1,11 @@
 ﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
 using HabitCracker.View.MainWindow;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.EntityFrameworkCore;
 using static HabitCracker.Model.Entities.CoolerContext;
 
 namespace HabitCracker.ViewModel.AuthViewModel
@@ -26,13 +26,12 @@ namespace HabitCracker.ViewModel.AuthViewModel
             {
                 try
                 {
-                    if (CoolerContext.GetInstance().Auths.FirstOrDefault(p=>p.Login==Login)!=null)
+                    if (CoolerContext.GetInstance().Auths.FirstOrDefault(p => p.Login == Login) != null)
                     {
                         MessageBox.Show("Пользователь с таким логином уже существует");
                         return;
                     }
 
-                    
                     CurrentPerson.Wallet = UserWallet;
                     UserWallet.Balance = 0;
 
@@ -81,9 +80,8 @@ namespace HabitCracker.ViewModel.AuthViewModel
                             break;
                         }
                     }
-                    
-                    
-                    if (GetInstance().People.FirstOrDefault(p => p.AuthRef == eAuth.Id)==null)
+
+                    if (GetInstance().People.FirstOrDefault(p => p.AuthRef == eAuth.Id) == null)
                     {
                         MessageBox.Show("Такого пользователя не существует");
                         return;
@@ -110,7 +108,6 @@ namespace HabitCracker.ViewModel.AuthViewModel
             window?.Show();
 
             Application.Current.MainWindow?.Close();
-            
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace HabitCracker.View.MainWindow
 {
@@ -11,10 +9,8 @@ namespace HabitCracker.View.MainWindow
     /// </summary>
     public partial class AdminMainWindow : Window
     {
-
         private int _theme;
         private readonly List<string> _themes = new List<string>();
-
 
         public AdminMainWindow()
         {
@@ -23,8 +19,6 @@ namespace HabitCracker.View.MainWindow
 
             _themes.Add("LightTheme");
             _themes.Add("DarkTheme");
-
-
         }
 
         private void ChangeTheme(object sender, RoutedEventArgs e)
@@ -45,7 +39,6 @@ namespace HabitCracker.View.MainWindow
 
         private void ToggleTheme_Check(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

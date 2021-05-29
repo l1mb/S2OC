@@ -1,5 +1,4 @@
-﻿
-<Page
+﻿<Page
     x:Class="HabitCracker.View.Menu.Profile"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -20,7 +19,7 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0.5" EndPoint="1,0">
-                <GradientStop Offset="0" Color="#9172A6"/>
+                <GradientStop Offset="0" Color="#9172A6" />
                 <GradientStop Offset="1.0" Color="#F283A5" />
             </LinearGradientBrush>
         </Grid.Background>
@@ -68,8 +67,8 @@
                             Text="Приветствем тебя, Чемпион"
                             TextWrapping="Wrap" />
                         <Separator Margin="0,10"
-                                   
-/>
+
+ />
                         <TextBlock
                             Margin="0,2.5"
                             FontSize="15"
@@ -87,7 +86,7 @@
                         <Run Text="Текущий баланс:" />
                         <Run Text="{Binding PersonBalance, Mode=OneWay}" />
                     </TextBlock>
-                    <Separator Margin="0,10"/>
+                    <Separator Margin="0,10" />
                     <TextBlock>
                         <Run Text="{Binding CurrentPerson.Role}" />
                     </TextBlock>
@@ -119,7 +118,6 @@
                         </TextBlock.Style>
                         <Run Text="Дата выполнения:" />
                         <Run Text="{Binding LastHabit.Item2, Mode=OneWay}" />
-
                     </TextBlock>
                     <Separator Margin="0,10"></Separator>
                     <TextBlock>
@@ -150,7 +148,7 @@
                         <Run Text=", " />
                         <Run Text="{Binding BiggestHabbitStreak.Item1.Title}" />
                     </TextBlock>
-                    <Separator Margin="0,10"/>
+                    <Separator Margin="0,10" />
                     <Button Margin="5,1" Content="Сменить фотографию" Command="{Binding ChangeProfilePic}"></Button>
                     <Button Margin="5,1" Content="Убрать рекламу" Command="{Binding BuyAd}"></Button>
                 </StackPanel>

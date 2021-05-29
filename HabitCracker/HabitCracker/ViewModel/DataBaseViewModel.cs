@@ -1,7 +1,6 @@
 ﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
 
-
 namespace HabitCracker.ViewModel
 {
     internal class DataBaseViewModel : BaseViewModel
@@ -14,7 +13,6 @@ namespace HabitCracker.ViewModel
         public Wallet WalletObject { get; set; } = new();
 
         public HabitProgress HabitProgressObject { get; set; } = new();
-
 
         private bool _isModerator;
 

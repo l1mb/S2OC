@@ -22,22 +22,19 @@ namespace HabitCracker.Model.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
             var auth = modelBuilder.Entity<Auth>();
             var person = modelBuilder.Entity<Person>();
             var wallet = modelBuilder.Entity<Wallet>();
             var habitProgress = modelBuilder.Entity<HabitProgress>();
             var habit = modelBuilder.Entity<Habit>();
 
-            habit.HasMany(p =>p.HabitProgress).WithOne(p =>p.Habit).OnDelete(DeleteBehavior.Cascade);
+            habit.HasMany(p => p.HabitProgress).WithOne(p => p.Habit).OnDelete(DeleteBehavior.Cascade);
             habitProgress.HasOne(p => p.Habit).WithMany(p => p.HabitProgress).OnDelete(DeleteBehavior.Cascade);
 
             auth.HasOne(a => a.Person).WithOne(p => p.Auth).HasForeignKey<Person>(p => p.AuthRef);
             person.HasOne(p => p.Wallet).WithOne(w => w.Owner).HasForeignKey<Wallet>(w => w.PersonRef);
             person.Property(p => p.Role).HasDefaultValue("Пользователь");
 
-
-       
             base.OnModelCreating(modelBuilder);
         }
 

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 
 namespace HabitCracker.View.MainWindow
 {
@@ -12,6 +11,5 @@ namespace HabitCracker.View.MainWindow
         {
             InitializeComponent();
         }
-        
     }
 }

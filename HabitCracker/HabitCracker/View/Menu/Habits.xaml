@@ -118,7 +118,6 @@
                     <DataTemplate>
                         <Grid MinWidth="300px">
 
-
                             <StackPanel Margin="20">
                                 <TextBlock Padding="15,2" TextWrapping="Wrap">
                                     <Run FontSize="16" Text="{Binding Title}" />
@@ -128,17 +127,14 @@
                                 <TextBlock Padding="7,1" TextWrapping="Wrap">
                                     <Run Text="Номер" />
                                     <Run FontSize="12" Text="{Binding Id}" />
-
                                 </TextBlock>
 
                                 <TextBlock Padding="7,1" TextWrapping="Wrap">
                                     <Run Text="Дата создания: " />
                                     <Run FontSize="12" Text="{Binding CreateDate}" />
-
                                 </TextBlock>
 
                                 <Separator />
-
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
@@ -173,7 +169,6 @@
                                     <Run Text="{Binding Id}" />
                                 </TextBlock>
 
-
                                 <TextBlock Padding="4" TextWrapping="Wrap">
                                     <Run Text="Дата создания:" />
                                     <Run Text="{Binding CreateDate}" />
@@ -188,8 +183,6 @@
                                     <Run Text="Описание:" />
                                     <Run Text="{Binding Description}" />
                                 </TextBlock>
-
-
                             </StackPanel>
                             <DockPanel>
                                 <Button
@@ -213,14 +206,11 @@
                                                     <ControlTemplate TargetType="{x:Type Button}">
                                                         <Border Background="{TemplateBinding Background}" CornerRadius="7">
                                                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                            
                                                         </Border>
                                                     </ControlTemplate>
                                                 </Setter.Value>
                                             </Setter>
                                         </Style>
-
-
                                     </Button.Style>
                                     <Image Source="../../Resources/Icons/icons8-checkmark-64.png" Style="{StaticResource ImageIcon}" />
                                 </Button>
@@ -228,8 +218,7 @@
                                     Padding="15,5,15,5"
                                     VerticalAlignment="Bottom"
                                     Command="{Binding DeleteSelectedCommand}"
-                                    Content="Удалить"
-                                    />
+                                    Content="Удалить" />
                             </DockPanel>
                         </Grid>
                     </Border>

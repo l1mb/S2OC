@@ -1,8 +1,8 @@
 ﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
+using HabitCracker.View.Menu;
 using System.Windows;
 using System.Windows.Controls;
-using HabitCracker.View.Menu;
 
 namespace HabitCracker.ViewModel
 {

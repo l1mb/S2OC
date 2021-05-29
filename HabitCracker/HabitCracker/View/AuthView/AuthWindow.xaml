@@ -1,7 +1,5 @@
 ﻿<Window
     x:Class="HabitCracker.AuthWindow"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,7 +12,6 @@
     FontFamily="Comfortaa"
     mc:Ignorable="d">
     <Window.Resources>
-       
     </Window.Resources>
     <Grid>
 
@@ -26,12 +23,12 @@
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="10*" />
             </Grid.RowDefinitions>
-            <StackPanel >
+            <StackPanel>
                 <TextBlock  Text="Welcome" MinHeight="30" FontSize="24" Margin="20, 15,0,0"></TextBlock>
-                 <DockPanel>
-                     <Button  x:Name="SignUp"  Command="{Binding SetSignUpPage}"   Content="Sign up"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,5"></Button>
-                     <Button  x:Name="SignIn" Command="{Binding SetSignInPage}" Content="Sign in"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20,5"></Button>
-                 </DockPanel>
+                <DockPanel>
+                    <Button  x:Name="SignUp"  Command="{Binding SetSignUpPage}"   Content="Sign up"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,5"></Button>
+                    <Button  x:Name="SignIn" Command="{Binding SetSignInPage}" Content="Sign in"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20,5"></Button>
+                </DockPanel>
             </StackPanel>
             <Frame Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}"
             NavigationUIVisibility="Hidden"  Grid.Row="2" />

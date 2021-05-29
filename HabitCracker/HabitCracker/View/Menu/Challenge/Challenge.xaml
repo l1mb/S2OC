@@ -12,12 +12,11 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     FontFamily="Comfortaa"
-    
+
     mc:Ignorable="d">
-    
+
     <Page.DataContext>
         <vm:ChallengeViewModel />
-
     </Page.DataContext>
     <Page.Resources>
         <converter:DateTimeToBrushConverter x:Key="DateConverter" />
@@ -38,14 +37,13 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0.5" EndPoint="1,0">
-                <GradientStop Offset="0" Color="#9172A6"/>
+                <GradientStop Offset="0" Color="#9172A6" />
                 <GradientStop Offset="1.0" Color="#AAB3CD" />
             </LinearGradientBrush>
         </Grid.Background>
         <Grid
             x:Name="Person"
-            Grid.Visibility="Collapsed"
-            >
+            Grid.Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="10*" />
@@ -156,7 +154,7 @@
                 </ListBox>
             </Border>
             <Border
-                
+
                 x:Name="EventGrid"
                 Grid.Row="2"
                 Grid.Column="1"
@@ -231,7 +229,6 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
             </Border>
             <Border
                 Grid.Row="1"

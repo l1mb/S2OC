@@ -31,7 +31,7 @@ namespace HabitCracker.Model.Contexts
             var Habits = new ObservableCollection<Habit>();
 
             foreach (var item in _dbContext.Habits.Where(p =>
-                p.User== UserContext.GetInstance().UserPerson).ToList())
+                p.User == UserContext.GetInstance().UserPerson).ToList())
             {
                 Habits.Add(item);
             }

@@ -1,22 +1,20 @@
 ﻿using HabitCracker.Model.Contexts;
 using HabitCracker.Model.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
 using HabitCracker.View.AuthView;
 using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 
 namespace HabitCracker.ViewModel
 {
     internal class ProfileViewModel : BaseViewModel
     {
         public int AdCost = 50;
+
         public Decimal PersonBalance =>
             //{
             //    if (CurrentPerson.Wallet == null)
@@ -26,7 +24,7 @@ namespace HabitCracker.ViewModel
             //            new Wallet();
             //        CoolerContext.GetInstance().SaveChanges();
             //    }
-            decimal.Round(CurrentPerson.Wallet.Balance, 2,MidpointRounding.AwayFromZero);
+            decimal.Round(CurrentPerson.Wallet.Balance, 2, MidpointRounding.AwayFromZero);
 
         //public string LastHabbit
         //{
@@ -36,7 +34,6 @@ namespace HabitCracker.ViewModel
         //}
 
         public Person CurrentPerson { get; set; } = UserContext.GetInstance().UserPerson;
-
 
         [CanBeNull]
         public Tuple<Habit, DateTime> LastHabit
@@ -52,7 +49,6 @@ namespace HabitCracker.ViewModel
             }
         }
 
-
         public Tuple<Habit, int> BiggestHabbitStreak
         {
             get
@@ -64,9 +60,9 @@ namespace HabitCracker.ViewModel
 
         public RelayCommand BuyAd => new RelayCommand(obj =>
         {
-            if (CurrentPerson.Role=="Пользователь")
+            if (CurrentPerson.Role == "Пользователь")
             {
-                if (CurrentPerson.Wallet.Balance<AdCost)
+                if (CurrentPerson.Wallet.Balance < AdCost)
                 {
                     MessageBox.Show($"Тебе не хватает ещё {AdCost - CurrentPerson.Wallet.Balance} монет");
                 }
@@ -76,11 +72,8 @@ namespace HabitCracker.ViewModel
                     CoolerContext.GetInstance().People.FirstOrDefault(p => p == CurrentPerson).Wallet.Balance -= AdCost;
                     CoolerContext.GetInstance().SaveChanges();
                 }
-                
             }
-            
         });
-
 
         public string PicSource
         {
@@ -100,24 +93,19 @@ namespace HabitCracker.ViewModel
             var fileDialog = new OpenFileDialog { Filter = "Image files(*.jpg)|*.jpg" };
             if (fileDialog.ShowDialog() != true)
             {
-
-
                 MessageBox.Show("Картинка не была выбрана");
             }
             PicSource = fileDialog.FileName;
-
         });
 
-
-        private Window _AdWindow ;
+        private Window _AdWindow;
 
         public ProfileViewModel()
         {
-            if (UserContext.GetInstance().UserPerson.Role=="Пользователь")
+            if (UserContext.GetInstance().UserPerson.Role == "Пользователь")
             {
                 _AdWindow = new Greeting();
                 _AdWindow.ShowDialog();
-
             }
         }
     }

@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using HabitCracker.Model.Entities;
-
 
 namespace HabitCracker.Model.Memento
 {

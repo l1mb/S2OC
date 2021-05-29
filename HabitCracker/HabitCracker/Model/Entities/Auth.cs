@@ -1,5 +1,4 @@
-﻿
-namespace HabitCracker.Model.Entities
+﻿namespace HabitCracker.Model.Entities
 {
     public class Auth
     {

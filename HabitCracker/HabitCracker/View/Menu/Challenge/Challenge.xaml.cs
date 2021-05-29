@@ -1,7 +1,7 @@
-﻿using System.Windows;
+﻿using HabitCracker.Model.Contexts;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HabitCracker.Model.Contexts;
 
 namespace HabitCracker.View.Menu.Challenge
 {
@@ -37,6 +37,5 @@ namespace HabitCracker.View.Menu.Challenge
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
         }
-
     }
 }
